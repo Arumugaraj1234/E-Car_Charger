@@ -12,11 +12,29 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var appDetails: AppDetailsModel?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        getAppDetails()
         return true
+    }
+    
+    func skipToNearByChargersScreen(){
+        let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = sb.instantiateViewController(withIdentifier: "NearByChargersNavigation") as! UINavigationController
+        
+        vc.modalTransitionStyle = .crossDissolve
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
+    }
+    
+    func getAppDetails(){
+        appDetails = AppDetailsModel(flag: 0, instruction: "New Version available on AppStore. Please upgrade your app for better experience.", isOldVersion: true)
+        if appDetails?.flag == 0 {
+            skipToNearByChargersScreen()
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

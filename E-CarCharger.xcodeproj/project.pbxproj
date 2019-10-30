@@ -8,8 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		3F886C2BB1880A253A0097CA /* Pods_E_CarCharger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */; };
+		526F948A236996D400012B0F /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F947E236996D200012B0F /* Roboto-BoldItalic.ttf */; };
+		526F948B236996D400012B0F /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F947F236996D200012B0F /* Roboto-LightItalic.ttf */; };
+		526F948C236996D400012B0F /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9480236996D200012B0F /* Roboto-MediumItalic.ttf */; };
+		526F948D236996D400012B0F /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9481236996D200012B0F /* Roboto-Black.ttf */; };
+		526F948E236996D400012B0F /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9482236996D300012B0F /* Roboto-BlackItalic.ttf */; };
+		526F948F236996D400012B0F /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9483236996D300012B0F /* Roboto-Medium.ttf */; };
+		526F9490236996D400012B0F /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9484236996D300012B0F /* Roboto-Regular.ttf */; };
+		526F9491236996D400012B0F /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9485236996D300012B0F /* Roboto-Thin.ttf */; };
+		526F9492236996D400012B0F /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9486236996D300012B0F /* Roboto-Italic.ttf */; };
+		526F9493236996D400012B0F /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9487236996D300012B0F /* Roboto-Bold.ttf */; };
+		526F9494236996D400012B0F /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9488236996D300012B0F /* Roboto-ThinItalic.ttf */; };
+		526F9495236996D400012B0F /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9489236996D400012B0F /* Roboto-Light.ttf */; };
+		526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949623699CEF00012B0F /* NearByChargersVC.swift */; };
+		526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949823699DD100012B0F /* AppDetailsModel.swift */; };
+		526F949C2369A62600012B0F /* OtherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949B2369A62600012B0F /* OtherService.swift */; };
 		52CD5DE02369789800429463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD5DDF2369789800429463 /* AppDelegate.swift */; };
-		52CD5DE22369789800429463 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD5DE12369789800429463 /* ViewController.swift */; };
+		52CD5DE22369789800429463 /* InstructionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD5DE12369789800429463 /* InstructionVC.swift */; };
 		52CD5DE52369789800429463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52CD5DE32369789800429463 /* Main.storyboard */; };
 		52CD5DE72369789900429463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52CD5DE62369789900429463 /* Assets.xcassets */; };
 		52CD5DEA2369789900429463 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52CD5DE82369789900429463 /* LaunchScreen.storyboard */; };
@@ -18,9 +33,24 @@
 /* Begin PBXFileReference section */
 		0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_CarCharger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A931D41ECAB726D0518EFCD /* Pods-E-CarCharger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-CarCharger.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger.release.xcconfig"; sourceTree = "<group>"; };
+		526F947E236996D200012B0F /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		526F947F236996D200012B0F /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		526F9480236996D200012B0F /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		526F9481236996D200012B0F /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		526F9482236996D300012B0F /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		526F9483236996D300012B0F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		526F9484236996D300012B0F /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		526F9485236996D300012B0F /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		526F9486236996D300012B0F /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		526F9487236996D300012B0F /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		526F9488236996D300012B0F /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		526F9489236996D400012B0F /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		526F949623699CEF00012B0F /* NearByChargersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearByChargersVC.swift; sourceTree = "<group>"; };
+		526F949823699DD100012B0F /* AppDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsModel.swift; sourceTree = "<group>"; };
+		526F949B2369A62600012B0F /* OtherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherService.swift; sourceTree = "<group>"; };
 		52CD5DDC2369789800429463 /* E-CarCharger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-CarCharger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52CD5DDF2369789800429463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		52CD5DE12369789800429463 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		52CD5DE12369789800429463 /* InstructionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionVC.swift; sourceTree = "<group>"; };
 		52CD5DE42369789800429463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52CD5DE62369789900429463 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52CD5DE92369789900429463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -48,6 +78,68 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		526F947923698FDC00012B0F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				52CD5DE12369789800429463 /* InstructionVC.swift */,
+				526F949623699CEF00012B0F /* NearByChargersVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		526F947A2369902B00012B0F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52CD5DE32369789800429463 /* Main.storyboard */,
+				52CD5DE62369789900429463 /* Assets.xcassets */,
+				52CD5DE82369789900429463 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		526F947B2369903200012B0F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				526F949823699DD100012B0F /* AppDetailsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		526F947C2369966F00012B0F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				526F947D236996B900012B0F /* Roboto */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		526F947D236996B900012B0F /* Roboto */ = {
+			isa = PBXGroup;
+			children = (
+				526F9481236996D200012B0F /* Roboto-Black.ttf */,
+				526F9482236996D300012B0F /* Roboto-BlackItalic.ttf */,
+				526F9487236996D300012B0F /* Roboto-Bold.ttf */,
+				526F947E236996D200012B0F /* Roboto-BoldItalic.ttf */,
+				526F9486236996D300012B0F /* Roboto-Italic.ttf */,
+				526F9489236996D400012B0F /* Roboto-Light.ttf */,
+				526F947F236996D200012B0F /* Roboto-LightItalic.ttf */,
+				526F9483236996D300012B0F /* Roboto-Medium.ttf */,
+				526F9480236996D200012B0F /* Roboto-MediumItalic.ttf */,
+				526F9484236996D300012B0F /* Roboto-Regular.ttf */,
+				526F9485236996D300012B0F /* Roboto-Thin.ttf */,
+				526F9488236996D300012B0F /* Roboto-ThinItalic.ttf */,
+			);
+			path = Roboto;
+			sourceTree = "<group>";
+		};
+		526F949A2369A5A100012B0F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				526F949B2369A62600012B0F /* OtherService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		52CD5DD32369789700429463 = {
 			isa = PBXGroup;
 			children = (
@@ -69,12 +161,13 @@
 		52CD5DDE2369789800429463 /* E-CarCharger */ = {
 			isa = PBXGroup;
 			children = (
-				52CD5DDF2369789800429463 /* AppDelegate.swift */,
-				52CD5DE12369789800429463 /* ViewController.swift */,
-				52CD5DE32369789800429463 /* Main.storyboard */,
-				52CD5DE62369789900429463 /* Assets.xcassets */,
-				52CD5DE82369789900429463 /* LaunchScreen.storyboard */,
 				52CD5DEB2369789900429463 /* Info.plist */,
+				52CD5DDF2369789800429463 /* AppDelegate.swift */,
+				526F947B2369903200012B0F /* Model */,
+				526F947A2369902B00012B0F /* View */,
+				526F947923698FDC00012B0F /* Controller */,
+				526F949A2369A5A100012B0F /* Services */,
+				526F947C2369966F00012B0F /* Support Files */,
 			);
 			path = "E-CarCharger";
 			sourceTree = "<group>";
@@ -149,8 +242,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				52CD5DEA2369789900429463 /* LaunchScreen.storyboard in Resources */,
+				526F9493236996D400012B0F /* Roboto-Bold.ttf in Resources */,
+				526F9495236996D400012B0F /* Roboto-Light.ttf in Resources */,
+				526F9492236996D400012B0F /* Roboto-Italic.ttf in Resources */,
 				52CD5DE72369789900429463 /* Assets.xcassets in Resources */,
+				526F9490236996D400012B0F /* Roboto-Regular.ttf in Resources */,
+				526F948B236996D400012B0F /* Roboto-LightItalic.ttf in Resources */,
+				526F9491236996D400012B0F /* Roboto-Thin.ttf in Resources */,
+				526F948A236996D400012B0F /* Roboto-BoldItalic.ttf in Resources */,
+				526F948D236996D400012B0F /* Roboto-Black.ttf in Resources */,
+				526F948C236996D400012B0F /* Roboto-MediumItalic.ttf in Resources */,
+				526F9494236996D400012B0F /* Roboto-ThinItalic.ttf in Resources */,
 				52CD5DE52369789800429463 /* Main.storyboard in Resources */,
+				526F948E236996D400012B0F /* Roboto-BlackItalic.ttf in Resources */,
+				526F948F236996D400012B0F /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +307,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52CD5DE22369789800429463 /* ViewController.swift in Sources */,
+				526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */,
+				52CD5DE22369789800429463 /* InstructionVC.swift in Sources */,
+				526F949C2369A62600012B0F /* OtherService.swift in Sources */,
+				526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */,
 				52CD5DE02369789800429463 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
