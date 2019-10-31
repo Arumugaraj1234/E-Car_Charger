@@ -13,10 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var appDetails: AppDetailsModel?
+    let locationService = LocationService.shared
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        locationService.setGoogleApiKeys()
+        locationService.authorize()
         getAppDetails()
         return true
     }

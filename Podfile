@@ -11,5 +11,10 @@ target 'E-CarCharger' do
   
   pod 'Alamofire'
   pod 'SwiftyJSON'
+  pod 'RealmSwift'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'ValidationTextField'
+  pod 'Toast-Swift', '~> 5.0.0'
 
 end

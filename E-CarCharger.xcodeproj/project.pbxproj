@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		3F886C2BB1880A253A0097CA /* Pods_E_CarCharger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */; };
+		52228E00236AB28000F05847 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228DFF236AB28000F05847 /* LocationService.swift */; };
+		52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E02236ACE8900F05847 /* UIViewExt.swift */; };
+		52228E05236AE77B00F05847 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E04236AE77B00F05847 /* Constants.swift */; };
+		52228E08236AEFA800F05847 /* RoundedTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E07236AEFA800F05847 /* RoundedTF.swift */; };
+		52228E0A236AF09E00F05847 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E09236AF09E00F05847 /* LoginVC.swift */; };
 		526F948A236996D400012B0F /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F947E236996D200012B0F /* Roboto-BoldItalic.ttf */; };
 		526F948B236996D400012B0F /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F947F236996D200012B0F /* Roboto-LightItalic.ttf */; };
 		526F948C236996D400012B0F /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9480236996D200012B0F /* Roboto-MediumItalic.ttf */; };
@@ -33,6 +38,11 @@
 /* Begin PBXFileReference section */
 		0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_CarCharger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A931D41ECAB726D0518EFCD /* Pods-E-CarCharger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-CarCharger.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger.release.xcconfig"; sourceTree = "<group>"; };
+		52228DFF236AB28000F05847 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		52228E02236ACE8900F05847 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		52228E04236AE77B00F05847 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		52228E07236AEFA800F05847 /* RoundedTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTF.swift; sourceTree = "<group>"; };
+		52228E09236AF09E00F05847 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		526F947E236996D200012B0F /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
 		526F947F236996D200012B0F /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		526F9480236996D200012B0F /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -78,11 +88,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		52228E01236ACE4600F05847 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				52228E02236ACE8900F05847 /* UIViewExt.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		52228E06236AEF5900F05847 /* SpecialView */ = {
+			isa = PBXGroup;
+			children = (
+				52228E07236AEFA800F05847 /* RoundedTF.swift */,
+			);
+			path = SpecialView;
+			sourceTree = "<group>";
+		};
 		526F947923698FDC00012B0F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				52CD5DE12369789800429463 /* InstructionVC.swift */,
 				526F949623699CEF00012B0F /* NearByChargersVC.swift */,
+				52228E09236AF09E00F05847 /* LoginVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -90,6 +117,7 @@
 		526F947A2369902B00012B0F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52228E06236AEF5900F05847 /* SpecialView */,
 				52CD5DE32369789800429463 /* Main.storyboard */,
 				52CD5DE62369789900429463 /* Assets.xcassets */,
 				52CD5DE82369789900429463 /* LaunchScreen.storyboard */,
@@ -109,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				526F947D236996B900012B0F /* Roboto */,
+				52228E04236AE77B00F05847 /* Constants.swift */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -136,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				526F949B2369A62600012B0F /* OtherService.swift */,
+				52228DFF236AB28000F05847 /* LocationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -167,6 +197,7 @@
 				526F947A2369902B00012B0F /* View */,
 				526F947923698FDC00012B0F /* Controller */,
 				526F949A2369A5A100012B0F /* Services */,
+				52228E01236ACE4600F05847 /* Extention */,
 				526F947C2369966F00012B0F /* Support Files */,
 			);
 			path = "E-CarCharger";
@@ -193,6 +224,7 @@
 				52CD5DD92369789800429463 /* Frameworks */,
 				52CD5DDA2369789800429463 /* Resources */,
 				0A515C6E6F9AC72F5B6DB6D6 /* [CP] Embed Pods Frameworks */,
+				23D0F91BC646396EE9036EE7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,16 +302,44 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/ValidationTextField/ValidationTextField.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ValidationTextField.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		23D0F91BC646396EE9036EE7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BE8FFF757B577E8BE279D98C /* [CP] Check Pods Manifest.lock */ = {
@@ -307,11 +367,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */,
 				526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */,
 				52CD5DE22369789800429463 /* InstructionVC.swift in Sources */,
 				526F949C2369A62600012B0F /* OtherService.swift in Sources */,
+				52228E0A236AF09E00F05847 /* LoginVC.swift in Sources */,
 				526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */,
+				52228E00236AB28000F05847 /* LocationService.swift in Sources */,
 				52CD5DE02369789800429463 /* AppDelegate.swift in Sources */,
+				52228E05236AE77B00F05847 /* Constants.swift in Sources */,
+				52228E08236AEFA800F05847 /* RoundedTF.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
