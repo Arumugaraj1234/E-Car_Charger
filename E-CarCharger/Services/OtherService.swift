@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 class OtherService: NSObject {
     
@@ -43,4 +44,12 @@ class OtherService: NSObject {
         titleLabel.font = UIFont(name: "Roboto-Regular", size: 16)
         vC.navigationItem.titleView = titleLabel
     }
+    
+    func makeToast(message: String, time: TimeInterval, position: ToastPosition, vc: UIViewController) {
+        var style = ToastStyle()
+        style.backgroundColor = #colorLiteral(red: 1, green: 0.9843137255, blue: 0.649359809, alpha: 1)
+        style.messageColor = #colorLiteral(red: 0.5803921569, green: 0.09019607843, blue: 0.3176470588, alpha: 1)
+        vc.view.makeToast(message, duration: time, position: position, style: style)
+    }
+    
 }

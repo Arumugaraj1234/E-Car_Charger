@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getAppDetails(){
-        appDetails = AppDetailsModel(flag: 0, instruction: "New Version available on AppStore. Please upgrade your app for better experience.", isOldVersion: true)
+        appDetails = AppDetailsModel(flag: 3, instruction: "New Version available on AppStore. Please upgrade your app for better experience.", isOldVersion: true)
         if appDetails?.flag == 0 {
             skipToNearByChargersScreen()
         }

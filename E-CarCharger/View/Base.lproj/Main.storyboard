@@ -73,12 +73,93 @@
                                     <constraint firstAttribute="height" constant="140" id="zLP-gA-7ap"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vda-nI-okG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgImage" translatesAutoresizingMaskIntoConstraints="NO" id="RSg-0Y-Txe">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bOi-Q2-QAL">
+                                        <rect key="frame" x="15" y="183.5" width="345" height="180"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your mobile number below before start" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hul-5b-GSW">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="hus-wq-H8f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="leb-WD-aA8" customClass="ValidationTextField" customModule="ValidationTextField">
+                                                <rect key="frame" x="0.0" y="70" width="345" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="0.44071061643835618" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="pqs-i2-eJz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="22"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" keyboardAppearance="light" returnKeyType="done"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                                        <color key="value" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledColor">
+                                                        <color key="value" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="errorMessage" value="Invalid Mobile Number"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShowTitle" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Mobile Number"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="MOBILE NUMBER"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="SKf-o0-go3"/>
+                                                </connections>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e09-DN-glx">
+                                                <rect key="frame" x="122.5" y="140" width="100" height="40"/>
+                                                <color key="backgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="2I6-DL-IY8"/>
+                                                </constraints>
+                                                <state key="normal" title="GO"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="leb-WD-aA8" secondAttribute="trailing" id="EJO-Kv-b7V"/>
+                                            <constraint firstItem="leb-WD-aA8" firstAttribute="leading" secondItem="bOi-Q2-QAL" secondAttribute="leading" id="JEi-ij-gAu"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hul-5b-GSW" secondAttribute="trailing" id="Q3G-Us-fNs"/>
+                                            <constraint firstItem="Hul-5b-GSW" firstAttribute="leading" secondItem="bOi-Q2-QAL" secondAttribute="leading" id="ek4-nX-kLR"/>
+                                            <constraint firstAttribute="height" constant="180" id="yXj-0d-TJP"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="RSg-0Y-Txe" firstAttribute="top" secondItem="vda-nI-okG" secondAttribute="top" id="5yQ-GL-lTG"/>
+                                    <constraint firstItem="RSg-0Y-Txe" firstAttribute="leading" secondItem="vda-nI-okG" secondAttribute="leading" id="9pG-kr-RcG"/>
+                                    <constraint firstAttribute="trailing" secondItem="bOi-Q2-QAL" secondAttribute="trailing" constant="15" id="DQs-Zm-aqk"/>
+                                    <constraint firstItem="bOi-Q2-QAL" firstAttribute="leading" secondItem="vda-nI-okG" secondAttribute="leading" constant="15" id="GnA-SD-9bp"/>
+                                    <constraint firstItem="bOi-Q2-QAL" firstAttribute="centerY" secondItem="vda-nI-okG" secondAttribute="centerY" constant="-50" id="gKo-Sw-BWk"/>
+                                    <constraint firstAttribute="bottom" secondItem="RSg-0Y-Txe" secondAttribute="bottom" id="n5P-Qu-7bQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="RSg-0Y-Txe" secondAttribute="trailing" id="vmn-N2-g9i"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qDL-3v-u65" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="AAU-Xp-gxJ"/>
+                            <constraint firstItem="vda-nI-okG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="B5I-Je-sp3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vda-nI-okG" secondAttribute="bottom" id="PcI-ws-s1a"/>
                             <constraint firstItem="WM5-bf-98F" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RQC-Px-4mN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qDL-3v-u65" secondAttribute="trailing" id="cBG-bc-ejW"/>
+                            <constraint firstItem="vda-nI-okG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dr5-oF-e2Q"/>
+                            <constraint firstItem="vda-nI-okG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="h33-he-pWA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WM5-bf-98F" secondAttribute="trailing" constant="20" id="kXv-A0-toU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qDL-3v-u65" secondAttribute="bottom" id="oL4-4m-nEJ"/>
                             <constraint firstItem="qDL-3v-u65" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qi2-re-er5"/>
@@ -89,6 +170,8 @@
                     <connections>
                         <outlet property="instructionMsgLbl" destination="jiD-hb-tSj" id="JTB-I0-CgO"/>
                         <outlet property="laterBtn" destination="N8U-HS-22o" id="qFx-v1-gkl"/>
+                        <outlet property="mobileTF" destination="leb-WD-aA8" id="4o8-AU-4V2"/>
+                        <outlet property="mobileView" destination="vda-nI-okG" id="9Dz-Vl-0Qt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -173,13 +256,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UC7-pw-yb1">
-                                <rect key="frame" x="30" y="218.5" width="315" height="230"/>
+                                <rect key="frame" x="30" y="186" width="315" height="295"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgImage" translatesAutoresizingMaskIntoConstraints="NO" id="JPD-k0-JLy">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="230"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="295"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PJh-On-af7">
-                                        <rect key="frame" x="15" y="30" width="285" height="170"/>
+                                        <rect key="frame" x="15" y="30" width="285" height="235"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Login here before book charger" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wg4-z3-IoO">
                                                 <rect key="frame" x="0.0" y="0.0" width="285" height="45"/>
@@ -191,9 +274,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IBF-sT-kog">
-                                                <rect key="frame" x="0.0" y="65" width="285" height="45"/>
+                                                <rect key="frame" x="0.0" y="65" width="285" height="110"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="D7D-pP-K98" customClass="ValidationTextField" customModule="ValidationTextField">
+                                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="D7D-pP-K98" customClass="ValidationTextField" customModule="ValidationTextField">
                                                         <rect key="frame" x="0.0" y="0.0" width="285" height="45"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -201,7 +284,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" keyboardAppearance="light" returnKeyType="done"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
                                                                 <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -218,16 +301,19 @@
                                                                 <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="BMF-7r-EEX" id="imf-Vd-Dh5"/>
+                                                        </connections>
                                                     </textField>
-                                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-Zf-Nwh" customClass="ValidationTextField" customModule="ValidationTextField">
-                                                        <rect key="frame" x="0.0" y="0.0" width="285" height="45"/>
+                                                    <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-Zf-Nwh" customClass="ValidationTextField" customModule="ValidationTextField">
+                                                        <rect key="frame" x="0.0" y="65" width="285" height="45"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="45" id="c3K-4m-QWc"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="OTP"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
@@ -241,20 +327,39 @@
                                                                 <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="BMF-7r-EEX" id="x4o-4U-qHE"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6P-jp-zWM">
-                                                <rect key="frame" x="0.0" y="130" width="285" height="40"/>
-                                                <color key="backgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
-                                                <state key="normal" title="SEND OTP">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onLoginBtnPressedWithSender:" destination="BMF-7r-EEX" eventType="touchUpInside" id="Fnu-Jk-iFl"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bqK-0M-eIs">
+                                                <rect key="frame" x="0.0" y="195" width="285" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tHC-Wj-ypk">
+                                                        <rect key="frame" x="0.0" y="0.0" width="132.5" height="40"/>
+                                                        <color key="backgroundColor" red="0.58039215690000001" green="0.090196078430000007" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
+                                                        <state key="normal" title="SEND OTP">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onSendOtpBtnPressedWithSender:" destination="BMF-7r-EEX" eventType="touchUpInside" id="eex-S6-k3c"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6P-jp-zWM">
+                                                        <rect key="frame" x="152.5" y="0.0" width="132.5" height="40"/>
+                                                        <color key="backgroundColor" red="0.58039215686274503" green="0.090196078431372548" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
+                                                        <state key="normal" title="LOGIN">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onLoginBtnPressedWithSender:" destination="BMF-7r-EEX" eventType="touchUpInside" id="2xN-ts-UUY"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -263,7 +368,7 @@
                                     <constraint firstItem="JPD-k0-JLy" firstAttribute="leading" secondItem="UC7-pw-yb1" secondAttribute="leading" id="7iK-aO-HLl"/>
                                     <constraint firstAttribute="bottom" secondItem="PJh-On-af7" secondAttribute="bottom" constant="30" id="DiE-pX-s1q"/>
                                     <constraint firstItem="PJh-On-af7" firstAttribute="top" secondItem="UC7-pw-yb1" secondAttribute="top" constant="30" id="Ip0-cq-5aL"/>
-                                    <constraint firstAttribute="height" constant="230" id="gcP-Sj-RKk"/>
+                                    <constraint firstAttribute="height" constant="295" id="gcP-Sj-RKk"/>
                                     <constraint firstAttribute="bottom" secondItem="JPD-k0-JLy" secondAttribute="bottom" id="jO3-HG-7q1"/>
                                     <constraint firstItem="JPD-k0-JLy" firstAttribute="top" secondItem="UC7-pw-yb1" secondAttribute="top" id="pMc-qY-KNN"/>
                                     <constraint firstAttribute="trailing" secondItem="JPD-k0-JLy" secondAttribute="trailing" id="vAG-gm-Uy7"/>
@@ -283,9 +388,10 @@
                     <connections>
                         <outlet property="bgImage" destination="JPD-k0-JLy" id="UKD-0c-hrh"/>
                         <outlet property="containerView" destination="UC7-pw-yb1" id="qLg-mW-SLC"/>
-                        <outlet property="loginBtn" destination="i6P-jp-zWM" id="iag-vf-5pi"/>
+                        <outlet property="loginBtn" destination="i6P-jp-zWM" id="yBv-G4-OEv"/>
                         <outlet property="mobileNoTF" destination="D7D-pP-K98" id="z9F-s0-On6"/>
                         <outlet property="otpTF" destination="xoJ-Zf-Nwh" id="wPM-Yc-L1x"/>
+                        <outlet property="sendOtpBtn" destination="tHC-Wj-ypk" id="P4U-LZ-qVg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOG-Nc-M6C" userLabel="First Responder" sceneMemberID="firstResponder"/>
