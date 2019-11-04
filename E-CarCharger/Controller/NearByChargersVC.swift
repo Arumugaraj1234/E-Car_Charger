@@ -38,7 +38,7 @@ class NearByChargersVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        otherService.setNaviagtionBarTitle(title: "NEARBY CHARGERS", vC: self)
+        setNaviagtionBarTitle(title: "NEARBY CHARGERS")
     }
     
     //MARK: IBAction Connectiions
@@ -101,17 +101,8 @@ class NearByChargersVC: UIViewController {
         if otherService.isLoggedIn {
             print("Show the Charger details")
         } else {
-            showLoginPopUp()
+            
         }
-    }
-    
-    func showLoginPopUp(){
-        let loginVc = storyboard?.instantiateViewController(withIdentifier: "loginVC") as! LoginVC
-        loginVc.modalPresentationStyle = .overCurrentContext
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            loginVc.preferredContentSize = CGSize(width: 450.0, height: 750.0)
-        }
-        self.present(loginVc, animated: true)
     }
     
 }

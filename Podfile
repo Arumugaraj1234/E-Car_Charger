@@ -16,5 +16,6 @@ target 'E-CarCharger' do
   pod 'GooglePlaces'
   pod 'ValidationTextField'
   pod 'Toast-Swift', '~> 5.0.0'
+  pod 'NVActivityIndicatorView'
 
 end

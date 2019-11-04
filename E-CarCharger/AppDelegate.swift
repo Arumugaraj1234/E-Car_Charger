@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        OtherService.shared.isLoggedIn = false
         locationService.setGoogleApiKeys()
         locationService.authorize()
         getAppDetails()
@@ -34,8 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getAppDetails(){
-        appDetails = AppDetailsModel(flag: 3, instruction: "New Version available on AppStore. Please upgrade your app for better experience.", isOldVersion: true)
-        if appDetails?.flag == 0 {
+        appDetails = AppDetailsModel(flag: 0, instruction: "New Version available on AppStore. Please upgrade your app for better experience.", isOldVersion: true)
+        if  appDetails?.flag == 1 || appDetails?.flag == 2  || OtherService.shared.isLoggedIn == false {
+            //Will go to instruction VC
+        } else {
             skipToNearByChargersScreen()
         }
     }

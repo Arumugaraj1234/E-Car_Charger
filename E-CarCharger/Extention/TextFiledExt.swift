@@ -16,12 +16,12 @@ extension UITextField {
         
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.black
-        toolBar.barTintColor = #colorLiteral(red: 0.8078431373, green: 0.8, blue: 0.8274509804, alpha: 1)
+        toolBar.tintColor = UIColor.white
+        toolBar.barTintColor = #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1)
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "DONE", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.resignFirstResponder))
-        doneButton.setTitleTextAttributes([ NSAttributedString.Key.font: UIFont(name: "Roboto-Medium", size: 16)!], for: UIControl.State.normal)
+        doneButton.setTitleTextAttributes([ NSAttributedString.Key.font: UIFont(name: "AvenirNextCondensed-Demibold", size: 18)!], for: UIControl.State.normal)
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         toolBar.setItems([ spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true

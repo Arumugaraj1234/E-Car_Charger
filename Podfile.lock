@@ -7,6 +7,9 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (3.1.0):
     - GoogleMaps/Base (= 3.1.0)
+  - NVActivityIndicatorView (4.7.0):
+    - NVActivityIndicatorView/Presenter (= 4.7.0)
+  - NVActivityIndicatorView/Presenter (4.7.0)
   - Realm (3.16.1):
     - Realm/Headers (= 3.16.1)
   - Realm/Headers (3.16.1)
@@ -20,6 +23,7 @@ DEPENDENCIES:
   - Alamofire
   - GoogleMaps
   - GooglePlaces
+  - NVActivityIndicatorView
   - RealmSwift
   - SwiftyJSON
   - Toast-Swift (~> 5.0.0)
@@ -30,6 +34,7 @@ SPEC REPOS:
     - Alamofire
     - GoogleMaps
     - GooglePlaces
+    - NVActivityIndicatorView
     - Realm
     - RealmSwift
     - SwiftyJSON
@@ -40,12 +45,13 @@ SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
   GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
+  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   Realm: 601cacc51d8be3b17a377ef787be0f6ee0e76cf1
   RealmSwift: 486f2e09d5a8ccff63ed66e48d0846b111deb5e5
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
   ValidationTextField: 553b3c61a7cf5d3d2a63eb99a2b1f0ad3df32da1
 
-PODFILE CHECKSUM: af5d66ccb03016bcbf672ec6a68964741f5132f0
+PODFILE CHECKSUM: 93e596df8f1f52145d54143a7e4b6d9841bb93ab
 
 COCOAPODS: 1.5.2
