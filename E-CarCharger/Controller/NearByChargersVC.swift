@@ -12,13 +12,24 @@ import GoogleMaps
 
 class NearByChargersVC: UIViewController {
     
-    //MARK: Outlets
+    //MARK: Side Screen Outlets
+    @IBOutlet var gestureScreenEdgePan: UIScreenEdgePanGestureRecognizer!
+    @IBOutlet weak var viewBlack: UIView!
+    @IBOutlet weak var viewMenu: UIView!
+    @IBOutlet weak var constraintMenuLeft: NSLayoutConstraint!
+    @IBOutlet weak var constraintMenuWidth: NSLayoutConstraint!
+    @IBOutlet weak var menuBtn: UIBarButtonItem!
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
+    
+    //MARK: Other Outlets
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var centreMapBtn: UIButton!
     
-    //MARK: General Variables
-    let otherService = OtherService.shared
-    var vehicleType = 0
+    //MARK: Hamburger Menu Variables
+    let maxBlackViewAlpha: CGFloat = 0.5
+    let animationDuration: TimeInterval = 0.3
+    var isLeftToRight = true
+    var isMenuOpened = false
     
     //MARK: Google Map Related Variables
     let locationManager = CLLocationManager()
@@ -27,6 +38,10 @@ class NearByChargersVC: UIViewController {
     var myCurrentLatitude: Double?
     var myCurrentLongitude: Double?
     
+    //MARK: General Variables
+    let otherService = OtherService.shared
+    var vehicleType = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,11 +49,14 @@ class NearByChargersVC: UIViewController {
         locationManager.delegate = self
         mapView.delegate = self
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
-        getNearByChargers()
+        
+        setInitialSideMenu() // Side Menu initial Settings
+        getNearByChargers() // Gettting nearby chargers to show in map
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setNaviagtionBarTitle(title: "NEARBY CHARGERS")
+        setNaviagtionBarTitle(title: "Nearby Chargers")
     }
     
     //MARK: IBAction Connectiions
@@ -62,6 +80,22 @@ class NearByChargersVC: UIViewController {
     
     
     //MARK: Functions
+    
+    func setInitialSideMenu() {
+        constraintMenuLeft.constant = -constraintMenuWidth.constant
+        viewBlack.alpha = 0
+        viewBlack.isHidden = true
+        let language = NSLocale.preferredLanguages.first!
+        let direction = NSLocale.characterDirection(forLanguage: language)
+        if direction == .leftToRight {
+            gestureScreenEdgePan.edges = .left
+            isLeftToRight = true
+        } else {
+            gestureScreenEdgePan.edges = .right
+            isLeftToRight = false
+        }
+    }
+    
     func getNearByChargers() {
         //Current Locatiion: Optional(19.0176147), Optional(72.8561644)
         let charger1 = CLLocationCoordinate2DMake(19.017919, 72.857248)
@@ -98,11 +132,7 @@ class NearByChargersVC: UIViewController {
     }
     
     func bookCharger() {
-        if otherService.isLoggedIn {
-            print("Show the Charger details")
-        } else {
-            
-        }
+        
     }
     
 }
@@ -139,6 +169,162 @@ extension NearByChargersVC: GMSMapViewDelegate {
             self.centreMapBtn.fadeTo(alphaValue: 0.0, withDuration: 0.2)
         }
         self.isMapCentered = false
+    }
+    
+}
+
+extension NearByChargersVC {
+    //hamburger Menu functions
+    
+    func openMenu() {
+        
+        // when menu is opened, it's left constraint should be 0
+        constraintMenuLeft.constant = 0
+        
+        // view for dimming effect should also be shown
+        viewBlack.isHidden = false
+        
+        // animate opening of the menu - including opacity value
+        UIView.animate(withDuration: animationDuration, animations: {
+            
+            self.view.layoutIfNeeded()
+            self.viewBlack.alpha = self.maxBlackViewAlpha
+            
+        }, completion: { (complete) in
+            
+            // disable the screen edge pan gesture when menu is fully opened
+            self.gestureScreenEdgePan.isEnabled = false
+        })
+    }
+    
+    func hideMenu() {
+        
+        // when menu is closed, it's left constraint should be of value that allows it to be completely hidden to the left of the screen - which is negative value of it's width
+        constraintMenuLeft.constant = -constraintMenuWidth.constant
+        
+        // animate closing of the menu - including opacity value
+        UIView.animate(withDuration: animationDuration, animations: {
+            
+            self.view.layoutIfNeeded()
+            self.viewBlack.alpha = 0
+            
+        }, completion: { (complete) in
+            
+            // reenable the screen edge pan gesture so we can detect it next time
+            self.gestureScreenEdgePan.isEnabled = true
+            
+            // hide the view for dimming effect so it wont interrupt touches for views underneath it
+            self.viewBlack.isHidden = true
+        })
+    }
+    
+    @IBAction func gestureScreenEdgePan(_ sender: UIScreenEdgePanGestureRecognizer) {
+        
+        // retrieve the current state of the gesture
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            // if the user has just started dragging, make sure view for dimming effect is hidden well
+            viewBlack.isHidden = false
+            viewBlack.alpha = 0
+            
+        } else if (sender.state == UIGestureRecognizer.State.changed) {
+            
+            // retrieve the amount viewMenu has been dragged
+            var translationX = sender.translation(in: sender.view).x
+            
+            if !isLeftToRight {
+                translationX = -translationX
+            }
+            
+            if -constraintMenuWidth.constant + translationX > 0 {
+                
+                // viewMenu fully dragged out
+                constraintMenuLeft.constant = 0
+                viewBlack.alpha = maxBlackViewAlpha
+                
+            } else if translationX < 0 {
+                
+                // viewMenu fully dragged in
+                constraintMenuLeft.constant = -constraintMenuWidth.constant
+                viewBlack.alpha = 0
+                
+            } else {
+                
+                // viewMenu is being dragged somewhere between min and max amount
+                constraintMenuLeft.constant = -constraintMenuWidth.constant + translationX
+                
+                let ratio = translationX / constraintMenuWidth.constant
+                let alphaValue = ratio * maxBlackViewAlpha
+                viewBlack.alpha = alphaValue
+            }
+        } else {
+            
+            // if the menu was dragged less than half of it's width, close it. Otherwise, open it.
+            if constraintMenuLeft.constant < -constraintMenuWidth.constant / 2 {
+                self.hideMenu()
+            } else {
+                self.openMenu()
+            }
+        }
+    }
+    
+    @IBAction func gesturePan(_ sender: UIPanGestureRecognizer) {
+        // retrieve the current state of the gesture
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            // no need to do anything
+        } else if sender.state == UIGestureRecognizer.State.changed {
+            
+            // retrieve the amount viewMenu has been dragged
+            var translationX = sender.translation(in: sender.view).x
+            
+            if !isLeftToRight {
+                translationX = -translationX
+            }
+            
+            if translationX > 0 {
+                
+                // viewMenu fully dragged out
+                constraintMenuLeft.constant = 0
+                viewBlack.alpha = maxBlackViewAlpha
+                
+            } else if translationX < -constraintMenuWidth.constant {
+                
+                // viewMenu fully dragged in
+                constraintMenuLeft.constant = -constraintMenuWidth.constant
+                viewBlack.alpha = 0
+                
+            } else {
+                
+                // it's being dragged somewhere between min and max amount
+                constraintMenuLeft.constant = translationX
+                
+                let ratio = (constraintMenuWidth.constant + translationX) / constraintMenuWidth.constant
+                let alphaValue = ratio * maxBlackViewAlpha
+                viewBlack.alpha = alphaValue
+            }
+        } else {
+            
+            // if the drag was less than half of it's width, close it. Otherwise, open it.
+            if constraintMenuLeft.constant < -constraintMenuWidth.constant / 2 {
+                self.hideMenu()
+            } else {
+                self.openMenu()
+            }
+        }
+    }
+    
+    @IBAction func gestureTap(_ sender: UITapGestureRecognizer) {
+        self.hideMenu()
+    }
+    
+    @IBAction func menuBtnPressed(_ sender: Any) {
+        if isMenuOpened {
+            self.hideMenu()
+        } else {
+            self.openMenu()
+        }
+        isMenuOpened = !isMenuOpened
     }
     
 }

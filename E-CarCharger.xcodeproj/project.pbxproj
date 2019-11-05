@@ -30,6 +30,9 @@
 		526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949623699CEF00012B0F /* NearByChargersVC.swift */; };
 		526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949823699DD100012B0F /* AppDetailsModel.swift */; };
 		526F949C2369A62600012B0F /* OtherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949B2369A62600012B0F /* OtherService.swift */; };
+		52BA90312371599C003F06CF /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA90302371599C003F06CF /* SideMenuVC.swift */; };
+		52BA903423715A4D003F06CF /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA903323715A4D003F06CF /* SideMenuCell.swift */; };
+		52BA903623715AF0003F06CF /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA903523715AF0003F06CF /* SideMenuModel.swift */; };
 		52CD5DE02369789800429463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD5DDF2369789800429463 /* AppDelegate.swift */; };
 		52CD5DE22369789800429463 /* InstructionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD5DE12369789800429463 /* InstructionVC.swift */; };
 		52CD5DE52369789800429463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52CD5DE32369789800429463 /* Main.storyboard */; };
@@ -62,6 +65,9 @@
 		526F949623699CEF00012B0F /* NearByChargersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearByChargersVC.swift; sourceTree = "<group>"; };
 		526F949823699DD100012B0F /* AppDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsModel.swift; sourceTree = "<group>"; };
 		526F949B2369A62600012B0F /* OtherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherService.swift; sourceTree = "<group>"; };
+		52BA90302371599C003F06CF /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
+		52BA903323715A4D003F06CF /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		52BA903523715AF0003F06CF /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		52CD5DDC2369789800429463 /* E-CarCharger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-CarCharger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52CD5DDF2369789800429463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52CD5DE12369789800429463 /* InstructionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionVC.swift; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 			children = (
 				52CD5DE12369789800429463 /* InstructionVC.swift */,
 				526F949623699CEF00012B0F /* NearByChargersVC.swift */,
+				52BA90302371599C003F06CF /* SideMenuVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -123,6 +130,7 @@
 		526F947A2369902B00012B0F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52BA903223715A14003F06CF /* TableViewCells */,
 				52228E06236AEF5900F05847 /* SpecialView */,
 				52CD5DE32369789800429463 /* Main.storyboard */,
 				52CD5DE62369789900429463 /* Assets.xcassets */,
@@ -135,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				526F949823699DD100012B0F /* AppDetailsModel.swift */,
+				52BA903523715AF0003F06CF /* SideMenuModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,6 +183,14 @@
 				52228DFF236AB28000F05847 /* LocationService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		52BA903223715A14003F06CF /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				52BA903323715A4D003F06CF /* SideMenuCell.swift */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		52CD5DD32369789700429463 = {
@@ -376,12 +393,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5262A0C02370025600A7AAE5 /* ViewControllerExt.swift in Sources */,
+				52BA903423715A4D003F06CF /* SideMenuCell.swift in Sources */,
 				52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */,
 				526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */,
+				52BA903623715AF0003F06CF /* SideMenuModel.swift in Sources */,
 				52CD5DE22369789800429463 /* InstructionVC.swift in Sources */,
 				5238000C236C187F0086AE36 /* TextFiledExt.swift in Sources */,
 				5262A0BE236FE3CA00A7AAE5 /* RoundedBtn.swift in Sources */,
 				526F949C2369A62600012B0F /* OtherService.swift in Sources */,
+				52BA90312371599C003F06CF /* SideMenuVC.swift in Sources */,
 				526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */,
 				52228E00236AB28000F05847 /* LocationService.swift in Sources */,
 				52CD5DE02369789800429463 /* AppDelegate.swift in Sources */,

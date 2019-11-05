@@ -32,7 +32,7 @@ extension UIViewController: NVActivityIndicatorViewable {
         let titleLabel = UILabel(frame: CGRect(x: x, y: 0, width: 100, height: 40))
         titleLabel.text = title
         titleLabel.textColor = UIColor.white
-        titleLabel.font = UIFont(name: "Roboto-Regular", size: 16)
+        titleLabel.font = UIFont(name: "Georgia", size: 16)
         self.navigationItem.titleView = titleLabel
     }
     
