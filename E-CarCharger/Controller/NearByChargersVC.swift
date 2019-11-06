@@ -132,7 +132,13 @@ class NearByChargersVC: UIViewController {
     }
     
     func bookCharger() {
-        
+        let orderConfirmVc = storyboard?.instantiateViewController(withIdentifier: "OrderConfirmationPopVC") as! OrderConfirmationPopVC
+        orderConfirmVc.modalPresentationStyle = .overCurrentContext
+        orderConfirmVc.delegate = self
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            orderConfirmVc.preferredContentSize = CGSize(width: 450.0, height: 750.0)
+        }
+        self.present(orderConfirmVc, animated: true)
     }
     
 }
@@ -327,4 +333,15 @@ extension NearByChargersVC {
         isMenuOpened = !isMenuOpened
     }
     
+}
+
+extension NearByChargersVC: orderConfimationDelegate {
+    func orderGotConfirmed(tag: Int) {
+        if tag == 1 {
+            performSegue(withIdentifier: NEARBY_CHARGERS_TO_HISTORY, sender: self)
+        }
+        else if tag == 2 {
+            performSegue(withIdentifier: NEARBY_CHARGERS_TO_TRACK_CHARGER, sender: self)
+        }
+    }
 }

@@ -62,6 +62,17 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
         let cell = self.tableView.cellForRow(at: indexPath) as! SideMenuCell
         let menu = menuDetails[indexPath.row]
         cell.menuIconImg.image = menu.blueMenuIcon
+        
+        if indexPath.row == 0 {
+            let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeVC = main.instantiateViewController(withIdentifier: "NearByChargersNavigation") as! UINavigationController
+            present(homeVC, animated: true, completion: nil)
+        }
+        else if indexPath.row == 2 {
+            let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let historyVC = main.instantiateViewController(withIdentifier: "HistoryNaviagtion") as! UINavigationController
+            present(historyVC, animated: true, completion: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

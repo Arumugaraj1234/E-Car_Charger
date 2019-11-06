@@ -30,6 +30,9 @@
 		526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949623699CEF00012B0F /* NearByChargersVC.swift */; };
 		526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949823699DD100012B0F /* AppDetailsModel.swift */; };
 		526F949C2369A62600012B0F /* OtherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949B2369A62600012B0F /* OtherService.swift */; };
+		529370C62372AED10020DBCC /* OrderConfirmationPopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529370C52372AED10020DBCC /* OrderConfirmationPopVC.swift */; };
+		529370C82372C97B0020DBCC /* TrackChargerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529370C72372C97B0020DBCC /* TrackChargerVC.swift */; };
+		529370CA2372D42B0020DBCC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529370C92372D42B0020DBCC /* HistoryVC.swift */; };
 		52BA90312371599C003F06CF /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA90302371599C003F06CF /* SideMenuVC.swift */; };
 		52BA903423715A4D003F06CF /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA903323715A4D003F06CF /* SideMenuCell.swift */; };
 		52BA903623715AF0003F06CF /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA903523715AF0003F06CF /* SideMenuModel.swift */; };
@@ -65,6 +68,9 @@
 		526F949623699CEF00012B0F /* NearByChargersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearByChargersVC.swift; sourceTree = "<group>"; };
 		526F949823699DD100012B0F /* AppDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsModel.swift; sourceTree = "<group>"; };
 		526F949B2369A62600012B0F /* OtherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherService.swift; sourceTree = "<group>"; };
+		529370C52372AED10020DBCC /* OrderConfirmationPopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationPopVC.swift; sourceTree = "<group>"; };
+		529370C72372C97B0020DBCC /* TrackChargerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackChargerVC.swift; sourceTree = "<group>"; };
+		529370C92372D42B0020DBCC /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		52BA90302371599C003F06CF /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		52BA903323715A4D003F06CF /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		52BA903523715AF0003F06CF /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
@@ -123,6 +129,9 @@
 				52CD5DE12369789800429463 /* InstructionVC.swift */,
 				526F949623699CEF00012B0F /* NearByChargersVC.swift */,
 				52BA90302371599C003F06CF /* SideMenuVC.swift */,
+				529370C52372AED10020DBCC /* OrderConfirmationPopVC.swift */,
+				529370C72372C97B0020DBCC /* TrackChargerVC.swift */,
+				529370C92372D42B0020DBCC /* HistoryVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -396,7 +405,10 @@
 				52BA903423715A4D003F06CF /* SideMenuCell.swift in Sources */,
 				52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */,
 				526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */,
+				529370C62372AED10020DBCC /* OrderConfirmationPopVC.swift in Sources */,
 				52BA903623715AF0003F06CF /* SideMenuModel.swift in Sources */,
+				529370C82372C97B0020DBCC /* TrackChargerVC.swift in Sources */,
+				529370CA2372D42B0020DBCC /* HistoryVC.swift in Sources */,
 				52CD5DE22369789800429463 /* InstructionVC.swift in Sources */,
 				5238000C236C187F0086AE36 /* TextFiledExt.swift in Sources */,
 				5262A0BE236FE3CA00A7AAE5 /* RoundedBtn.swift in Sources */,

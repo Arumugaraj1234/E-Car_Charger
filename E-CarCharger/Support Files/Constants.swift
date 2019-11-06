@@ -8,6 +8,10 @@
 
 import Foundation
 
-//UserDefaults Constants
+//MARK: UserDefaults Constants
 let LOGGED_IN_KEY = "loggedIn"
 let USER_ID_KEY = "userId"
+
+//MARK: Segue Identifiers
+let NEARBY_CHARGERS_TO_TRACK_CHARGER = "nearByChargersToTrackCharger"
+let NEARBY_CHARGERS_TO_HISTORY = "nearByChargersToHistory"
