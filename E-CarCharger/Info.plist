@@ -41,5 +41,10 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>E-Car Charger requires your location to show our charger details nearby your location</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

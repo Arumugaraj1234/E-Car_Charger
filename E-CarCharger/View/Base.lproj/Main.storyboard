@@ -22,16 +22,16 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="WM5-bf-98F">
-                                <rect key="frame" x="20" y="258.5" width="335" height="150"/>
+                                <rect key="frame" x="20" y="208.5" width="335" height="250"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A new versioin is available in Appstore. Please upload your app for better experience." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="jiD-hb-tSj">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="60"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A new versioin is available in Appstore. Please upload your app for better experience." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="jiD-hb-tSj">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="160"/>
                                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="18"/>
                                         <color key="textColor" red="0.83216959239999999" green="0.98548370600000001" blue="0.47333085539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="M6M-dJ-Hs0">
-                                        <rect key="frame" x="0.0" y="110" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="210" width="335" height="40"/>
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8U-HS-22o" customClass="RoundedBtn" customModule="E_CarCharger" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="117.5" height="40"/>
@@ -62,7 +62,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="zLP-gA-7ap"/>
+                                    <constraint firstAttribute="height" constant="250" id="zLP-gA-7ap"/>
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vda-nI-okG">
@@ -313,6 +313,7 @@
                         <outlet property="otpStackViewConstraint" destination="mF3-eh-hsN" id="5ZG-dQ-pTm"/>
                         <outlet property="otpTF" destination="f8v-vc-jGk" id="b5v-rU-1cG"/>
                         <outlet property="otpView" destination="WUp-Ag-Xrt" id="PaC-la-BF7"/>
+                        <outlet property="updateBtnStackView" destination="M6M-dJ-Hs0" id="lwd-Q1-kYN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -805,7 +806,7 @@
                                 <rect key="frame" x="0.0" y="266.5" width="275" height="296.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SideMenuCell" rowHeight="40" id="Ttk-YW-v7n" customClass="SideMenuCell" customModule="E_CarCharger" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SideMenuCell" rowHeight="40" id="Ttk-YW-v7n" customClass="SideMenuCell" customModule="E_CarCharger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="275" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ttk-YW-v7n" id="Gqd-zn-HZq">
@@ -813,10 +814,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vS8-ZY-n3o">
-                                                    <rect key="frame" x="20" y="0.0" width="255" height="40"/>
+                                                    <rect key="frame" x="20" y="0.0" width="155" height="40"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gcV-n7-n35">
-                                                            <rect key="frame" x="10" y="7.5" width="235" height="25"/>
+                                                            <rect key="frame" x="10" y="7.5" width="135" height="25"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_Home" translatesAutoresizingMaskIntoConstraints="NO" id="nje-wp-Kjx">
                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -825,7 +826,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFi-xL-l6g">
-                                                                    <rect key="frame" x="35" y="0.0" width="200" height="25"/>
+                                                                    <rect key="frame" x="35" y="0.0" width="100" height="25"/>
                                                                     <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="16"/>
                                                                     <color key="textColor" red="0.13725490196078433" green="0.23529411764705882" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>

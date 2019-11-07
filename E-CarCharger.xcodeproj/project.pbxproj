@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F886C2BB1880A253A0097CA /* Pods_E_CarCharger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */; };
+		5214AD932373FD15009BEA79 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5214AD922373FD15009BEA79 /* StringExt.swift */; };
 		52228E00236AB28000F05847 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228DFF236AB28000F05847 /* LocationService.swift */; };
 		52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E02236ACE8900F05847 /* UIViewExt.swift */; };
 		52228E05236AE77B00F05847 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E04236AE77B00F05847 /* Constants.swift */; };
@@ -29,7 +30,7 @@
 		526F9495236996D400012B0F /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F9489236996D400012B0F /* Roboto-Light.ttf */; };
 		526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949623699CEF00012B0F /* NearByChargersVC.swift */; };
 		526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949823699DD100012B0F /* AppDetailsModel.swift */; };
-		526F949C2369A62600012B0F /* OtherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949B2369A62600012B0F /* OtherService.swift */; };
+		526F949C2369A62600012B0F /* WebRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949B2369A62600012B0F /* WebRequestService.swift */; };
 		529370C62372AED10020DBCC /* OrderConfirmationPopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529370C52372AED10020DBCC /* OrderConfirmationPopVC.swift */; };
 		529370C82372C97B0020DBCC /* TrackChargerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529370C72372C97B0020DBCC /* TrackChargerVC.swift */; };
 		529370CA2372D42B0020DBCC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529370C92372D42B0020DBCC /* HistoryVC.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_CarCharger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A931D41ECAB726D0518EFCD /* Pods-E-CarCharger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-CarCharger.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger.release.xcconfig"; sourceTree = "<group>"; };
+		5214AD922373FD15009BEA79 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		52228DFF236AB28000F05847 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		52228E02236ACE8900F05847 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		52228E04236AE77B00F05847 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 		526F9489236996D400012B0F /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		526F949623699CEF00012B0F /* NearByChargersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearByChargersVC.swift; sourceTree = "<group>"; };
 		526F949823699DD100012B0F /* AppDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsModel.swift; sourceTree = "<group>"; };
-		526F949B2369A62600012B0F /* OtherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherService.swift; sourceTree = "<group>"; };
+		526F949B2369A62600012B0F /* WebRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRequestService.swift; sourceTree = "<group>"; };
 		529370C52372AED10020DBCC /* OrderConfirmationPopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationPopVC.swift; sourceTree = "<group>"; };
 		529370C72372C97B0020DBCC /* TrackChargerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackChargerVC.swift; sourceTree = "<group>"; };
 		529370C92372D42B0020DBCC /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				52228E02236ACE8900F05847 /* UIViewExt.swift */,
 				5238000B236C187F0086AE36 /* TextFiledExt.swift */,
 				5262A0BF2370025600A7AAE5 /* ViewControllerExt.swift */,
+				5214AD922373FD15009BEA79 /* StringExt.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -188,7 +191,7 @@
 		526F949A2369A5A100012B0F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				526F949B2369A62600012B0F /* OtherService.swift */,
+				526F949B2369A62600012B0F /* WebRequestService.swift */,
 				52228DFF236AB28000F05847 /* LocationService.swift */,
 			);
 			path = Services;
@@ -402,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5262A0C02370025600A7AAE5 /* ViewControllerExt.swift in Sources */,
+				5214AD932373FD15009BEA79 /* StringExt.swift in Sources */,
 				52BA903423715A4D003F06CF /* SideMenuCell.swift in Sources */,
 				52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */,
 				526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */,
@@ -412,7 +416,7 @@
 				52CD5DE22369789800429463 /* InstructionVC.swift in Sources */,
 				5238000C236C187F0086AE36 /* TextFiledExt.swift in Sources */,
 				5262A0BE236FE3CA00A7AAE5 /* RoundedBtn.swift in Sources */,
-				526F949C2369A62600012B0F /* OtherService.swift in Sources */,
+				526F949C2369A62600012B0F /* WebRequestService.swift in Sources */,
 				52BA90312371599C003F06CF /* SideMenuVC.swift in Sources */,
 				526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */,
 				52228E00236AB28000F05847 /* LocationService.swift in Sources */,

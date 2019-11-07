@@ -39,7 +39,7 @@ class NearByChargersVC: UIViewController {
     var myCurrentLongitude: Double?
     
     //MARK: General Variables
-    let otherService = OtherService.shared
+    let webService = WebRequestService.shared
     var vehicleType = 0
     
     override func viewDidLoad() {

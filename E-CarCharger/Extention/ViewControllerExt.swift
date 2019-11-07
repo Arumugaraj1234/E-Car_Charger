@@ -43,7 +43,46 @@ extension UIViewController: NVActivityIndicatorViewable {
         self.view.makeToast(message, duration: time, position: position, style: style)
     }
     
-    
+    func shouldPresentLoadingViewWithText(_ show : Bool, _ title: String) {
+        var fadedView: UIView?
+        
+        if show == true {
+            fadedView = UIView(frame: CGRect(x: 0, y: 0,
+                                             width: view.frame.width,
+                                             height: view.frame.height))
+            fadedView?.backgroundColor = UIColor.white
+            fadedView?.alpha = 1.0
+            fadedView?.tag = 99
+            
+            var bgImage = UIImageView()
+            bgImage = UIImageView(frame: (fadedView?.bounds)!)
+            bgImage.image = UIImage(named: "bgImage")
+            bgImage.removeFromSuperview()
+            
+            var activityIndicator = UIActivityIndicatorView()
+            activityIndicator.removeFromSuperview()
+            activityIndicator = UIActivityIndicatorView(style: .white)
+            activityIndicator.frame = CGRect(x: view.frame.midX - 50,
+                                             y: view.frame.midY - 50 ,
+                                             width: 100, height: 100)
+            activityIndicator.startAnimating()
+            
+            view.addSubview(fadedView!)
+            fadedView?.addSubview(bgImage)
+            fadedView?.addSubview(activityIndicator)
+            fadedView?.fadeTo(alphaValue: 1.0, withDuration: 0.2)
+        } else {
+            for subview in view.subviews {
+                if subview.tag == 99 {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        subview.alpha = 0.0
+                    }, completion: { (finished) in
+                        subview.removeFromSuperview()
+                    })
+                }
+            }
+        }
+    }
     
     
 }
