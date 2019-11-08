@@ -97,17 +97,26 @@ class NearByChargersVC: UIViewController {
     }
     
     func getNearByChargers() {
-        //Current Locatiion: Optional(19.0176147), Optional(72.8561644)
-        let charger1 = CLLocationCoordinate2DMake(19.017919, 72.857248)
-        let charger2 = CLLocationCoordinate2DMake(19.019542, 72.854255)
-        let nearByChargers = [charger1, charger2]
-        setLocationMarkerForChargers(chargers: nearByChargers)
+        let myLocatiion = CLLocationCoordinate2DMake(13.074554, 80.259644)
+        if checkInternetAvailablity() {
+            webService.getNearByChargers(with: myLocatiion.latitude, and: myLocatiion.longitude) { (status, message, data) in
+                if status == 1 {
+                    let nearestChargers = data!
+                    self.setLocationMarkerForChargers(chargers: nearestChargers)
+                }
+            }
+        }
+        else {
+            stopAnimating()
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+        }
     }
     
-    func setLocationMarkerForChargers(chargers: [CLLocationCoordinate2D]) {
+    func setLocationMarkerForChargers(chargers: [ChargerModel]) {
         for charger in chargers {
             let driverLocationMarker = GMSMarker()
-            driverLocationMarker.position = charger
+            let position = CLLocationCoordinate2DMake(charger.currentLatitude, charger.currentLongitude)
+            driverLocationMarker.position = position
             driverLocationMarker.icon = UIImage(named: "chargerIcon")
             driverLocationMarker.map = mapView
         }

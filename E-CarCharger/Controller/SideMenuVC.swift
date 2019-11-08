@@ -19,11 +19,25 @@ class SideMenuVC: UIViewController {
         SideMenuModel(menuName: "Profile", whiteMenuIcon: UIImage(named: "white_Profile")!, blueMenuIcon: UIImage(named: "blue_Profile")!),
         SideMenuModel(menuName: "History", whiteMenuIcon: UIImage(named: "white_History")!, blueMenuIcon: UIImage(named: "blue_History")!)
     ]
+    let webService = WebRequestService.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
+    }
+    
+    @IBAction func onSignOutBtnPressed(sender: UIButton) {
+        _ = SweetAlert().showAlert("Are You Sure", subTitle: "Are you sure you want to sign out?", style: .none, buttonTitle: "Yes", buttonColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1), otherButtonTitle: "No", action: { (status) in
+            if status {
+                self.webService.userId = 0
+                self.webService.isLoggedIn = false
+                self.webService.userDetails = [String: String]()
+                let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let instructionVc = main.instantiateViewController(withIdentifier: "InstructionVC") as! InstructionVC
+                self.present(instructionVc, animated: true, completion: nil)
+            }
+        })
     }
     
 }

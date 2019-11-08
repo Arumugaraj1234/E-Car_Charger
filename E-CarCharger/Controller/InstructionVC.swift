@@ -58,10 +58,12 @@ class InstructionVC: UIViewController {
     
     @IBAction func onSendOtpBtnTapped(sender: UIButton) {
         view.endEditing(true)
+        startAnimate(with: "")
         if isMobileNoValid {
-            otpView.isHidden = false
+            sendOtp()
         }
         else {
+            stopAnimating()
             makeToast(message: "Oops! Invalid mobile number. Please check.", time: 3.0, position: .bottom)
         }
     }
@@ -76,11 +78,12 @@ class InstructionVC: UIViewController {
     
     @IBAction func onLoginBtnTapped(sender: UIButton) {
         view.endEditing(true)
+        startAnimating()
         if isOtpValid {
-            webService.isLoggedIn = true
-            appDelegate.skipToNearByChargersScreen()
+            checkOtp()
         }
         else {
+            stopAnimating()
             makeToast(message: "Oops! Invalid otp entered.", time: 3.0, position: .bottom)
         }
     }
@@ -102,47 +105,98 @@ class InstructionVC: UIViewController {
     }
     
     func getAppDetails(){
-        WebRequestService.shared.getAppInitDetails { (status, message, result) in
-            if status == 1 {
-                self.appDetails = result!
-                let appVersionInMyMachine = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-                if appVersionInMyMachine != "\(String(describing: result?.recentVersion))" {
-                    self.isOldVersion = true
+        if checkInternetAvailablity() {
+            webService.getAppInitDetails { (status, message, result) in
+                if status == 1 {
+                    self.appDetails = result!
+                    let appVersionInMyMachine = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                    if appVersionInMyMachine! != "\(result!.recentVersion)" {
+                        self.isOldVersion = true
+                    }
+                    self.shouldPresentLoadingViewWithText(false, "")
+                    if result!.flag == 2 && self.isOldVersion == true {
+                        self.mobileView.isHidden = true
+                        self.otpView.isHidden = true
+                        self.laterBtn.isHidden = true
+                        self.instructionMsgLbl.attributedText = result!.instruction.htmlToAttributedString
+                        self.instructionMsgLbl.textAlignment = .center
+                    }
+                    else if result!.flag == 1 && self.isOldVersion == true {
+                        self.mobileView.isHidden = true
+                        self.otpView.isHidden = true
+                        self.instructionMsgLbl.attributedText = result!.instruction.htmlToAttributedString
+                        self.instructionMsgLbl.textAlignment = .center
+                    }
+                    else if result!.flag == 3 {
+                        self.mobileView.isHidden = true
+                        self.otpView.isHidden = true
+                        self.instructionMsgLbl.attributedText = result!.instruction.htmlToAttributedString
+                        self.instructionMsgLbl.textAlignment = .center
+                        self.updateBtnStackView.isHidden = true
+                    }
+                    else {
+                        if self.webService.isLoggedIn {
+                            self.appDelegate.skipToNearByChargersScreen()
+                        }
+                        else {
+                            self.otpView.isHidden = true
+                        }
+                    }
                 }
-                self.shouldPresentLoadingViewWithText(false, "")
-                if result!.flag == 2 {
+                else {
+                    self.shouldPresentLoadingViewWithText(false, "")
                     self.mobileView.isHidden = true
                     self.otpView.isHidden = true
-                    self.laterBtn.isHidden = true
-                    self.instructionMsgLbl.attributedText = result!.instruction.htmlToAttributedString
-                    self.instructionMsgLbl.textAlignment = .center
-                }
-                else if result!.flag == 1 {
-                    self.mobileView.isHidden = true
-                    self.otpView.isHidden = true
-                    self.instructionMsgLbl.attributedText = result!.instruction.htmlToAttributedString
-                    self.instructionMsgLbl.textAlignment = .center
-                }
-                else if result!.flag == 3 {
-                    self.mobileView.isHidden = true
-                    self.otpView.isHidden = true
-                    self.instructionMsgLbl.attributedText = result!.instruction.htmlToAttributedString
+                    self.instructionMsgLbl.text = "Something went wrong. Please try again later."
                     self.instructionMsgLbl.textAlignment = .center
                     self.updateBtnStackView.isHidden = true
                 }
+            }
+        }
+        else {
+            self.shouldPresentLoadingViewWithText(false, "")
+            self.mobileView.isHidden = true
+            self.otpView.isHidden = true
+            self.instructionMsgLbl.text = "Your internet is weak or unavailable. Please check & try again!"
+            self.instructionMsgLbl.textAlignment = .center
+            self.updateBtnStackView.isHidden = true
+        }
+        
+    }
+    
+    func sendOtp() {
+        if checkInternetAvailablity() {
+            webService.sendOtpForLogin(with: mobileTF.text!) { (status, message) in
+                self.stopAnimating()
+                if status == 1 {
+                    self.otpView.isHidden = false
+                }
                 else {
-                    if WebRequestService.shared.isLoggedIn {
-                        self.appDelegate.skipToNearByChargersScreen()
-                    }
-                    else {
-                        self.otpView.isHidden = true
-                    }
+                    self.makeToast(message: message, time: 3.0, position: .bottom)
                 }
             }
-            else {
-                self.shouldPresentLoadingViewWithText(false, "")
-                self.appDetails = AppDetailsModel(flag: 4, recentVersion: 1.0, instruction: "Something went wrong. Please try again later.")
+        }
+        else {
+            stopAnimating()
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+        }
+    }
+    
+    func checkOtp() {
+        if checkInternetAvailablity() {
+            webService.checkOtpForLogin(with: mobileTF.text!, with: otpTF.text!) { (status, message) in
+                self.stopAnimating()
+                if status == 1 {
+                    self.appDelegate.skipToNearByChargersScreen()
+                }
+                else {
+                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                }
             }
+        }
+        else {
+            stopAnimating()
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
         }
     }
 

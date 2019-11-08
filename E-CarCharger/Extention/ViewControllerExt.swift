@@ -22,7 +22,7 @@ extension UIViewController: NVActivityIndicatorViewable {
     }
     
     func startAnimate(with text: String){
-        startAnimating(CGSize(width: 75.0, height: 75.0), message: text, messageFont: UIFont(name: "AvenirNextCondensed-Demibold", size: 18), type: NVActivityIndicatorType.ballScaleMultiple, color: UIColor.white, padding: 0.0, displayTimeThreshold: 1, minimumDisplayTime: 2, backgroundColor: nil, textColor: UIColor.white, fadeInAnimation: nil)
+        startAnimating(CGSize(width: 125.0, height: 125.0), message: text, messageFont: UIFont(name: "AvenirNextCondensed-Demibold", size: 18), type: NVActivityIndicatorType.ballTrianglePath, color: UIColor.white, padding: 0.0, displayTimeThreshold: 1, minimumDisplayTime: 2, backgroundColor: nil, textColor: UIColor.white, fadeInAnimation: nil)
         
     }
     
@@ -38,8 +38,11 @@ extension UIViewController: NVActivityIndicatorViewable {
     
     func makeToast(message: String, time: TimeInterval, position: ToastPosition) {
         var style = ToastStyle()
-        style.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 0.5)
-        style.messageColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        style.backgroundColor = UIColor.clear
+        style.messageColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        if let font = UIFont(name: "AvenirNextCondensed-Demibold", size: 16.0) {
+            style.messageFont = font
+        }
         self.view.makeToast(message, duration: time, position: position, style: style)
     }
     
@@ -81,6 +84,18 @@ extension UIViewController: NVActivityIndicatorViewable {
                     })
                 }
             }
+        }
+    }
+    
+    func checkInternetAvailablity() -> Bool {
+        let status = Reach().connectionStatus()
+        switch status {
+        case .unknown, .offline:
+            return false
+        case .online(.wwan):
+            return true
+        case .online(.wiFi):
+            return true
         }
     }
     

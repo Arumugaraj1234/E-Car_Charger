@@ -14,6 +14,10 @@
 		52228E05236AE77B00F05847 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E04236AE77B00F05847 /* Constants.swift */; };
 		52228E08236AEFA800F05847 /* RoundedTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E07236AEFA800F05847 /* RoundedTF.swift */; };
 		5238000C236C187F0086AE36 /* TextFiledExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238000B236C187F0086AE36 /* TextFiledExt.swift */; };
+		524E0FA523753A9900DF0B33 /* Reach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E0FA423753A9900DF0B33 /* Reach.swift */; };
+		524E0FA7237571A200DF0B33 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E0FA6237571A200DF0B33 /* SweetAlert.swift */; };
+		524E0FA923758B4E00DF0B33 /* ChargerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E0FA823758B4E00DF0B33 /* ChargerModel.swift */; };
+		524E0FAB2375969800DF0B33 /* MyLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 524E0FAA2375969800DF0B33 /* MyLocation.gpx */; };
 		5262A0BE236FE3CA00A7AAE5 /* RoundedBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5262A0BD236FE3CA00A7AAE5 /* RoundedBtn.swift */; };
 		5262A0C02370025600A7AAE5 /* ViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5262A0BF2370025600A7AAE5 /* ViewControllerExt.swift */; };
 		526F948A236996D400012B0F /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 526F947E236996D200012B0F /* Roboto-BoldItalic.ttf */; };
@@ -53,6 +57,10 @@
 		52228E04236AE77B00F05847 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		52228E07236AEFA800F05847 /* RoundedTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTF.swift; sourceTree = "<group>"; };
 		5238000B236C187F0086AE36 /* TextFiledExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledExt.swift; sourceTree = "<group>"; };
+		524E0FA423753A9900DF0B33 /* Reach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reach.swift; sourceTree = "<group>"; };
+		524E0FA6237571A200DF0B33 /* SweetAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
+		524E0FA823758B4E00DF0B33 /* ChargerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerModel.swift; sourceTree = "<group>"; };
+		524E0FAA2375969800DF0B33 /* MyLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MyLocation.gpx; sourceTree = "<group>"; };
 		5262A0BD236FE3CA00A7AAE5 /* RoundedBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBtn.swift; sourceTree = "<group>"; };
 		5262A0BF2370025600A7AAE5 /* ViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExt.swift; sourceTree = "<group>"; };
 		526F947E236996D200012B0F /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 			children = (
 				526F949823699DD100012B0F /* AppDetailsModel.swift */,
 				52BA903523715AF0003F06CF /* SideMenuModel.swift */,
+				524E0FA823758B4E00DF0B33 /* ChargerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -163,8 +172,11 @@
 		526F947C2369966F00012B0F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				524E0FAA2375969800DF0B33 /* MyLocation.gpx */,
+				524E0FA423753A9900DF0B33 /* Reach.swift */,
 				526F947D236996B900012B0F /* Roboto */,
 				52228E04236AE77B00F05847 /* Constants.swift */,
+				524E0FA6237571A200DF0B33 /* SweetAlert.swift */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -318,6 +330,7 @@
 				526F9491236996D400012B0F /* Roboto-Thin.ttf in Resources */,
 				526F948A236996D400012B0F /* Roboto-BoldItalic.ttf in Resources */,
 				526F948D236996D400012B0F /* Roboto-Black.ttf in Resources */,
+				524E0FAB2375969800DF0B33 /* MyLocation.gpx in Resources */,
 				526F948C236996D400012B0F /* Roboto-MediumItalic.ttf in Resources */,
 				526F9494236996D400012B0F /* Roboto-ThinItalic.ttf in Resources */,
 				52CD5DE52369789800429463 /* Main.storyboard in Resources */,
@@ -409,10 +422,12 @@
 				52BA903423715A4D003F06CF /* SideMenuCell.swift in Sources */,
 				52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */,
 				526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */,
+				524E0FA7237571A200DF0B33 /* SweetAlert.swift in Sources */,
 				529370C62372AED10020DBCC /* OrderConfirmationPopVC.swift in Sources */,
 				52BA903623715AF0003F06CF /* SideMenuModel.swift in Sources */,
 				529370C82372C97B0020DBCC /* TrackChargerVC.swift in Sources */,
 				529370CA2372D42B0020DBCC /* HistoryVC.swift in Sources */,
+				524E0FA923758B4E00DF0B33 /* ChargerModel.swift in Sources */,
 				52CD5DE22369789800429463 /* InstructionVC.swift in Sources */,
 				5238000C236C187F0086AE36 /* TextFiledExt.swift in Sources */,
 				5262A0BE236FE3CA00A7AAE5 /* RoundedBtn.swift in Sources */,
@@ -421,6 +436,7 @@
 				526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */,
 				52228E00236AB28000F05847 /* LocationService.swift in Sources */,
 				52CD5DE02369789800429463 /* AppDelegate.swift in Sources */,
+				524E0FA523753A9900DF0B33 /* Reach.swift in Sources */,
 				52228E05236AE77B00F05847 /* Constants.swift in Sources */,
 				52228E08236AEFA800F05847 /* RoundedTF.swift in Sources */,
 			);

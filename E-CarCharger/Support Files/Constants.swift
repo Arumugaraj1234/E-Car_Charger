@@ -11,6 +11,7 @@ import Foundation
 //MARK: USERDEFAULTS KEYS
 let LOGGED_IN_KEY = "loggedIn"
 let USER_ID_KEY = "userId"
+let USER_DETAILS_KEY = "UserDetails"
 
 //MARK: SEGUE IDENTIFIERS
 let NEARBY_CHARGERS_TO_TRACK_CHARGER = "nearByChargersToTrackCharger"
@@ -19,17 +20,19 @@ let NEARBY_CHARGERS_TO_HISTORY = "nearByChargersToHistory"
 //MARK: URL CONSTANTS
 let BASE_URL = "http://101.53.153.54/ElectricCharger/WebService/api/Customer/"
 let URL_TO_GET_APP_INIT = BASE_URL + "AppInit"
-let URL_TO_LOGIN = BASE_URL + "Login"
-let URL_TO_VERIFY_OTP = BASE_URL + "VerifyOTP"
-let URL_TO_UPDATE_PROFILE = BASE_URL + "UpdateProfile"
+let URL_TO_SEND_OTP_FOR_LOGIN = BASE_URL + "SendLoginOTP"
+let URL_TO_VERIFY_OTP_FOR_LOGIN = BASE_URL + "CheckLoginOTP"
+let URL_TO_UPDATE_PROFILE = BASE_URL + "UpdateProfile"  //Not Yet
 let URL_TO_GET_NEARBY_CHARGERS = BASE_URL + "GetNearestChargers"
-let URL_TO_BOOK_CHARGER = BASE_URL + "BookCharge"
-let URL_TO_TRACK_CHARGER = BASE_URL + "TrackCharger"
-let URL_TO_GET_ALL_BOOKINGS = BASE_URL + "MyBookings"
-let URL_TO_GET_VEHICLES = BASE_URL + "GetVehicles"
-let URL_TO_CHECK_BOOKING = BASE_URL + "CheckBooking"
+let URL_TO_BOOK_CHARGER = BASE_URL + "BookCharge"  //Not Yet
+let URL_TO_TRACK_CHARGER = BASE_URL + "TrackCharger"  //Not Yet
+let URL_TO_GET_ALL_BOOKINGS = BASE_URL + "MyBookings"  //Not Yet
+let URL_TO_GET_VEHICLES = BASE_URL + "GetVehicles"  //Not Yet
+let URL_TO_CHECK_BOOKING = BASE_URL + "CheckBooking"  //Not Yet
 
 //MARK: HEADER
 let HEADER = [
     "Content-Type": "application/json"
 ]
+
+//green white black
