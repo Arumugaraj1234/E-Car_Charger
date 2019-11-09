@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3F886C2BB1880A253A0097CA /* Pods_E_CarCharger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */; };
 		5214AD932373FD15009BEA79 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5214AD922373FD15009BEA79 /* StringExt.swift */; };
+		521F3C522376AAA300BC16AE /* SelectVehicleTypePopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C512376AAA300BC16AE /* SelectVehicleTypePopVC.swift */; };
+		521F3C542376AADC00BC16AE /* VehicleTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C532376AADC00BC16AE /* VehicleTypeCell.swift */; };
+		521F3C562376AAF400BC16AE /* VehicleTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C552376AAF400BC16AE /* VehicleTypeModel.swift */; };
+		521F3C582376ACE400BC16AE /* UiImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C572376ACE400BC16AE /* UiImageViewExt.swift */; };
 		52228E00236AB28000F05847 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228DFF236AB28000F05847 /* LocationService.swift */; };
 		52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E02236ACE8900F05847 /* UIViewExt.swift */; };
 		52228E05236AE77B00F05847 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E04236AE77B00F05847 /* Constants.swift */; };
@@ -43,15 +47,19 @@
 		52BA903623715AF0003F06CF /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA903523715AF0003F06CF /* SideMenuModel.swift */; };
 		52CD5DE02369789800429463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD5DDF2369789800429463 /* AppDelegate.swift */; };
 		52CD5DE22369789800429463 /* InstructionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD5DE12369789800429463 /* InstructionVC.swift */; };
-		52CD5DE52369789800429463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52CD5DE32369789800429463 /* Main.storyboard */; };
 		52CD5DE72369789900429463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52CD5DE62369789900429463 /* Assets.xcassets */; };
 		52CD5DEA2369789900429463 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52CD5DE82369789900429463 /* LaunchScreen.storyboard */; };
+		52D147362376D72F00F7D92A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D147352376D72F00F7D92A /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_CarCharger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A931D41ECAB726D0518EFCD /* Pods-E-CarCharger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-CarCharger.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger.release.xcconfig"; sourceTree = "<group>"; };
 		5214AD922373FD15009BEA79 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		521F3C512376AAA300BC16AE /* SelectVehicleTypePopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVehicleTypePopVC.swift; sourceTree = "<group>"; };
+		521F3C532376AADC00BC16AE /* VehicleTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTypeCell.swift; sourceTree = "<group>"; };
+		521F3C552376AAF400BC16AE /* VehicleTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTypeModel.swift; sourceTree = "<group>"; };
+		521F3C572376ACE400BC16AE /* UiImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiImageViewExt.swift; sourceTree = "<group>"; };
 		52228DFF236AB28000F05847 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		52228E02236ACE8900F05847 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		52228E04236AE77B00F05847 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -87,10 +95,10 @@
 		52CD5DDC2369789800429463 /* E-CarCharger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-CarCharger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52CD5DDF2369789800429463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52CD5DE12369789800429463 /* InstructionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionVC.swift; sourceTree = "<group>"; };
-		52CD5DE42369789800429463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52CD5DE62369789900429463 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52CD5DE92369789900429463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52CD5DEB2369789900429463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52D147352376D72F00F7D92A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6C424ECB8572048F4BA8E38E /* Pods-E-CarCharger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-CarCharger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +129,7 @@
 				5238000B236C187F0086AE36 /* TextFiledExt.swift */,
 				5262A0BF2370025600A7AAE5 /* ViewControllerExt.swift */,
 				5214AD922373FD15009BEA79 /* StringExt.swift */,
+				521F3C572376ACE400BC16AE /* UiImageViewExt.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -143,6 +152,7 @@
 				529370C52372AED10020DBCC /* OrderConfirmationPopVC.swift */,
 				529370C72372C97B0020DBCC /* TrackChargerVC.swift */,
 				529370C92372D42B0020DBCC /* HistoryVC.swift */,
+				521F3C512376AAA300BC16AE /* SelectVehicleTypePopVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -152,7 +162,7 @@
 			children = (
 				52BA903223715A14003F06CF /* TableViewCells */,
 				52228E06236AEF5900F05847 /* SpecialView */,
-				52CD5DE32369789800429463 /* Main.storyboard */,
+				52D147352376D72F00F7D92A /* Main.storyboard */,
 				52CD5DE62369789900429463 /* Assets.xcassets */,
 				52CD5DE82369789900429463 /* LaunchScreen.storyboard */,
 			);
@@ -165,6 +175,7 @@
 				526F949823699DD100012B0F /* AppDetailsModel.swift */,
 				52BA903523715AF0003F06CF /* SideMenuModel.swift */,
 				524E0FA823758B4E00DF0B33 /* ChargerModel.swift */,
+				521F3C552376AAF400BC16AE /* VehicleTypeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				52BA903323715A4D003F06CF /* SideMenuCell.swift */,
+				521F3C532376AADC00BC16AE /* VehicleTypeCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -331,9 +343,9 @@
 				526F948A236996D400012B0F /* Roboto-BoldItalic.ttf in Resources */,
 				526F948D236996D400012B0F /* Roboto-Black.ttf in Resources */,
 				524E0FAB2375969800DF0B33 /* MyLocation.gpx in Resources */,
+				52D147362376D72F00F7D92A /* Main.storyboard in Resources */,
 				526F948C236996D400012B0F /* Roboto-MediumItalic.ttf in Resources */,
 				526F9494236996D400012B0F /* Roboto-ThinItalic.ttf in Resources */,
-				52CD5DE52369789800429463 /* Main.storyboard in Resources */,
 				526F948E236996D400012B0F /* Roboto-BlackItalic.ttf in Resources */,
 				526F948F236996D400012B0F /* Roboto-Medium.ttf in Resources */,
 			);
@@ -417,13 +429,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521F3C562376AAF400BC16AE /* VehicleTypeModel.swift in Sources */,
 				5262A0C02370025600A7AAE5 /* ViewControllerExt.swift in Sources */,
 				5214AD932373FD15009BEA79 /* StringExt.swift in Sources */,
+				521F3C542376AADC00BC16AE /* VehicleTypeCell.swift in Sources */,
+				521F3C582376ACE400BC16AE /* UiImageViewExt.swift in Sources */,
 				52BA903423715A4D003F06CF /* SideMenuCell.swift in Sources */,
 				52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */,
 				526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */,
 				524E0FA7237571A200DF0B33 /* SweetAlert.swift in Sources */,
 				529370C62372AED10020DBCC /* OrderConfirmationPopVC.swift in Sources */,
+				521F3C522376AAA300BC16AE /* SelectVehicleTypePopVC.swift in Sources */,
 				52BA903623715AF0003F06CF /* SideMenuModel.swift in Sources */,
 				529370C82372C97B0020DBCC /* TrackChargerVC.swift in Sources */,
 				529370CA2372D42B0020DBCC /* HistoryVC.swift in Sources */,
@@ -445,14 +461,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		52CD5DE32369789800429463 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52CD5DE42369789800429463 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		52CD5DE82369789900429463 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

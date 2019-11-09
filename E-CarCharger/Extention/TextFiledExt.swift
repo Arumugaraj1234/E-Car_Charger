@@ -17,7 +17,7 @@ extension UITextField {
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
         toolBar.tintColor = UIColor.white
-        toolBar.barTintColor = #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1)
+        toolBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "DONE", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.resignFirstResponder))

@@ -178,7 +178,35 @@ class WebRequestService: NSObject {
         
     }
     
-    
+    func getVehicleType(completion: @escaping (_ status: Int, _ message: String, _ data: [VehicleTypeModel]?) -> Void) {
+        
+        Alamofire.request(URL_TO_GET_VEHICLE_TYPES, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                var vehicleTypes = [VehicleTypeModel]()
+                if responseCode == 1 {
+                    let imageUrl = json["ImageUrl"].stringValue
+                    let responseData = json["ResponseData"].arrayValue
+                    for vehicle in responseData {
+                        let vehicleId = vehicle["Id"].intValue
+                        let vehicleName = vehicle["Type"].stringValue
+                        let flag = vehicle["Flg"].intValue
+                        let imageLink = "\(imageUrl)\(vehicleId).png"
+                        let vehicleModel = VehicleTypeModel(id: vehicleId, name: vehicleName, flag: flag, imageLink: imageLink)
+                        vehicleTypes.append(vehicleModel)
+                    }
+                }
+                completion(responseCode, responseMsg, vehicleTypes)
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error as! String, nil)
+            }
+        }
+    }
     
     
     

@@ -40,7 +40,7 @@ class NearByChargersVC: UIViewController {
     
     //MARK: General Variables
     let webService = WebRequestService.shared
-    var vehicleType = 0
+    var selectedVehicleId = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class NearByChargersVC: UIViewController {
         locationManager.delegate = self
         mapView.delegate = self
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
-        
+        startAnimate(with: "")
         setInitialSideMenu() // Side Menu initial Settings
         getNearByChargers() // Gettting nearby chargers to show in map
         
@@ -103,6 +103,7 @@ class NearByChargersVC: UIViewController {
                 if status == 1 {
                     let nearestChargers = data!
                     self.setLocationMarkerForChargers(chargers: nearestChargers)
+                    self.stopAnimating()
                 }
             }
         }
@@ -123,21 +124,16 @@ class NearByChargersVC: UIViewController {
     }
     
     func getVehicleType() {
-        let alert = UIAlertController(title: "Select your vehicle type", message: nil , preferredStyle: .alert)
-        let twoWheelerAction = UIAlertAction(title: "Bike", style: .default) { (alert) in
-            self.vehicleType = 1
-            self.bookCharger()
+        let vehicleTypeVc = storyboard?.instantiateViewController(withIdentifier: "SelectVehicleTypePopVC") as! SelectVehicleTypePopVC
+        vehicleTypeVc.modalPresentationStyle = .overCurrentContext
+        vehicleTypeVc.delegate = self
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            vehicleTypeVc.preferredContentSize = CGSize(width: 450.0, height: 750.0)
         }
-        let fourWheelerAction = UIAlertAction(title: "Car", style: .default) { (alert) in
-            self.vehicleType = 2
-            self.bookCharger()
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alert : UIAlertAction!) in
-        }
-        alert.addAction(twoWheelerAction)
-        alert.addAction(fourWheelerAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        self.present(vehicleTypeVc, animated: true)
+        
+
+        
     }
     
     func bookCharger() {
@@ -148,6 +144,8 @@ class NearByChargersVC: UIViewController {
             orderConfirmVc.preferredContentSize = CGSize(width: 450.0, height: 750.0)
         }
         self.present(orderConfirmVc, animated: true)
+        
+
     }
     
 }
@@ -352,5 +350,11 @@ extension NearByChargersVC: orderConfimationDelegate {
         else if tag == 2 {
             performSegue(withIdentifier: NEARBY_CHARGERS_TO_TRACK_CHARGER, sender: self)
         }
+    }
+}
+
+extension NearByChargersVC: SelectVehicleTypeDelegate {
+    func vehicleGotSelected(type: VehicleTypeModel) {
+        self.selectedVehicleId = type.id
     }
 }

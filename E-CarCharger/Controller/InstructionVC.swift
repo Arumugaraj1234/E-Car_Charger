@@ -34,7 +34,7 @@ class InstructionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         shouldPresentLoadingViewWithText(true, "")
-        
+        //<wpt lat="13.074554" lon="80.259644"> 
         setUpInitialView()
         //instructionMsgLbl.attributedText = htmlText.htmlToAttributedString
         
