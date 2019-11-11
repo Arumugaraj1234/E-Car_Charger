@@ -31,16 +31,16 @@ extension UIViewController: NVActivityIndicatorViewable {
         let x = self.view.frame.size.width/2 - 50
         let titleLabel = UILabel(frame: CGRect(x: x, y: 0, width: 100, height: 40))
         titleLabel.text = title
-        titleLabel.textColor = UIColor.white
-        titleLabel.font = UIFont(name: "Georgia", size: 16)
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 20.0)
         self.navigationItem.titleView = titleLabel
     }
     
     func makeToast(message: String, time: TimeInterval, position: ToastPosition) {
         var style = ToastStyle()
         style.backgroundColor = UIColor.clear
-        style.messageColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        if let font = UIFont(name: "AvenirNextCondensed-Demibold", size: 16.0) {
+        style.messageColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        if let font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18.0) {
             style.messageFont = font
         }
         self.view.makeToast(message, duration: time, position: position, style: style)

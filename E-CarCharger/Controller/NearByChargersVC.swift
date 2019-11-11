@@ -20,6 +20,7 @@ class NearByChargersVC: UIViewController {
     @IBOutlet weak var constraintMenuWidth: NSLayoutConstraint!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
+    @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: Other Outlets
     @IBOutlet weak var mapView: GMSMapView!
@@ -41,6 +42,8 @@ class NearByChargersVC: UIViewController {
     //MARK: General Variables
     let webService = WebRequestService.shared
     var selectedVehicleId = 0
+    var vehicles = [VehicleTypeModel]()
+    var selectedVehicle: VehicleTypeModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +55,7 @@ class NearByChargersVC: UIViewController {
         startAnimate(with: "")
         setInitialSideMenu() // Side Menu initial Settings
         getNearByChargers() // Gettting nearby chargers to show in map
+        getVehicleTypes()
         
     }
     
@@ -124,13 +128,13 @@ class NearByChargersVC: UIViewController {
     }
     
     func getVehicleType() {
-        let vehicleTypeVc = storyboard?.instantiateViewController(withIdentifier: "SelectVehicleTypePopVC") as! SelectVehicleTypePopVC
-        vehicleTypeVc.modalPresentationStyle = .overCurrentContext
-        vehicleTypeVc.delegate = self
+        let personalDetailsVc = storyboard?.instantiateViewController(withIdentifier: "PersonalDetailsVC") as! PersonalDetailsVC
+        personalDetailsVc.modalPresentationStyle = .overCurrentContext
+        personalDetailsVc.delegate = self
         if UIDevice.current.userInterfaceIdiom == .pad {
-            vehicleTypeVc.preferredContentSize = CGSize(width: 450.0, height: 750.0)
+            personalDetailsVc.preferredContentSize = CGSize(width: 450.0, height: 750.0)
         }
-        self.present(vehicleTypeVc, animated: true)
+        self.present(personalDetailsVc, animated: true)
         
 
         
@@ -144,8 +148,26 @@ class NearByChargersVC: UIViewController {
             orderConfirmVc.preferredContentSize = CGSize(width: 450.0, height: 750.0)
         }
         self.present(orderConfirmVc, animated: true)
-        
-
+    }
+    
+    func getVehicleTypes() {
+        if checkInternetAvailablity() {
+            webService.getVehicleType { (status, message, data) in
+                if status == 1 {
+                    self.vehicles = data!
+                    self.collectionView.reloadData()
+                    //self.stopAnimating()
+                }
+                else {
+                    //self.stopAnimating()
+                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                }
+            }
+        }
+        else {
+            //stopAnimating()
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+        }
     }
     
 }
@@ -353,8 +375,42 @@ extension NearByChargersVC: orderConfimationDelegate {
     }
 }
 
-extension NearByChargersVC: SelectVehicleTypeDelegate {
-    func vehicleGotSelected(type: VehicleTypeModel) {
-        self.selectedVehicleId = type.id
+extension NearByChargersVC: PersonalDetailsDelegate {
+    func personalDetailsUpdated() {
+        bookCharger()
     }
+}
+
+extension NearByChargersVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return vehicles.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VehicleTypeCell", for: indexPath) as? VehicleTypeCell else {return UICollectionViewCell()}
+        let vehicleType = vehicles[indexPath.row]
+        cell.configureCell(vehicle: vehicleType)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedVehicleType = vehicles[indexPath.row]
+        self.selectedVehicle = selectedVehicleType
+        let personal = webService.userDetails
+        let fName = personal["firstName"]
+        let lName = personal["lastName"]
+        let email = personal["email"]
+        if fName == "" || lName == "" || email == "" {
+           getVehicleType()
+        }
+        else {
+            bookCharger()
+        }
+    }
+
 }

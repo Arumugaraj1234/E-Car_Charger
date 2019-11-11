@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CBAAAE2E8E73B367DD995030B6D75FD3"
+               BlueprintIdentifier = "D85D3E6B909973E394387E01020FF749"
                BlueprintName = "ValidationTextField"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "ValidationTextField.framework">

@@ -25,7 +25,7 @@ class SideMenuCell: UITableViewCell {
         
         if selected {
             containerView.backgroundColor = UIColor.white
-            menuNameLbl.textColor = #colorLiteral(red: 0.1432973146, green: 0.2453835607, blue: 0.3625246882, alpha: 1)
+            menuNameLbl.textColor = #colorLiteral(red: 0.3921568627, green: 0.7529411765, blue: 0.2470588235, alpha: 1)
         }
         else {
             containerView.backgroundColor = UIColor.clear

@@ -15,7 +15,6 @@ class OrderConfirmationPopVC: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var totalView: UIView!
-    @IBOutlet weak var bgImage: UIImageView!
     
     //MARK: Variables
     var delegate: orderConfimationDelegate?
@@ -24,8 +23,6 @@ class OrderConfirmationPopVC: UIViewController {
         super.viewDidLoad()
 
         totalView.layer.cornerRadius = 20.0
-        bgImage.layer.cornerRadius = 20.0
-        bgImage.clipsToBounds = true
         
     }
     

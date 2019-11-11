@@ -10,6 +10,7 @@ import UIKit
 import ValidationTextField
 import Toast_Swift
 import NVActivityIndicatorView
+import KOControls
 
 class InstructionVC: UIViewController {
     
@@ -17,11 +18,12 @@ class InstructionVC: UIViewController {
     @IBOutlet weak var instructionMsgLbl: UILabel!
     @IBOutlet weak var laterBtn: UIButton!
     @IBOutlet weak var mobileView: UIView!
-    @IBOutlet weak var mobileTF: ValidationTextField!
+    @IBOutlet weak var mobileTF: KOTextField!
     @IBOutlet weak var otpView: UIView!
-    @IBOutlet weak var otpTF: ValidationTextField!
+    @IBOutlet weak var otpTF: KOTextField!
     @IBOutlet weak var otpStackViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var updateBtnStackView: UIStackView!
+    @IBOutlet weak var mobileErrorLbl: UILabel!
     
     //MARK: Variables
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -89,17 +91,21 @@ class InstructionVC: UIViewController {
     }
     
     func setUpInitialView() {
-        mobileTF.validCondition = { $0.count >= 10 }
         mobileTF.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+        mobileTF.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         mobileTF.addHideinputAccessoryView()
-        mobileTF.titleFont = UIFont(name: "Georgia", size: 14.0)!
-        mobileTF.errorFont = UIFont(name: "Georgia", size: 16.0)!
-        
-        otpTF.titleFont = UIFont(name: "Georgia", size: 14.0)!
-        otpTF.errorFont = UIFont(name: "Georgia", size: 16.0)!
-        otpTF.validCondition = { $0.count == 6 }
+        mobileTF.errorInfo.description = "Invalid Mobile Number"
+        mobileTF.validation.add(validator: KOFunctionTextValidator(function: { mobile -> Bool in
+            return mobile.count >= 10 && mobile.count <= 13
+        }))
+
         otpTF.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         otpTF.addHideinputAccessoryView()
+        otpTF.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        otpTF.errorInfo.description = "Invalid Otp"
+        otpTF.validation.add(validator: KOFunctionTextValidator(function: { otp -> Bool in
+            return otp.count == 6
+        }))
         
         
     }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F886C2BB1880A253A0097CA /* Pods_E_CarCharger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */; };
 		5214AD932373FD15009BEA79 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5214AD922373FD15009BEA79 /* StringExt.swift */; };
-		521F3C522376AAA300BC16AE /* SelectVehicleTypePopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C512376AAA300BC16AE /* SelectVehicleTypePopVC.swift */; };
+		521F3C522376AAA300BC16AE /* PersonalDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C512376AAA300BC16AE /* PersonalDetailsVC.swift */; };
 		521F3C542376AADC00BC16AE /* VehicleTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C532376AADC00BC16AE /* VehicleTypeCell.swift */; };
 		521F3C562376AAF400BC16AE /* VehicleTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C552376AAF400BC16AE /* VehicleTypeModel.swift */; };
 		521F3C582376ACE400BC16AE /* UiImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F3C572376ACE400BC16AE /* UiImageViewExt.swift */; };
@@ -17,6 +17,7 @@
 		52228E03236ACE8900F05847 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E02236ACE8900F05847 /* UIViewExt.swift */; };
 		52228E05236AE77B00F05847 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E04236AE77B00F05847 /* Constants.swift */; };
 		52228E08236AEFA800F05847 /* RoundedTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E07236AEFA800F05847 /* RoundedTF.swift */; };
+		5233D20223790E1E0002F35A /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233D20123790E1E0002F35A /* UILabelExt.swift */; };
 		5238000C236C187F0086AE36 /* TextFiledExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238000B236C187F0086AE36 /* TextFiledExt.swift */; };
 		524E0FA523753A9900DF0B33 /* Reach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E0FA423753A9900DF0B33 /* Reach.swift */; };
 		524E0FA7237571A200DF0B33 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E0FA6237571A200DF0B33 /* SweetAlert.swift */; };
@@ -56,7 +57,7 @@
 		0C234F49CC39248A9950E6F9 /* Pods_E_CarCharger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_CarCharger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A931D41ECAB726D0518EFCD /* Pods-E-CarCharger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-CarCharger.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger.release.xcconfig"; sourceTree = "<group>"; };
 		5214AD922373FD15009BEA79 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
-		521F3C512376AAA300BC16AE /* SelectVehicleTypePopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVehicleTypePopVC.swift; sourceTree = "<group>"; };
+		521F3C512376AAA300BC16AE /* PersonalDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailsVC.swift; sourceTree = "<group>"; };
 		521F3C532376AADC00BC16AE /* VehicleTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTypeCell.swift; sourceTree = "<group>"; };
 		521F3C552376AAF400BC16AE /* VehicleTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTypeModel.swift; sourceTree = "<group>"; };
 		521F3C572376ACE400BC16AE /* UiImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiImageViewExt.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		52228E02236ACE8900F05847 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		52228E04236AE77B00F05847 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		52228E07236AEFA800F05847 /* RoundedTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTF.swift; sourceTree = "<group>"; };
+		5233D20123790E1E0002F35A /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		5238000B236C187F0086AE36 /* TextFiledExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledExt.swift; sourceTree = "<group>"; };
 		524E0FA423753A9900DF0B33 /* Reach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reach.swift; sourceTree = "<group>"; };
 		524E0FA6237571A200DF0B33 /* SweetAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				5262A0BF2370025600A7AAE5 /* ViewControllerExt.swift */,
 				5214AD922373FD15009BEA79 /* StringExt.swift */,
 				521F3C572376ACE400BC16AE /* UiImageViewExt.swift */,
+				5233D20123790E1E0002F35A /* UILabelExt.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -152,7 +155,7 @@
 				529370C52372AED10020DBCC /* OrderConfirmationPopVC.swift */,
 				529370C72372C97B0020DBCC /* TrackChargerVC.swift */,
 				529370C92372D42B0020DBCC /* HistoryVC.swift */,
-				521F3C512376AAA300BC16AE /* SelectVehicleTypePopVC.swift */,
+				521F3C512376AAA300BC16AE /* PersonalDetailsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-E-CarCharger/Pods-E-CarCharger-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/KOControls/KOControls.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -372,6 +376,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KOControls.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -439,7 +444,7 @@
 				526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */,
 				524E0FA7237571A200DF0B33 /* SweetAlert.swift in Sources */,
 				529370C62372AED10020DBCC /* OrderConfirmationPopVC.swift in Sources */,
-				521F3C522376AAA300BC16AE /* SelectVehicleTypePopVC.swift in Sources */,
+				521F3C522376AAA300BC16AE /* PersonalDetailsVC.swift in Sources */,
 				52BA903623715AF0003F06CF /* SideMenuModel.swift in Sources */,
 				529370C82372C97B0020DBCC /* TrackChargerVC.swift in Sources */,
 				529370CA2372D42B0020DBCC /* HistoryVC.swift in Sources */,
@@ -454,6 +459,7 @@
 				52CD5DE02369789800429463 /* AppDelegate.swift in Sources */,
 				524E0FA523753A9900DF0B33 /* Reach.swift in Sources */,
 				52228E05236AE77B00F05847 /* Constants.swift in Sources */,
+				5233D20223790E1E0002F35A /* UILabelExt.swift in Sources */,
 				52228E08236AEFA800F05847 /* RoundedTF.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

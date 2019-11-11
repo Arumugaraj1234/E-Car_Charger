@@ -6,7 +6,7 @@
 //  Copyright © 2019 Peach. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 //MARK: USERDEFAULTS KEYS
 let LOGGED_IN_KEY = "loggedIn"
@@ -35,4 +35,5 @@ let HEADER = [
     "Content-Type": "application/json"
 ]
 
-//green white black
+//MARK: FONTS
+

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VehicleTypeCell: UITableViewCell {
+class VehicleTypeCell: UICollectionViewCell {
     
     @IBOutlet weak var fadedView: UIView!
     @IBOutlet weak var vehicleIcon: UIImageView!
@@ -16,7 +16,7 @@ class VehicleTypeCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        fadedView.layer.cornerRadius = 10.0
+        //fadedView.layer.cornerRadius = 10.0
     }
     
     func configureCell(vehicle: VehicleTypeModel) {
