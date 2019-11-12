@@ -9,8 +9,8 @@
 import UIKit
 import KOControls
 
-protocol OrderConfimationDelegate {
-    func orderGotConfirmed(tag: Int)
+protocol PersonalDetailsDelegate {
+    func personalDetailsUpdated()
 }
 class PersonalDetailsVC: UIViewController {
     
@@ -18,13 +18,12 @@ class PersonalDetailsVC: UIViewController {
     @IBOutlet weak var lastNameTF: KOTextField!
     @IBOutlet weak var emailTF: KOTextField!
     @IBOutlet weak var personalDetailsView: UIView!
-    @IBOutlet weak var orderConfirmView: UIView!
     
     let webService = WebRequestService.shared
     var isFirstNameValid = false
     var isLastNameValid = false
     var isEmailValid = false
-    var delegate: OrderConfimationDelegate?
+    var delegate: PersonalDetailsDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,19 +45,12 @@ class PersonalDetailsVC: UIViewController {
             userDetails["email"] = emailTF.text!
             userDetails["mobileNo"] = phone!
             webService.userDetails = userDetails
+            delegate?.personalDetailsUpdated()
             dismiss(animated: true, completion: nil)
         }
         else {
             makeToast(message: "Please provide the valid details to update!", time: 3.0, position: .bottom)
         }
-    }
-    
-    @IBAction func onOkBtnPressed(sender: UIButton) {
-        
-    }
-    
-    @IBAction func onTrackBtnPressed(sender: UIButton) {
-        
     }
     
     func setupInitialView() {
@@ -80,8 +72,6 @@ class PersonalDetailsVC: UIViewController {
         emailTF.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         emailTF.errorInfo.description = "Invalid Email Address"
         emailTF.validation.add(validator: KORegexTextValidator.mailValidator)
-        
-        orderConfirmView.layer.cornerRadius = 20.0
     }
     
 }

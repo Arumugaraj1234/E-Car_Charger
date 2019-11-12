@@ -19,6 +19,7 @@
 		52228E08236AEFA800F05847 /* RoundedTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52228E07236AEFA800F05847 /* RoundedTF.swift */; };
 		5233D20223790E1E0002F35A /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233D20123790E1E0002F35A /* UILabelExt.swift */; };
 		5238000C236C187F0086AE36 /* TextFiledExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238000B236C187F0086AE36 /* TextFiledExt.swift */; };
+		523C0E36237A96DE00FE1412 /* ChargerStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523C0E35237A96DE00FE1412 /* ChargerStatusCell.swift */; };
 		524E0FA523753A9900DF0B33 /* Reach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E0FA423753A9900DF0B33 /* Reach.swift */; };
 		524E0FA7237571A200DF0B33 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E0FA6237571A200DF0B33 /* SweetAlert.swift */; };
 		524E0FA923758B4E00DF0B33 /* ChargerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E0FA823758B4E00DF0B33 /* ChargerModel.swift */; };
@@ -67,6 +68,11 @@
 		52228E07236AEFA800F05847 /* RoundedTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTF.swift; sourceTree = "<group>"; };
 		5233D20123790E1E0002F35A /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		5238000B236C187F0086AE36 /* TextFiledExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledExt.swift; sourceTree = "<group>"; };
+		523C0E35237A96DE00FE1412 /* ChargerStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerStatusCell.swift; sourceTree = "<group>"; };
+		523C0E39237ACE8900FE1412 /* DIN Alternate Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DIN Alternate Regular.otf"; sourceTree = "<group>"; };
+		523C0E3A237ACF3600FE1412 /* DINRegularAlternate.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINRegularAlternate.ttf; sourceTree = "<group>"; };
+		523C0E3B237ACFB900FE1412 /* DINBlackAlternate.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINBlackAlternate.ttf; sourceTree = "<group>"; };
+		523C0E3C237ACFE300FE1412 /* DINMediumAlternate.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINMediumAlternate.ttf; sourceTree = "<group>"; };
 		524E0FA423753A9900DF0B33 /* Reach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reach.swift; sourceTree = "<group>"; };
 		524E0FA6237571A200DF0B33 /* SweetAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		524E0FA823758B4E00DF0B33 /* ChargerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerModel.swift; sourceTree = "<group>"; };
@@ -186,6 +192,10 @@
 		526F947C2369966F00012B0F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				523C0E3C237ACFE300FE1412 /* DINMediumAlternate.ttf */,
+				523C0E3B237ACFB900FE1412 /* DINBlackAlternate.ttf */,
+				523C0E3A237ACF3600FE1412 /* DINRegularAlternate.ttf */,
+				523C0E39237ACE8900FE1412 /* DIN Alternate Regular.otf */,
 				524E0FAA2375969800DF0B33 /* MyLocation.gpx */,
 				524E0FA423753A9900DF0B33 /* Reach.swift */,
 				526F947D236996B900012B0F /* Roboto */,
@@ -228,6 +238,7 @@
 			children = (
 				52BA903323715A4D003F06CF /* SideMenuCell.swift */,
 				521F3C532376AADC00BC16AE /* VehicleTypeCell.swift */,
+				523C0E35237A96DE00FE1412 /* ChargerStatusCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -456,6 +467,7 @@
 				52BA90312371599C003F06CF /* SideMenuVC.swift in Sources */,
 				526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */,
 				52228E00236AB28000F05847 /* LocationService.swift in Sources */,
+				523C0E36237A96DE00FE1412 /* ChargerStatusCell.swift in Sources */,
 				52CD5DE02369789800429463 /* AppDelegate.swift in Sources */,
 				524E0FA523753A9900DF0B33 /* Reach.swift in Sources */,
 				52228E05236AE77B00F05847 /* Constants.swift in Sources */,

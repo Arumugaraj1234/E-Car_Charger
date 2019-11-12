@@ -14,6 +14,7 @@ class TrackChargerVC: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var tableView: UITableView!
     
     //MARK: Google Map Related Variables
     let locationManager = CLLocationManager()
@@ -92,4 +93,19 @@ extension TrackChargerVC: GMSMapViewDelegate {
 //        self.isMapCentered = false
 //    }
     
+}
+
+extension TrackChargerVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChargerStatusCell", for: indexPath) as? ChargerStatusCell else {return UITableViewCell()}
+        return cell
+    }
 }

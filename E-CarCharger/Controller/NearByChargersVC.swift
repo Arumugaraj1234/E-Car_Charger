@@ -375,12 +375,6 @@ extension NearByChargersVC: orderConfimationDelegate {
     }
 }
 
-extension NearByChargersVC: PersonalDetailsDelegate {
-    func personalDetailsUpdated() {
-        bookCharger()
-    }
-}
-
 extension NearByChargersVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -413,4 +407,12 @@ extension NearByChargersVC: UICollectionViewDelegate, UICollectionViewDataSource
         }
     }
 
+}
+
+extension NearByChargersVC: PersonalDetailsDelegate {
+    func personalDetailsUpdated() {
+        performSegue(withIdentifier: NEARBY_CHARGERS_TO_TRACK_CHARGER, sender: self)
+    }
+    
+    
 }

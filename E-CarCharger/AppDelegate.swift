@@ -18,14 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         locationService.setGoogleApiKeys()
         locationService.authorize()
-        let personal = WebRequestService.shared.userDetails
-        let phone = personal["mobileNo"]
-        var userDetails = [String:String]()
-        userDetails["firstName"] = ""
-        userDetails["lastName"] = ""
-        userDetails["email"] = ""
-        userDetails["mobileNo"] = phone!
-        WebRequestService.shared.userDetails = userDetails
+//        let personal = WebRequestService.shared.userDetails
+//        let phone = personal["mobileNo"]
+//        var userDetails = [String:String]()
+//        userDetails["firstName"] = ""
+//        userDetails["lastName"] = ""
+//        userDetails["email"] = ""
+//        userDetails["mobileNo"] = phone!
+//        WebRequestService.shared.userDetails = userDetails
         return true
     }
     

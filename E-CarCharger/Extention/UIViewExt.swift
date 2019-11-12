@@ -10,6 +10,21 @@ import UIKit
 
 extension UIView {
     
+    private static let lineDashPattern: [NSNumber] = [2,3]
+    private static let lineDashWidth: CGFloat = 2.0
+    
+    func makeDashedBorderLine() {
+        let path = CGMutablePath()
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.lineWidth = UIView.lineDashWidth
+        shapeLayer.strokeColor = UIColor.darkGray.cgColor
+        shapeLayer.lineDashPattern = UIView.lineDashPattern
+        path.addLines(between: [CGPoint(x: bounds.minX + 1, y: bounds.minY),
+                                CGPoint(x: bounds.maxX - 1, y: bounds.maxY)])
+        shapeLayer.path = path
+        layer.addSublayer(shapeLayer)
+    }
+    
     func fadeTo(alphaValue: CGFloat, withDuration duration: TimeInterval) {
         UIView.animate(withDuration: duration) {
             self.alpha = alphaValue
