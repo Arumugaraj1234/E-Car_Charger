@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        userDetails["email"] = ""
 //        userDetails["mobileNo"] = phone!
 //        WebRequestService.shared.userDetails = userDetails
+//        WebRequestService.shared.isLoggedIn = false
         return true
     }
     

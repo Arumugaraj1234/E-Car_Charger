@@ -32,7 +32,7 @@ extension UIViewController: NVActivityIndicatorViewable {
         let titleLabel = UILabel(frame: CGRect(x: x, y: 0, width: 100, height: 40))
         titleLabel.text = title
         titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 20.0)
+        titleLabel.font = UIFont(name: "Thonburi-Bold", size: 16.0)
         self.navigationItem.titleView = titleLabel
     }
     
@@ -40,7 +40,7 @@ extension UIViewController: NVActivityIndicatorViewable {
         var style = ToastStyle()
         style.backgroundColor = UIColor.clear
         style.messageColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        if let font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18.0) {
+        if let font = UIFont(name: "AThonburi-Regular", size: 14.0) {
             style.messageFont = font
         }
         self.view.makeToast(message, duration: time, position: position, style: style)

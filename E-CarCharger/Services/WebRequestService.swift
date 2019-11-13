@@ -10,6 +10,7 @@ import UIKit
 import Toast_Swift
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
 class WebRequestService: NSObject {
     
@@ -208,6 +209,101 @@ class WebRequestService: NSObject {
         }
     }
     
+    func updateProfile(userDetails: UserDetailsModel, password: String, completion: @escaping (_ status: Int, _ message: String, _ data: UserDetailsModel?) -> Void) {
+        let params: [String: Any] = [
+            "Id": userDetails.userId,
+            "FirstName": userDetails.firstName,
+            "LastName": userDetails.lastName,
+            "Email": userDetails.email,
+            "Phone": userDetails.phoneNo,
+            "Password": password
+        ]
+        
+        Alamofire.request(URL_TO_UPDATE_PROFILE, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error as! String, nil)
+            }
+        }
+    }
     
+    func bookCharger(userId: Int, vehicleId: Int, userLocation: CLLocationCoordinate2D, completion: @escaping (_ status: Int, _ message: String, _ data: OrderModel?) -> Void ) {
+        let params: [String: Any] = [
+            "CustomerId": userId,
+            "VehicleId": vehicleId,
+            "Latitude": userLocation.latitude,
+            "Longitude": userLocation.longitude
+        ]
+        
+        Alamofire.request(URL_TO_BOOK_CHARGER, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                if responseCode == 1 {
+                    let responseData = json["ResponseData"]
+                    let orderId = responseData["Id"].intValue
+                    let vehicleId = responseData["VehicleId"].intValue
+                    let chargerId = responseData["ChargerId"].intValue
+                    let fare = responseData["Fare"].doubleValue
+                    let chargerLatitude = responseData["Latitude"].doubleValue
+                    let chargerLongitude = responseData["Longitude"].doubleValue
+                    let chargerStatus = responseData["Status"].intValue
+                    let otp = responseData["OTP"].intValue
+                    var bookedTimeRaw = responseData["Booked"].stringValue
+                    var bookedTime = ""
+                    if bookedTimeRaw != "" {
+                        if let dotRange = bookedTimeRaw.range(of: ".") {
+                            bookedTimeRaw.removeSubrange(dotRange.lowerBound..<bookedTimeRaw.endIndex)
+                        }
+                        print(bookedTimeRaw)
+                        bookedTime = self.changeDateFormat(sourceDate: bookedTimeRaw, originFormat: "yyyy-MM-dd'T'HH:mm:SS", reqFormat: "dd, MMMM, yyyy HH:mm")
+                    }
+                    print(bookedTime)
+                    let paymentStatus = responseData["PaymentStatus"].intValue
+                    let paymentType = responseData["PaymentType"].intValue
+                    let transactionId = responseData["TransactionId"].stringValue
+                    let declinedIds = responseData["DeclineIds"].stringValue
+                    let orderModel = OrderModel(id: orderId, vehicleId: vehicleId, chargerId: chargerId, fare: fare, chargerLatitude: chargerLatitude, chargerLongitude: chargerLongitude, chargerStatus: chargerStatus, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, paymentType: paymentType, transactionId: transactionId, declinedIds: declinedIds)
+                    completion(responseCode, responseMsg, orderModel)
+                }
+                else {
+                    completion(responseCode, responseMsg, nil)
+                }
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error as! String, nil)
+            }
+        }
+    }
     
+    func changeDateFormat(sourceDate: String, originFormat: String, reqFormat: String) -> String {
+        
+        var originalDate = sourceDate
+        if originalDate.contains(" ") {
+            originalDate = originalDate.replacingOccurrences(of: " ", with: "")
+        }
+        
+        if originalDate.contains(",") {
+            originalDate = originalDate.replacingOccurrences(of: ",", with: "")
+        }
+        
+        
+        let string = originalDate
+        let dateFormatter = DateFormatter()
+        let tempLocale = dateFormatter.locale // save locale temporarily
+        dateFormatter.locale = Locale(identifier: "en_CA") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = originFormat
+        let dateAru = dateFormatter.date(from: string)!
+        dateFormatter.dateFormat = reqFormat
+        dateFormatter.locale = tempLocale // reset the locale
+        let dateString = dateFormatter.string(from: dateAru)
+        print("EXACT_DATE : \(dateString)")
+        return dateString
+    }
 }

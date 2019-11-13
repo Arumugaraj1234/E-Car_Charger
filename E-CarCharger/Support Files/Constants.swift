@@ -27,8 +27,13 @@ let URL_TO_GET_NEARBY_CHARGERS = BASE_URL + "GetNearestChargers"
 let URL_TO_BOOK_CHARGER = BASE_URL + "BookCharge"  //Not Yet
 let URL_TO_TRACK_CHARGER = BASE_URL + "TrackCharger"  //Not Yet
 let URL_TO_GET_ALL_BOOKINGS = BASE_URL + "MyBookings"  //Not Yet
-let URL_TO_GET_VEHICLE_TYPES = BASE_URL + "GetVehicles"  //Not Yet
+let URL_TO_GET_VEHICLE_TYPES = BASE_URL + "GetVehicles"
 let URL_TO_CHECK_BOOKING = BASE_URL + "CheckBooking"  //Not Yet
+
+//MARK: GOOGLE MAP URL CONSTANTS
+let GOOGLE_URL_FOR_GEOCODING =  "https://maps.googleapis.com/maps/api/geocode/json?"
+let GOOGLE_URL_FOR_DIRECTIONS = "https://maps.googleapis.com/maps/api/directions/json?"
+let GOOGLE_URL_FOR_ADDRESS = "https://maps.googleapis.com/maps/api/geocode/json?"
 
 //MARK: HEADER
 let HEADER = [
