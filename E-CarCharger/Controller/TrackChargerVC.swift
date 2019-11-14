@@ -15,6 +15,7 @@ class TrackChargerVC: UIViewController {
     //MARK: Outlets
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var chargerNameLbl: UILabel!
     
     //MARK: Google Map Related Variables
     let locationManager = CLLocationManager()
@@ -23,14 +24,16 @@ class TrackChargerVC: UIViewController {
     var myCurrentLatitude: Double?
     var myCurrentLongitude: Double?
     
-    var orderDetails: OrderModel?
     var originMaker: GMSMarker?
     var destinationMarker: GMSMarker?
     var routePolyLine: GMSPolyline?
     var markersArray = [GMSMarker]()
     var wayPointsArray = [String]()
+    var chargerId = 0
+    var timer: Timer?
     
     let locationService = LocationService.shared
+    let webService = WebRequestService.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,23 +41,8 @@ class TrackChargerVC: UIViewController {
         locationManager.delegate = self
         mapView.delegate = self
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
-        //getNearByChargers()
-        let myLocatiion = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
-        let chargerLocation = CLLocationCoordinate2DMake((orderDetails?.chargerLatitude)!, (orderDetails?.chargerLongitude)!)
-//        let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
-//        let chargerLocation = CLLocationCoordinate2DMake(13.078519, 80.261002)
-        LocationService.shared.getDirectionsFromgeoCode(originLat: myLocatiion.latitude, originLon: myLocatiion.longitude, destinalat: chargerLocation.latitude, destLon: chargerLocation.longitude, wayPoints: [], travelMode: "driving" as AnyObject) { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    print("Poly Line Success")
-                    self.configureMapAndMarkersForRoute()
-                    self.drawRoute()
-                }
-            }
-            else {
-                print("Poly line failed")
-            }
-        }
+        updateChargerDetails()
+        trackChargerWithTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,28 +55,59 @@ class TrackChargerVC: UIViewController {
     }
     
     @IBAction func onCenterBtnPressed(sender: UIButton) {
-        //drawRoute()
+        drawRoute()
     }
     
-    func getNearByChargers() {
-        //Current Locatiion: Optional(19.0176147), Optional(72.8561644)
-        let chargerLocation = CLLocationCoordinate2DMake(19.017919, 72.857248)
-        let nearByChargers = [chargerLocation]
-        setLocationMarkerForChargers(chargers: nearByChargers)
+    func trackChargerWithTimer() {
+        guard self.timer == nil else {return}
+        self.timer = Timer.scheduledTimer(timeInterval: 5,
+                                          target: self,
+                                          selector: #selector(self.trackCharger),
+                                          userInfo: nil, repeats: true)
     }
     
-    func setLocationMarkerForChargers(chargers: [CLLocationCoordinate2D]) {
-        for charger in chargers {
-            let driverLocationMarker = GMSMarker()
-            driverLocationMarker.position = charger
-            driverLocationMarker.icon = UIImage(named: "chargerIcon")
-            driverLocationMarker.map = mapView
+    func updateChargerDetails() {
+        if checkInternetAvailablity() {
+            webService.trackCharger(chargerId: chargerId) { (status, message, data) in
+                if status == 1 {
+                    self.chargerNameLbl.text = (data?.firstName)! + " " + (data?.lastName)!
+                }
+            }
+        }
+        else {
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
         }
     }
     
-    func configureMapAndMarkersForRoute() {
-        //let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
-        let myLocatiion = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
+    @objc func trackCharger() {
+        if checkInternetAvailablity() {
+            webService.trackCharger(chargerId: chargerId) { (status, Message, data) in
+                if status == 1 {
+                    let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
+                    let chargerLocation = CLLocationCoordinate2DMake((data?.currentLatitude)!, (data?.currentLongitude)!)
+                    LocationService.shared.getDirectionsFromgeoCode(originLat: myLocatiion.latitude, originLon: myLocatiion.longitude, destinalat: chargerLocation.latitude, destLon: chargerLocation.longitude, wayPoints: [], travelMode: "driving" as AnyObject) { (success) in
+                        if success {
+                            DispatchQueue.main.async {
+                                print("Poly Line Success")
+                                self.configureMapAndMarkersForRoute(chargerCoOrdinates: chargerLocation)
+                                self.drawRoute()
+                            }
+                        }
+                        else {
+                            print("Poly line failed")
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+        }
+    }
+    
+    func configureMapAndMarkersForRoute(chargerCoOrdinates: CLLocationCoordinate2D) {
+        let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
+        //let myLocatiion = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
         mapView.camera = GMSCameraPosition.camera(withTarget: myLocatiion, zoom: 15.0)
         
         originMaker = GMSMarker(position: myLocatiion)
@@ -99,7 +118,7 @@ class TrackChargerVC: UIViewController {
         self.mapView.selectedMarker = originMaker
         
         //let chargerLocation = CLLocationCoordinate2DMake(13.078519, 80.261002)
-        let chargerLocation = CLLocationCoordinate2DMake((orderDetails?.chargerLatitude)!, (orderDetails?.chargerLongitude)!)
+        let chargerLocation = chargerCoOrdinates
         destinationMarker = GMSMarker(position: chargerLocation)
         destinationMarker?.map = self.mapView
         destinationMarker?.icon = UIImage(named: "chargerIcon")

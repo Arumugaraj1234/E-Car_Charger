@@ -211,7 +211,7 @@ class WebRequestService: NSObject {
     
     func updateProfile(userDetails: UserDetailsModel, password: String, completion: @escaping (_ status: Int, _ message: String, _ data: UserDetailsModel?) -> Void) {
         let params: [String: Any] = [
-            "Id": userDetails.userId,
+            "CustomerId": userDetails.userId,
             "FirstName": userDetails.firstName,
             "LastName": userDetails.lastName,
             "Email": userDetails.email,
@@ -221,7 +221,28 @@ class WebRequestService: NSObject {
         
         Alamofire.request(URL_TO_UPDATE_PROFILE, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
-                
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                if responseCode == 1 {
+                    let responseData = json["ResponseData"]
+                    let firstName = responseData["FirstName"].stringValue
+                    let lastName = responseData["LastName"].stringValue
+                    let email = responseData["Email"].stringValue
+                    let phoneNo = responseData["Phone"].stringValue
+                    var userDetails = [String:String]()
+                    userDetails["firstName"] = firstName
+                    userDetails["lastName"] = lastName
+                    userDetails["email"] = email
+                    userDetails["mobileNo"] = phoneNo
+                    self.userDetails = userDetails
+                    let userModel = UserDetailsModel(userId: self.userId, firstName: firstName, lastName: lastName, email: email, phoneNo: phoneNo)
+                    completion(responseCode, responseMsg, userModel)
+                }
+                else {
+                    completion(responseCode, responseMsg, nil)
+                }
             }
             else {
                 debugPrint(response.error as Any)
@@ -230,7 +251,7 @@ class WebRequestService: NSObject {
         }
     }
     
-    func bookCharger(userId: Int, vehicleId: Int, userLocation: CLLocationCoordinate2D, completion: @escaping (_ status: Int, _ message: String, _ data: OrderModel?) -> Void ) {
+    func bookCharger(userId: Int, vehicleId: Int, userLocation: CLLocationCoordinate2D, completion: @escaping (_ status: Int, _ message: String, _ data: OrderBookModel?) -> Void ) {
         let params: [String: Any] = [
             "CustomerId": userId,
             "VehicleId": vehicleId,
@@ -248,27 +269,7 @@ class WebRequestService: NSObject {
                     let responseData = json["ResponseData"]
                     let orderId = responseData["Id"].intValue
                     let vehicleId = responseData["VehicleId"].intValue
-                    let chargerId = responseData["ChargerId"].intValue
-                    let fare = responseData["Fare"].doubleValue
-                    let chargerLatitude = responseData["Latitude"].doubleValue
-                    let chargerLongitude = responseData["Longitude"].doubleValue
-                    let chargerStatus = responseData["Status"].intValue
-                    let otp = responseData["OTP"].intValue
-                    var bookedTimeRaw = responseData["Booked"].stringValue
-                    var bookedTime = ""
-                    if bookedTimeRaw != "" {
-                        if let dotRange = bookedTimeRaw.range(of: ".") {
-                            bookedTimeRaw.removeSubrange(dotRange.lowerBound..<bookedTimeRaw.endIndex)
-                        }
-                        print(bookedTimeRaw)
-                        bookedTime = self.changeDateFormat(sourceDate: bookedTimeRaw, originFormat: "yyyy-MM-dd'T'HH:mm:SS", reqFormat: "dd, MMMM, yyyy HH:mm")
-                    }
-                    print(bookedTime)
-                    let paymentStatus = responseData["PaymentStatus"].intValue
-                    let paymentType = responseData["PaymentType"].intValue
-                    let transactionId = responseData["TransactionId"].stringValue
-                    let declinedIds = responseData["DeclineIds"].stringValue
-                    let orderModel = OrderModel(id: orderId, vehicleId: vehicleId, chargerId: chargerId, fare: fare, chargerLatitude: chargerLatitude, chargerLongitude: chargerLongitude, chargerStatus: chargerStatus, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, paymentType: paymentType, transactionId: transactionId, declinedIds: declinedIds)
+                    let orderModel = OrderBookModel(id: orderId, vehicleId: vehicleId)
                     completion(responseCode, responseMsg, orderModel)
                 }
                 else {
@@ -306,4 +307,94 @@ class WebRequestService: NSObject {
         print("EXACT_DATE : \(dateString)")
         return dateString
     }
+    
+    func checkBookingStatus(orderId: Int, vehicleType: Int, userLocation: CLLocationCoordinate2D, completion: @escaping (_ status: Int, _ message: String, _ data: Int?) -> Void) {
+        
+        let params: [String: Any] = [
+            "BookingId": orderId,
+            "VehicleId": vehicleType,
+            "Latitude": userLocation.latitude,
+            "Longitude": userLocation.longitude
+        ]
+        
+        Alamofire.request(URL_TO_CHECK_BOOKING, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                if responseCode == 1 {
+                    let chargerId = json["ResponseData"].intValue
+                    completion(responseCode, responseMsg, chargerId)
+                }
+                else {
+                    completion(responseCode, responseMsg, nil)
+                }
+                
+                
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error as! String, nil)
+            }
+        }
+    }
+    
+    func trackCharger(chargerId: Int, completiion: @escaping (_ status: Int, _ message: String, _ data: ChargerModel?) -> Void) {
+        let params = [
+            "ChargerId": chargerId
+        ]
+        
+        Alamofire.request(URL_TO_TRACK_CHARGER, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                if responseCode == 1 {
+                    let responseData = json["ResponseData"]
+                    let chargerId = responseData["Id"].intValue
+                    let firstName = responseData["FirstName"].stringValue
+                    let lastName = responseData["LastName"].stringValue
+                    let email = responseData["Email"].stringValue
+                    let phone = responseData["Phone"].stringValue
+                    let status = responseData["Status"].intValue
+                    let flag = responseData["Flg"].intValue
+                    let totalCharged = responseData["TotalCharged"].intValue
+                    let chargerLatitude = responseData["Latitude"].doubleValue
+                    let chargerLongitude = responseData["Longitude"].doubleValue
+                    let chargerModel = ChargerModel(id: chargerId, firstName: firstName, lastName: lastName, email: email, phone: phone, status: status, flag: flag, totalChargedCount: totalCharged, currentLatitude: chargerLatitude, currentLongitude: chargerLongitude)
+                    completiion(responseCode, responseMsg, chargerModel)
+                }
+                else {
+                    completiion(responseCode, responseMsg, nil)
+                }
+            }
+            else {
+                debugPrint(response.error as Any)
+                completiion(-2, response.error as! String, nil)
+            }
+        }
+    }
+    
+    func autoCancelOfOrder(orderId: Int, completion: @escaping (_ status: Int, _ message: String) -> Void) {
+        let params = [
+            "BookingId": orderId
+        ]
+        
+        Alamofire.request(URL_TO_AUTO_CANCEL_OF_ORDER, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                completion(responseCode, responseMsg)
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error as! String)
+            }
+        }
+    }
+    
 }

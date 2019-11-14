@@ -860,6 +860,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="chargerNameLbl" destination="5TR-Tt-l9a" id="TLh-nl-Zhk"/>
                         <outlet property="mapView" destination="Ete-Gk-hPJ" id="8Lf-ww-j0I"/>
                         <outlet property="tableView" destination="9ao-y7-TFM" id="9Im-rU-2Fs"/>
                     </connections>

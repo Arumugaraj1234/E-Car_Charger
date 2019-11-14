@@ -43,7 +43,10 @@ class NearByChargersVC: UIViewController {
     let webService = WebRequestService.shared
     var vehicles = [VehicleTypeModel]()
     var selectedVehicle: VehicleTypeModel?
-    var orderDetails: OrderModel?
+    var bookOrder: OrderBookModel?
+    var timer: Timer?
+    var chargerId: Int?
+    var chargerCountFlag = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +115,23 @@ class NearByChargersVC: UIViewController {
         }
     }
     
+    func getVehicleTypes() {
+        if checkInternetAvailablity() {
+            webService.getVehicleType { (status, message, data) in
+                if status == 1 {
+                    self.vehicles = data!
+                    self.collectionView.reloadData()
+                }
+                else {
+                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                }
+            }
+        }
+        else {
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+        }
+    }
+    
     func setLocationMarkerForChargers(chargers: [ChargerModel]) {
         for charger in chargers {
             let driverLocationMarker = GMSMarker()
@@ -122,7 +142,7 @@ class NearByChargersVC: UIViewController {
         }
     }
     
-    func getVehicleType() {
+    func updatePersonalDetails() {
         let personalDetailsVc = storyboard?.instantiateViewController(withIdentifier: "PersonalDetailsVC") as! PersonalDetailsVC
         personalDetailsVc.modalPresentationStyle = .overCurrentContext
         personalDetailsVc.delegate = self
@@ -138,9 +158,12 @@ class NearByChargersVC: UIViewController {
             let myLocation = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
             webService.bookCharger(userId: webService.userId, vehicleId: (selectedVehicle?.id)!, userLocation: myLocation) { (status, message, data) in
                 if status == 1 {
-                    self.orderDetails = data!
-                    self.stopAnimating()
-                    self.performSegue(withIdentifier: NEARBY_CHARGERS_TO_TRACK_CHARGER, sender: self)
+                    self.bookOrder = data!
+                    guard self.timer == nil else {return}
+                    self.timer = Timer.scheduledTimer(timeInterval: 10,
+                                                      target: self,
+                                                      selector: #selector(self.checkChargerAcceptanceForBookedOrder),
+                                                      userInfo: nil, repeats: true)
                 }
                 else {
                     self.stopAnimating()
@@ -154,30 +177,37 @@ class NearByChargersVC: UIViewController {
         }
     }
     
-    func getVehicleTypes() {
-        if checkInternetAvailablity() {
-            webService.getVehicleType { (status, message, data) in
+    @objc func checkChargerAcceptanceForBookedOrder() {
+        chargerCountFlag = chargerCountFlag + 1
+        print(chargerCountFlag)
+        if chargerCountFlag < 7 {
+            let myLocation = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
+            webService.checkBookingStatus(orderId: (bookOrder?.id)!, vehicleType: (bookOrder?.vehicleId)!, userLocation: myLocation) { (status, message, data) in
                 if status == 1 {
-                    self.vehicles = data!
-                    self.collectionView.reloadData()
-                    //self.stopAnimating()
-                }
-                else {
-                    //self.stopAnimating()
-                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                    self.stopAnimating()
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    self.chargerId = data
+                    self.performSegue(withIdentifier: NEARBY_CHARGERS_TO_TRACK_CHARGER, sender: self)
                 }
             }
         }
         else {
-            //stopAnimating()
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            self.timer?.invalidate()
+            self.timer = nil
+            self.webService.autoCancelOfOrder(orderId: (bookOrder?.id)!) { (status, message) in
+                self.stopAnimating()
+                self.makeToast(message: message, time: 3.0, position: .bottom)
+            }
         }
     }
+    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == NEARBY_CHARGERS_TO_TRACK_CHARGER {
             let trackChargerVc = segue.destination as! TrackChargerVC
-            trackChargerVc.orderDetails = self.orderDetails!
+            trackChargerVc.chargerId = self.chargerId!
             trackChargerVc.myCurrentLatitude = self.myCurrentLatitude!
             trackChargerVc.myCurrentLongitude = self.myCurrentLongitude!
         }
@@ -403,7 +433,7 @@ extension NearByChargersVC: UICollectionViewDelegate, UICollectionViewDataSource
         let lName = personal["lastName"]
         let email = personal["email"]
         if fName == "" || lName == "" || email == "" {
-           getVehicleType()
+           updatePersonalDetails()
         }
         else {
             bookCharger()

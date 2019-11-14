@@ -36,19 +36,31 @@ class PersonalDetailsVC: UIViewController {
     }
     
     @IBAction func onUpdateBtnTapped(sender: UIButton) {
+        startAnimate(with: "")
         if isFirstNameValid && isLastNameValid && isEmailValid {
-            let personal = webService.userDetails
-            let phone = personal["mobileNo"]
-            var userDetails = [String:String]()
-            userDetails["firstName"] = firstNameTF.text!
-            userDetails["lastName"] = lastNameTF.text!
-            userDetails["email"] = emailTF.text!
-            userDetails["mobileNo"] = phone!
-            webService.userDetails = userDetails
-            delegate?.personalDetailsUpdated()
-            dismiss(animated: true, completion: nil)
+            if checkInternetAvailablity() {
+                let personal = webService.userDetails
+                let phone = personal["mobileNo"]
+                let userModel = UserDetailsModel(userId: webService.userId, firstName: firstNameTF.text!, lastName: lastNameTF.text!, email: emailTF.text!, phoneNo: phone!)
+                webService.updateProfile(userDetails: userModel, password: "123456") { (status, message, data) in
+                    if status == 1 {
+                        self.stopAnimating()
+                        self.delegate?.personalDetailsUpdated()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    else {
+                        self.stopAnimating()
+                        self.makeToast(message: message, time: 3.0, position: .bottom)
+                    }
+                }
+            }
+            else {
+                stopAnimating()
+                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            }
         }
         else {
+            stopAnimating()
             makeToast(message: "Please provide the valid details to update!", time: 3.0, position: .bottom)
         }
     }

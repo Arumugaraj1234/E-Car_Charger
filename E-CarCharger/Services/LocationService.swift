@@ -36,7 +36,7 @@ class LocationService: NSObject {
     
     func getDirectionsFromgeoCode(originLat: CLLocationDegrees!,originLon: CLLocationDegrees!, destinalat: Double!, destLon: Double!, wayPoints: [String]!, travelMode: AnyObject!, completion: @escaping (Bool) -> Void) {
         var directionURLString = "\(GOOGLE_URL_FOR_DIRECTIONS)origin=\(originLat!),\(originLon!)&destination=\(destinalat!),\(destLon!)&mode=driving&key=AIzaSyDUgw31MfDV88qEnxUqInF8VVElUAjqgpg"
-        var reqDirecttionURL = "\(GOOGLE_URL_FOR_DIRECTIONS)origin=\(originLat)&destination=\(destinalat)&mode=driving"
+        var reqDirecttionURL = "\(GOOGLE_URL_FOR_DIRECTIONS)origin=\(originLat ?? 0.0)&destination=\(destinalat ?? 0.0)&mode=driving"
         if wayPoints.count > 0 {
             reqDirecttionURL += "&waypoints=optimize:true"
             for waypoint in wayPoints {
@@ -65,7 +65,7 @@ class LocationService: NSObject {
                     if status == "OK" {
                         let result = resultJson!["routes"] as! [[String: AnyObject]]
                         self.selectedRoute = result[0]
-                        self.overViewPolyLine = self.selectedRoute["overview_polyline"] as![String: AnyObject]
+                        self.overViewPolyLine = self.selectedRoute["overview_polyline"] as! [String: AnyObject]
                         completion(true)
                     } else {
                         completion(false)
