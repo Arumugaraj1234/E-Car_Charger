@@ -1,53 +1,62 @@
 //
-//  PersonalDetailsVC.swift
+//  ProfileEditVC.swift
 //  E-CarCharger
 //
-//  Created by MacBook Pro on 2019-11-09.
+//  Created by MacBook Pro on 2019-11-15.
 //  Copyright © 2019 Peach. All rights reserved.
 //
 
 import UIKit
 import KOControls
 
-protocol PersonalDetailsDelegate {
-    func personalDetailsUpdated()
-}
-class PersonalDetailsVC: UIViewController {
+class ProfileEditVC: UIViewController {
     
+    //MARK: Outlets
     @IBOutlet weak var firstNameTF: KOTextField!
     @IBOutlet weak var lastNameTF: KOTextField!
     @IBOutlet weak var emailTF: KOTextField!
-    @IBOutlet weak var personalDetailsView: UIView!
+    @IBOutlet weak var phoneNoTF: KOTextField!
+    @IBOutlet weak var verifyOtpView: UIView!
     
-    let webService = WebRequestService.shared
+    //MARK: VARIABLES
     var isFirstNameValid = false
     var isLastNameValid = false
     var isEmailValid = false
-    var delegate: PersonalDetailsDelegate?
+    var isPhoneValid = false
+    let webService = WebRequestService.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideKeyboardWhenTappedAround()
+        
+        verifyOtpView.isHidden = true
         setupInitialView()
     }
     
-    @IBAction func onCancelBtnPressed(sender: UIButton) {
+    override func viewWillAppear(_ animated: Bool) {
+        setNaviagtionBarTitle(title: "Edit Profile")
+    }
+    
+    @IBAction func onBackBtnPressed(sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onUpdateBtnTapped(sender: UIButton) {
+    @IBAction func onUpdateBtnPressed(sender: UIButton) {
         view.endEditing(true)
+        validateTextField()
         startAnimate(with: "")
-        if isFirstNameValid && isLastNameValid && isEmailValid {
+        if isFirstNameValid && isLastNameValid && isEmailValid && isPhoneValid {
             if checkInternetAvailablity() {
-                let personal = webService.userDetails
-                let phone = personal["mobileNo"]
-                let userModel = UserDetailsModel(userId: webService.userId, firstName: firstNameTF.text!, lastName: lastNameTF.text!, email: emailTF.text!, phoneNo: phone!)
+                let userModel = UserDetailsModel(userId: webService.userId, firstName: firstNameTF.text!, lastName: lastNameTF.text!, email: emailTF.text!, phoneNo: phoneNoTF.text!)
                 webService.updateProfile(userDetails: userModel, password: "123456") { (status, message, data) in
                     if status == 1 {
                         self.stopAnimating()
-                        self.delegate?.personalDetailsUpdated()
                         self.dismiss(animated: true, completion: nil)
+                    }
+                    else if status == 2 {
+                        self.stopAnimating()
+                        UIView.animate(withDuration: 3.0, animations: {
+                            self.verifyOtpView.isHidden = false
+                        })
                     }
                     else {
                         self.stopAnimating()
@@ -67,6 +76,18 @@ class PersonalDetailsVC: UIViewController {
     }
     
     func setupInitialView() {
+        
+        let userDetails = webService.userDetails
+        let fName = userDetails["firstName"] ?? ""
+        let lName = userDetails["lastName"] ?? ""
+        let email = userDetails["email"] ?? ""
+        let phone = userDetails["mobileNo"] ?? ""
+        
+        firstNameTF.text = fName
+        lastNameTF.text = lName
+        emailTF.text = email
+        phoneNoTF.text = phone
+        
         firstNameTF.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         firstNameTF.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         firstNameTF.errorInfo.description = "Invalid First Name"
@@ -85,13 +106,60 @@ class PersonalDetailsVC: UIViewController {
         emailTF.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         emailTF.errorInfo.description = "Invalid Email Address"
         emailTF.validation.add(validator: KORegexTextValidator.mailValidator)
+        
+        phoneNoTF.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+        phoneNoTF.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        phoneNoTF.addHideinputAccessoryView()
+        phoneNoTF.errorInfo.description = "Invalid Mobile Number"
+        phoneNoTF.validation.add(validator: KOFunctionTextValidator(function: { mobile -> Bool in
+            return mobile.count >= 10 && mobile.count <= 13
+        }))
     }
     
+    func validateTextField() {
+        if firstNameTF.text != "" {
+            isFirstNameValid = true
+        }
+        else {
+            isFirstNameValid = false
+        }
+        
+        if lastNameTF.text != "" {
+            isLastNameValid = true
+        }
+        else {
+            isLastNameValid = false
+        }
+        
+        if emailTF.text != "" {
+            if isValidEmail(testStr: emailTF.text!) {
+                isEmailValid = true
+            }
+            else {
+                isEmailValid = false
+            }
+        }
+        else {
+            isEmailValid = false
+        }
+        
+        if phoneNoTF.text != "" {
+            if (phoneNoTF.text?.count)! >= 10 && (phoneNoTF.text?.count)! <= 13 {
+                isPhoneValid = true
+            }
+            else {
+                isPhoneValid = false
+            }
+        }
+        else {
+            isPhoneValid = false
+        }
+    }
+
+
 }
 
-
-
-extension PersonalDetailsVC: UITextFieldDelegate {
+extension ProfileEditVC: UITextFieldDelegate {
     
     @objc func textFieldDidChange(textField: UITextField) {
         
@@ -127,6 +195,20 @@ extension PersonalDetailsVC: UITextFieldDelegate {
             }
         }
         
+        if textField.tag == 4 {
+            if textField.text != "" {
+                if (textField.text?.count)! >= 10 {
+                    isPhoneValid = true
+                }
+                else {
+                    isPhoneValid = false
+                }
+            }
+            else {
+                isPhoneValid = false
+            }
+        }
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -140,9 +222,12 @@ extension PersonalDetailsVC: UITextFieldDelegate {
         }
         else if textField.tag == 3 {
             let _ = emailTF.resignFirstResponder()
+            let _ = phoneNoTF.becomeFirstResponder()
+        }
+        else if textField.tag == 4 {
+            let _ = phoneNoTF.resignFirstResponder()
         }
         return true
     }
     
 }
-

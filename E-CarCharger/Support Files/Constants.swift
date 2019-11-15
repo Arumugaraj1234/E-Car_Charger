@@ -16,6 +16,7 @@ let USER_DETAILS_KEY = "UserDetails"
 //MARK: SEGUE IDENTIFIERS
 let NEARBY_CHARGERS_TO_TRACK_CHARGER = "nearByChargersToTrackCharger"
 let NEARBY_CHARGERS_TO_HISTORY = "nearByChargersToHistory"
+let PROFILEVC_TO_EDIT_PROFILEVC = "profileVcToEditProfileVc"
 
 //MARK: URL CONSTANTS
 let BASE_URL = "http://101.53.153.54/ElectricCharger/WebService/api/Customer/"

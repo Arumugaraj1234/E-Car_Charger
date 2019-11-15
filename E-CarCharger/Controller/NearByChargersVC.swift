@@ -193,6 +193,7 @@ class NearByChargersVC: UIViewController {
             }
         }
         else {
+            chargerCountFlag = 0
             self.timer?.invalidate()
             self.timer = nil
             self.webService.autoCancelOfOrder(orderId: (bookOrder?.id)!) { (status, message) in

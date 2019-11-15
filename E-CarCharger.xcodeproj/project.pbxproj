@@ -43,6 +43,8 @@
 		526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949623699CEF00012B0F /* NearByChargersVC.swift */; };
 		526F949923699DD100012B0F /* AppDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949823699DD100012B0F /* AppDetailsModel.swift */; };
 		526F949C2369A62600012B0F /* WebRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F949B2369A62600012B0F /* WebRequestService.swift */; };
+		52867B5A237E7B97009C5753 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52867B59237E7B97009C5753 /* ProfileVC.swift */; };
+		52867B5C237EB90D009C5753 /* ProfileEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52867B5B237EB90D009C5753 /* ProfileEditVC.swift */; };
 		529370C82372C97B0020DBCC /* TrackChargerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529370C72372C97B0020DBCC /* TrackChargerVC.swift */; };
 		529370CA2372D42B0020DBCC /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529370C92372D42B0020DBCC /* HistoryVC.swift */; };
 		52BA90312371599C003F06CF /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA90302371599C003F06CF /* SideMenuVC.swift */; };
@@ -93,6 +95,8 @@
 		526F949623699CEF00012B0F /* NearByChargersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearByChargersVC.swift; sourceTree = "<group>"; };
 		526F949823699DD100012B0F /* AppDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsModel.swift; sourceTree = "<group>"; };
 		526F949B2369A62600012B0F /* WebRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRequestService.swift; sourceTree = "<group>"; };
+		52867B59237E7B97009C5753 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		52867B5B237EB90D009C5753 /* ProfileEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditVC.swift; sourceTree = "<group>"; };
 		529370C72372C97B0020DBCC /* TrackChargerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackChargerVC.swift; sourceTree = "<group>"; };
 		529370C92372D42B0020DBCC /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		52BA90302371599C003F06CF /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				529370C72372C97B0020DBCC /* TrackChargerVC.swift */,
 				529370C92372D42B0020DBCC /* HistoryVC.swift */,
 				521F3C512376AAA300BC16AE /* PersonalDetailsVC.swift */,
+				52867B59237E7B97009C5753 /* ProfileVC.swift */,
+				52867B5B237EB90D009C5753 /* ProfileEditVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52867B5A237E7B97009C5753 /* ProfileVC.swift in Sources */,
 				521F3C562376AAF400BC16AE /* VehicleTypeModel.swift in Sources */,
 				5262A0C02370025600A7AAE5 /* ViewControllerExt.swift in Sources */,
 				5214AD932373FD15009BEA79 /* StringExt.swift in Sources */,
@@ -461,6 +468,7 @@
 				52BA90312371599C003F06CF /* SideMenuVC.swift in Sources */,
 				526F949723699CEF00012B0F /* NearByChargersVC.swift in Sources */,
 				52228E00236AB28000F05847 /* LocationService.swift in Sources */,
+				52867B5C237EB90D009C5753 /* ProfileEditVC.swift in Sources */,
 				523C0E36237A96DE00FE1412 /* ChargerStatusCell.swift in Sources */,
 				52CD5DE02369789800429463 /* AppDelegate.swift in Sources */,
 				524E0FA523753A9900DF0B33 /* Reach.swift in Sources */,

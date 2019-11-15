@@ -71,7 +71,6 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = self.tableView.cellForRow(at: indexPath) as! SideMenuCell
         let menu = menuDetails[indexPath.row]
@@ -81,6 +80,11 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
             let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let homeVC = main.instantiateViewController(withIdentifier: "NearByChargersNavigation") as! UINavigationController
             present(homeVC, animated: true, completion: nil)
+        }
+        else if indexPath.row == 1 {
+            let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let profileVc = main.instantiateViewController(withIdentifier: "ProfileVcNavigation") as! UINavigationController
+            present(profileVc, animated: true, completion: nil)
         }
         else if indexPath.row == 2 {
             let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
