@@ -23,14 +23,14 @@ let BASE_URL = "http://101.53.153.54/ElectricCharger/WebService/api/Customer/"
 let URL_TO_GET_APP_INIT = BASE_URL + "AppInit"
 let URL_TO_SEND_OTP_FOR_LOGIN = BASE_URL + "SendOtpForLogin"
 let URL_TO_VERIFY_OTP_FOR_LOGIN = BASE_URL + "CheckOtpForLogin"
-let URL_TO_UPDATE_PROFILE = BASE_URL + "UpdateProfile"  //Not Yet
+let URL_TO_UPDATE_PROFILE = BASE_URL + "UpdateProfile"
 let URL_TO_GET_NEARBY_CHARGERS = BASE_URL + "GetNearestChargers"
 let URL_TO_BOOK_CHARGER = BASE_URL + "BookCharger"
 let URL_TO_TRACK_CHARGER = BASE_URL + "TrackCharger"
-let URL_TO_GET_ALL_BOOKINGS = BASE_URL + "MyBookingHistory"  //Not Yet
+let URL_TO_GET_ALL_BOOKINGS = BASE_URL + "MyBookingHistory"
 let URL_TO_GET_VEHICLE_TYPES = BASE_URL + "GetVehicleTypes"
 let URL_TO_CHECK_BOOKING = BASE_URL + "GetBookingStatus"
-let URL_TO_VERIFY_OTP_FOR_UPDATE_PHONENO = BASE_URL + "CheckOTPForUpdatePhoneNo" //Not Yet
+let URL_TO_VERIFY_OTP_FOR_UPDATE_PHONENO = BASE_URL + "CheckOTPForUpdatePhoneNo"
 let URL_TO_AUTO_CANCEL_OF_ORDER = BASE_URL + "AutoCancelOfBooking"
 let URL_TO_CANCEL_ORDER_BY_USER = BASE_URL + "CancelBookingByCustomer"  //Not Yet
 

@@ -304,7 +304,6 @@ class WebRequestService: NSObject {
         dateFormatter.dateFormat = reqFormat
         dateFormatter.locale = tempLocale // reset the locale
         let dateString = dateFormatter.string(from: dateAru)
-        print("EXACT_DATE : \(dateString)")
         return dateString
     }
     
@@ -393,6 +392,135 @@ class WebRequestService: NSObject {
             else {
                 debugPrint(response.error as Any)
                 completion(-2, response.error as! String)
+            }
+        }
+    }
+    
+    func verifyOtpForUpdatePhoneNo(userId: Int, phone: String, otp: String, completiion: @escaping (_ status: Int, _ message: String) -> Void) {
+        
+        let params: [String: Any] = [
+            "CustomerId": userId,
+            "Phone": phone,
+            "OTP": otp
+        ]
+        
+        Alamofire.request(URL_TO_VERIFY_OTP_FOR_UPDATE_PHONENO, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                if responseCode == 1 {
+                    let userDetails = self.userDetails
+                    let fName = userDetails["firstName"] ?? ""
+                    let lName = userDetails["lastName"] ?? ""
+                    let email = userDetails["email"] ?? ""
+                    
+                    var userData = [String:String]()
+                    userData["firstName"] = fName
+                    userData["lastName"] = lName
+                    userData["email"] = email
+                    userData["mobileNo"] = phone
+                    self.userDetails = userData
+                }
+                completiion(responseCode, responseMsg)
+            }
+            else {
+                debugPrint(response.error as Any)
+                completiion(-2, response.error as! String)
+            }
+        }
+    }
+    
+    func getOrderHistory(userId: Int, completion: @escaping (_ status: Int, _ message: String, _ orders: [OrderModel]?) -> Void ) {
+        
+        let params = [
+            "CustomerId": userId
+        ]
+        
+        Alamofire.request(URL_TO_GET_ALL_BOOKINGS, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                var orders = [OrderModel]()
+                if responseCode == 1 {
+                    let responseData = json["ResponseData"].arrayValue
+                    for order in responseData {
+                        let orderId = order["BookingId"].intValue
+                        let vehicleName = order["VehileName"].stringValue
+                        let imageLink = order["VehileImage"].stringValue
+                        let chargerName = order["ChargerName"].stringValue
+                        let fare = order["Fare"].doubleValue
+                        let latitude = order["Latitude"].doubleValue
+                        let longitude = order["Longitude"].doubleValue
+                        let otp = order["OTP"].intValue
+                        var bookedDate = order["Booked"].stringValue
+                        var bookedTime = ""
+                        if bookedDate != "" {
+                            if let dotRange = bookedDate.range(of: ".") {
+                                bookedDate.removeSubrange(dotRange.lowerBound..<bookedDate.endIndex)
+                            }
+                            bookedTime = self.changeDateFormat(sourceDate: bookedDate, originFormat: "dd-MM-yyyyHH:mma", reqFormat: "dd, MMMM, yyyy HH:mm a")
+                        }
+                        let paymentStatus = order["PaymentStatus"].stringValue
+                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus)
+                        orders.append(orderModel)
+                    }
+                }
+                completion(responseCode, responseMsg, orders)
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error as! String, nil)
+            }
+        }
+    }
+    
+    func cancelOrderByUser(orderId: Int, userId: Int, completion: @escaping (_ status: Int, _ message: String, _ data: [OrderModel]?) -> Void) {
+        let params = [
+            "BookingId": orderId,
+            "CustomerId": userId
+        ]
+        
+        Alamofire.request(URL_TO_CANCEL_ORDER_BY_USER, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if  response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                var orders = [OrderModel]()
+                if responseCode == 1 {
+                    let responseData = json["ResponseData"].arrayValue
+                    print(responseData)
+                    for order in responseData {
+                        let orderId = order["BookingId"].intValue
+                        let vehicleName = order["VehileName"].stringValue
+                        let imageLink = order["VehileImage"].stringValue
+                        let chargerName = order["ChargerName"].stringValue
+                        let fare = order["Fare"].doubleValue
+                        let latitude = order["Latitude"].doubleValue
+                        let longitude = order["Longitude"].doubleValue
+                        let otp = order["OTP"].intValue
+                        var bookedDate = order["Booked"].stringValue
+                        var bookedTime = ""
+                        if bookedDate != "" {
+                            if let dotRange = bookedDate.range(of: ".") {
+                                bookedDate.removeSubrange(dotRange.lowerBound..<bookedDate.endIndex)
+                            }
+                            bookedTime = self.changeDateFormat(sourceDate: bookedDate, originFormat: "dd-MM-yyyyHH:mma", reqFormat: "dd, MMMM, yyyy HH:mm a")
+                        }
+                        let paymentStatus = order["PaymentStatus"].stringValue
+                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus)
+                        orders.append(orderModel)
+                    }
+                }
+                completion(responseCode, responseMsg, orders)
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error as! String, nil)
             }
         }
     }

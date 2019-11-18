@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -409,7 +410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4i-7I-cLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2524" y="-676.01199400299856"/>
+            <point key="canvasLocation" x="1734" y="-731"/>
         </scene>
         <!--Near By ChargersVC-->
         <scene sceneID="tfy-U3-OUe">
@@ -1027,7 +1028,286 @@
                     <view key="view" contentMode="scaleToFill" id="Rdr-cn-Yi0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ETS-fr-Vrm">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderCell" rowHeight="201" id="f1L-rF-uZh" customClass="OrderCell" customModule="E_CarCharger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="201"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f1L-rF-uZh" id="TVK-7W-gCf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="201"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AAY-iB-Ad8">
+                                                    <rect key="frame" x="15" y="15" width="345" height="186"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ddF-4g-31I">
+                                                            <rect key="frame" x="10" y="10" width="325" height="110"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DCu-xL-D3f">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="225" height="110"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13, Nov, 2019 15:30 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fz-6V-8Lc">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="225" height="25"/>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yCu-dl-uOA">
+                                                                            <rect key="frame" x="0.0" y="30" width="225" height="25"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name    :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4G-Yv-0oa">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="65" height="25"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="65" id="ikp-vX-Kir"/>
+                                                                                    </constraints>
+                                                                                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Charger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmm-sp-U5S">
+                                                                                    <rect key="frame" x="70" y="0.0" width="155" height="25"/>
+                                                                                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="25" id="Qlg-41-2hl"/>
+                                                                            </constraints>
+                                                                        </stackView>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sYr-8a-9ju">
+                                                                            <rect key="frame" x="0.0" y="60" width="225" height="50"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1g-QQ-cKX">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="65" id="Q8u-Kd-XAS"/>
+                                                                                    </constraints>
+                                                                                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$56/-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akf-jH-mVb">
+                                                                                    <rect key="frame" x="70" y="0.0" width="155" height="50"/>
+                                                                                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="25"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="50" id="iWI-qg-N75"/>
+                                                                            </constraints>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XrZ-mk-Y0h">
+                                                                    <rect key="frame" x="235" y="0.0" width="90" height="110"/>
+                                                                    <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_Home" translatesAutoresizingMaskIntoConstraints="NO" id="bCq-c4-j5U">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="35"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="35" id="P55-el-z0D"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mini Car" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJK-pR-glM">
+                                                                            <rect key="frame" x="0.0" y="40" width="90" height="20"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="20" id="W9e-9m-O5L"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0x-9d-iEe">
+                                                                            <rect key="frame" x="0.0" y="65" width="90" height="20"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="20" id="nwb-TO-CHB"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="Thonburi-Bold" family="Thonburi" pointSize="16"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUV-I4-g1r">
+                                                                            <rect key="frame" x="0.0" y="90" width="90" height="20"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="90" id="Dc5-gB-1te"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FeJ-Wi-99X">
+                                                            <rect key="frame" x="0.0" y="125" width="345" height="1"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="2Aj-Gh-r3R"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jPz-v3-QRk">
+                                                            <rect key="frame" x="10" y="131" width="325" height="45"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NsD-hc-Yxs">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s1i-DJ-oUB">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="12"/>
+                                                                            <state key="normal" image="phone">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GO-R8-oeW">
+                                                                            <rect key="frame" x="0.0" y="30" width="45" height="15"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="15" id="130-c5-K1n"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="12"/>
+                                                                            <state key="normal" title="Call">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="45" id="gUi-yX-u2a"/>
+                                                                        <constraint firstAttribute="height" constant="45" id="tn9-6g-KpL"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5nY-Kl-cpf">
+                                                                    <rect key="frame" x="93.5" y="0.0" width="45" height="45"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-sW-00D">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="12"/>
+                                                                            <state key="normal" image="message">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T58-ft-Pni">
+                                                                            <rect key="frame" x="0.0" y="30" width="45" height="15"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="15" id="jc8-s7-aIb"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="12"/>
+                                                                            <state key="normal" title="SMS">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="45" id="jVB-GG-UJN"/>
+                                                                        <constraint firstAttribute="width" constant="45" id="yIU-4e-F2O"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8Pf-mB-ywd">
+                                                                    <rect key="frame" x="186.5" y="0.0" width="45" height="45"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4w-id-e2g">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="12"/>
+                                                                            <state key="normal" image="trackIcon">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghV-6H-H0D">
+                                                                            <rect key="frame" x="0.0" y="30" width="45" height="15"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="15" id="UAv-Ta-MuT"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="12"/>
+                                                                            <state key="normal" title="Track">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="45" id="RGB-tm-ba4"/>
+                                                                        <constraint firstAttribute="height" constant="45" id="soD-hF-6pR"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Xg-yP-lTm">
+                                                                    <rect key="frame" x="280" y="0.0" width="45" height="45"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2u-jL-g5T">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="12"/>
+                                                                            <state key="normal" image="roundCancel">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                            <connections>
+                                                                                <action selector="onCancelBtnPressedWithSender:" destination="Gqe-fn-UdX" eventType="touchUpInside" id="wDj-Pg-RjW"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehJ-tB-1eB">
+                                                                            <rect key="frame" x="0.0" y="30" width="45" height="15"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="15" id="Ka4-HB-ITp"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="12"/>
+                                                                            <state key="normal" title="Cancel">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                            <connections>
+                                                                                <action selector="onCancelBtnPressedWithSender:" destination="Gqe-fn-UdX" eventType="touchUpInside" id="QhS-de-lUO"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="45" id="RhM-Yf-ily"/>
+                                                                        <constraint firstAttribute="height" constant="45" id="XQt-FN-mor"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="FeJ-Wi-99X" secondAttribute="trailing" id="9in-cc-YYX"/>
+                                                        <constraint firstAttribute="trailing" secondItem="jPz-v3-QRk" secondAttribute="trailing" constant="10" id="DnB-oX-WUi"/>
+                                                        <constraint firstItem="ddF-4g-31I" firstAttribute="leading" secondItem="AAY-iB-Ad8" secondAttribute="leading" constant="10" id="E2p-v6-SG7"/>
+                                                        <constraint firstItem="jPz-v3-QRk" firstAttribute="top" secondItem="FeJ-Wi-99X" secondAttribute="bottom" constant="5" id="J5C-Kt-V2Z"/>
+                                                        <constraint firstItem="FeJ-Wi-99X" firstAttribute="top" secondItem="ddF-4g-31I" secondAttribute="bottom" constant="5" id="P6Q-Hw-ekE"/>
+                                                        <constraint firstItem="ddF-4g-31I" firstAttribute="top" secondItem="AAY-iB-Ad8" secondAttribute="top" constant="10" id="VhR-aO-Lti"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ddF-4g-31I" secondAttribute="trailing" constant="10" id="d6E-Hy-JvK"/>
+                                                        <constraint firstItem="jPz-v3-QRk" firstAttribute="leading" secondItem="AAY-iB-Ad8" secondAttribute="leading" constant="10" id="fHM-lb-hBy"/>
+                                                        <constraint firstAttribute="bottom" secondItem="jPz-v3-QRk" secondAttribute="bottom" constant="10" id="h8M-MZ-eth"/>
+                                                        <constraint firstItem="FeJ-Wi-99X" firstAttribute="leading" secondItem="AAY-iB-Ad8" secondAttribute="leading" id="owC-iW-t0m"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="AAY-iB-Ad8" secondAttribute="bottom" id="26I-rE-ppH"/>
+                                                <constraint firstItem="AAY-iB-Ad8" firstAttribute="top" secondItem="TVK-7W-gCf" secondAttribute="top" constant="15" id="6mR-1j-SIK"/>
+                                                <constraint firstAttribute="trailing" secondItem="AAY-iB-Ad8" secondAttribute="trailing" constant="15" id="XZC-jU-53N"/>
+                                                <constraint firstItem="AAY-iB-Ad8" firstAttribute="leading" secondItem="TVK-7W-gCf" secondAttribute="leading" constant="15" id="gRs-S0-wyq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="bookedDateLbl" destination="5fz-6V-8Lc" id="GZZ-SC-dlM"/>
+                                            <outlet property="cancelBtn" destination="n2u-jL-g5T" id="snS-FJ-i7s"/>
+                                            <outlet property="cancelBtnOne" destination="ehJ-tB-1eB" id="yx3-Ni-Jgu"/>
+                                            <outlet property="chargerNameLbl" destination="gmm-sp-U5S" id="4sh-34-Ve9"/>
+                                            <outlet property="fareLbl" destination="akf-jH-mVb" id="bdd-jO-AG6"/>
+                                            <outlet property="otpLbl" destination="s0x-9d-iEe" id="NDf-0u-noS"/>
+                                            <outlet property="totalView" destination="AAY-iB-Ad8" id="z8N-YS-jBW"/>
+                                            <outlet property="vehicleImg" destination="bCq-c4-j5U" id="Qpz-bi-4fm"/>
+                                            <outlet property="vehicleNameLbl" destination="NJK-pR-glM" id="rdL-iO-7iK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Gqe-fn-UdX" id="ySL-HM-DeA"/>
+                                    <outlet property="delegate" destination="Gqe-fn-UdX" id="yRj-Jv-Cdm"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.3921568627" green="0.75294117650000003" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Wru-8F-9gL" firstAttribute="trailing" secondItem="ETS-fr-Vrm" secondAttribute="trailing" id="4Ip-zL-i0V"/>
+                            <constraint firstItem="Wru-8F-9gL" firstAttribute="bottom" secondItem="ETS-fr-Vrm" secondAttribute="bottom" id="IjF-If-GmN"/>
+                            <constraint firstItem="ETS-fr-Vrm" firstAttribute="leading" secondItem="Wru-8F-9gL" secondAttribute="leading" id="NKm-GD-Vvj"/>
+                            <constraint firstItem="ETS-fr-Vrm" firstAttribute="top" secondItem="Wru-8F-9gL" secondAttribute="top" id="q83-1E-Jgc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Wru-8F-9gL"/>
                     </view>
                     <navigationItem key="navigationItem" id="c5U-QK-TJM">
@@ -1038,10 +1318,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="ETS-fr-Vrm" id="GN8-Uk-mzo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ctq-nx-pNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3335" y="699"/>
+            <point key="canvasLocation" x="3333.5999999999999" y="698.5007496251875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OOr-F2-ujE">
@@ -1312,7 +1595,7 @@
                                             <constraint firstAttribute="height" constant="40" id="JM7-0I-0Pc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="light" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" keyboardAppearance="light" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <integer key="value" value="5"/>
@@ -1371,19 +1654,22 @@
                                                 <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="16"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tsv-Mz-1PI" customClass="KOTextField" customModule="KOControls">
+                                            <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="OTP" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tsv-Mz-1PI" customClass="KOTextField" customModule="KOControls">
                                                 <rect key="frame" x="0.0" y="138" width="345" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="G9Q-sU-XbK"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <integer key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="hd4-T5-PpT" id="FDf-tB-2MA"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -1398,6 +1684,9 @@
                                         <state key="normal" title="Update">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onVerifyOtpBtnTappedWithSender:" destination="hd4-T5-PpT" eventType="touchUpInside" id="hOn-88-yMD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.3921568627" green="0.75294117650000003" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1434,6 +1723,7 @@
                         <outlet property="emailTF" destination="lR8-74-juq" id="ZB6-Gc-sqV"/>
                         <outlet property="firstNameTF" destination="4Bc-CC-eys" id="4jC-DV-ilt"/>
                         <outlet property="lastNameTF" destination="rSK-kL-qC0" id="6yD-Do-fox"/>
+                        <outlet property="otpTF" destination="Tsv-Mz-1PI" id="E03-UD-Ull"/>
                         <outlet property="phoneNoTF" destination="bLD-aj-lkm" id="7em-Do-Ija"/>
                         <outlet property="verifyOtpView" destination="qGe-9m-2vO" id="DbM-Sp-HSt"/>
                     </connections>
@@ -1476,8 +1766,10 @@
         <image name="message" width="32" height="32"/>
         <image name="onStatusCircle" width="20" height="20"/>
         <image name="phone" width="32" height="32"/>
+        <image name="roundCancel" width="32" height="32"/>
+        <image name="trackIcon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ajE-O0-bny"/>
+        <segue reference="OSG-hQ-Vxu"/>
     </inferredMetricsTieBreakers>
 </document>

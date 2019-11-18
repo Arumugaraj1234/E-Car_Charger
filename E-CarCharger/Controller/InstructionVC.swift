@@ -75,7 +75,9 @@ class InstructionVC: UIViewController {
     }
     
     @IBAction func onChangePhoneNoBtnTapped(sender: UIButton) {
-        otpView.isHidden = true
+        UIView.animate(withDuration: 2.0) {
+            self.otpView.isHidden = true
+        }
     }
     
     @IBAction func onLoginBtnTapped(sender: UIButton) {
@@ -175,7 +177,9 @@ class InstructionVC: UIViewController {
             webService.sendOtpForLogin(with: mobileTF.text!) { (status, message) in
                 self.stopAnimating()
                 if status == 1 {
-                    self.otpView.isHidden = false
+                    UIView.animate(withDuration: 2.0, animations: {
+                        self.otpView.isHidden = false
+                    })
                 }
                 else {
                     self.makeToast(message: message, time: 3.0, position: .bottom)

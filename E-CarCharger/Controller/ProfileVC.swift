@@ -68,4 +68,17 @@ class ProfileVC: UIViewController {
         phoneLbl.text = " " + phone
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == PROFILEVC_TO_EDIT_PROFILEVC {
+            let editProfileVc = segue.destination as! ProfileEditVC
+            editProfileVc.delegate = self
+        }
+    }
+    
+}
+
+extension ProfileVC: UpdateProfileDelegate {
+    func profileGotUpdated() {
+        setInitialValues()
+    }
 }

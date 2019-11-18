@@ -9,6 +9,10 @@
 import UIKit
 import KOControls
 
+protocol UpdateProfileDelegate {
+    func profileGotUpdated()
+}
+
 class ProfileEditVC: UIViewController {
     
     //MARK: Outlets
@@ -17,17 +21,21 @@ class ProfileEditVC: UIViewController {
     @IBOutlet weak var emailTF: KOTextField!
     @IBOutlet weak var phoneNoTF: KOTextField!
     @IBOutlet weak var verifyOtpView: UIView!
+    @IBOutlet weak var otpTF: KOTextField!
     
     //MARK: VARIABLES
     var isFirstNameValid = false
     var isLastNameValid = false
     var isEmailValid = false
     var isPhoneValid = false
+    var isOtpValid = false
     let webService = WebRequestService.shared
+    var delegate: UpdateProfileDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideKeyboardWhenTappedAround()
         verifyOtpView.isHidden = true
         setupInitialView()
     }
@@ -37,7 +45,7 @@ class ProfileEditVC: UIViewController {
     }
     
     @IBAction func onBackBtnPressed(sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+         self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func onUpdateBtnPressed(sender: UIButton) {
@@ -50,7 +58,8 @@ class ProfileEditVC: UIViewController {
                 webService.updateProfile(userDetails: userModel, password: "123456") { (status, message, data) in
                     if status == 1 {
                         self.stopAnimating()
-                        self.dismiss(animated: true, completion: nil)
+                        self.delegate?.profileGotUpdated()
+                        self.navigationController?.popToRootViewController(animated: true)
                     }
                     else if status == 2 {
                         self.stopAnimating()
@@ -72,6 +81,29 @@ class ProfileEditVC: UIViewController {
         else {
             stopAnimating()
             makeToast(message: "Please provide the valid details to update!", time: 3.0, position: .bottom)
+        }
+    }
+    
+    @IBAction func onVerifyOtpBtnTapped(sender: Any) {
+        view.endEditing(true)
+        if isOtpValid {
+            startAnimate(with: "")
+            if checkInternetAvailablity() {
+                webService.verifyOtpForUpdatePhoneNo(userId: webService.userId, phone: phoneNoTF.text!, otp: otpTF.text!) { (status, message) in
+                    self.stopAnimating()
+                    if status == 1 {
+                        self.delegate?.profileGotUpdated()
+                         self.navigationController?.popToRootViewController(animated: true)
+                    }
+                    else {
+                        self.makeToast(message: message, time: 3.0, position: .bottom)
+                    }
+                }
+            }
+            else {
+                stopAnimating()
+                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            }
         }
     }
     
@@ -114,6 +146,15 @@ class ProfileEditVC: UIViewController {
         phoneNoTF.validation.add(validator: KOFunctionTextValidator(function: { mobile -> Bool in
             return mobile.count >= 10 && mobile.count <= 13
         }))
+        
+        otpTF.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+        otpTF.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        otpTF.addHideinputAccessoryView()
+        otpTF.errorInfo.description = "Invalid Otp"
+        otpTF.validation.add(validator: KOFunctionTextValidator(function: { otp -> Bool in
+            return otp.count == 6
+        }))
+        
     }
     
     func validateTextField() {
@@ -155,7 +196,6 @@ class ProfileEditVC: UIViewController {
             isPhoneValid = false
         }
     }
-
 
 }
 
@@ -206,6 +246,20 @@ extension ProfileEditVC: UITextFieldDelegate {
             }
             else {
                 isPhoneValid = false
+            }
+        }
+        
+        if textField.tag == 5 {
+            if textField.text != "" {
+                if (textField.text?.count)! == 6 {
+                    isOtpValid = true
+                }
+                else {
+                    isOtpValid = false
+                }
+            }
+            else {
+                isOtpValid = false
             }
         }
         
