@@ -19,6 +19,8 @@ class HistoryVC: UIViewController {
         super.viewDidLoad()
 
         getOrderHistory()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 153
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,4 +101,5 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
         cell.configureCell(order: order)
         return cell
     }
+    
 }

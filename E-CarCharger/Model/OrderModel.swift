@@ -19,8 +19,9 @@ class OrderModel {
     var otp: Int
     var bookedTime: String
     var paymentStatus: String
+    var status: String
     
-    init(orderId: Int, vehicleName: String, vehicleImageLink: String, chargerName: String, fare: Double, latitude: Double, longitude: Double, otp: Int, bookedTime: String, paymentStatus: String) {
+    init(orderId: Int, vehicleName: String, vehicleImageLink: String, chargerName: String, fare: Double, latitude: Double, longitude: Double, otp: Int, bookedTime: String, paymentStatus: String, status: String) {
         self.orderId = orderId
         self.vehicleName = vehicleName
         self.vehicleImageLink = vehicleImageLink
@@ -31,5 +32,6 @@ class OrderModel {
         self.otp = otp
         self.bookedTime = bookedTime
         self.paymentStatus = paymentStatus
+        self.status = status
     }
 }

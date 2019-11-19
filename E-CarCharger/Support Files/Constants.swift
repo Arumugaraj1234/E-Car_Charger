@@ -32,7 +32,7 @@ let URL_TO_GET_VEHICLE_TYPES = BASE_URL + "GetVehicleTypes"
 let URL_TO_CHECK_BOOKING = BASE_URL + "GetBookingStatus"
 let URL_TO_VERIFY_OTP_FOR_UPDATE_PHONENO = BASE_URL + "CheckOTPForUpdatePhoneNo"
 let URL_TO_AUTO_CANCEL_OF_ORDER = BASE_URL + "AutoCancelOfBooking"
-let URL_TO_CANCEL_ORDER_BY_USER = BASE_URL + "CancelBookingByCustomer"  //Not Yet
+let URL_TO_CANCEL_ORDER_BY_USER = BASE_URL + "CancelBookingByCustomer"
 
 //MARK: GOOGLE MAP URL CONSTANTS
 let GOOGLE_URL_FOR_GEOCODING =  "https://maps.googleapis.com/maps/api/geocode/json?"
@@ -44,5 +44,13 @@ let HEADER = [
     "Content-Type": "application/json"
 ]
 
-//MARK: FONTS
+/*
+ Pendings:
+ 1. Alert messages to set where ever required
+ 2. Toast message to be set in place with respect to backround color
+ 3. Charger status need to updated down in track screen
+ 4. Call to number functionality
+ 5. Message to number functionality
+ 6. Resend otp functionality
+ */
 

@@ -19,7 +19,10 @@ class OrderCell: UITableViewCell {
     @IBOutlet weak var otpLbl: UILabel!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var cancelBtnOne: UIButton!
-
+    @IBOutlet weak var otpStackView: UIStackView!
+    @IBOutlet weak var lineView: UIView!
+    @IBOutlet weak var buttonStackView: UIStackView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         totalView.layer.cornerRadius = 10.0
@@ -28,12 +31,23 @@ class OrderCell: UITableViewCell {
     }
 
     func configureCell(order: OrderModel) {
+        let rupee = "\u{20B9}"
         bookedDateLbl.text = order.bookedTime
         chargerNameLbl.text = order.chargerName
-        fareLbl.text = String(order.fare)
+        fareLbl.text = rupee + String(order.fare)
         vehicleImg.downloadedFrom(link: order.vehicleImageLink)
-        vehicleNameLbl.text = order.vehicleName
+        vehicleNameLbl.text = order.vehicleName + " - " + "EC123456"
         otpLbl.text = String(order.otp)
+        if order.status == "Searching " || order.status == "Cancelled " {
+            otpStackView.isHidden = true
+            lineView.isHidden = true
+            buttonStackView.isHidden = true
+        }
+        else {
+            otpStackView.isHidden = false
+            lineView.isHidden = false
+            buttonStackView.isHidden = false
+        }
     }
 
 }

@@ -465,7 +465,8 @@ class WebRequestService: NSObject {
                             bookedTime = self.changeDateFormat(sourceDate: bookedDate, originFormat: "dd-MM-yyyyHH:mma", reqFormat: "dd, MMMM, yyyy HH:mm a")
                         }
                         let paymentStatus = order["PaymentStatus"].stringValue
-                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus)
+                        let orderStatus = order["Status"].stringValue
+                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, status: orderStatus)
                         orders.append(orderModel)
                     }
                 }
@@ -512,7 +513,8 @@ class WebRequestService: NSObject {
                             bookedTime = self.changeDateFormat(sourceDate: bookedDate, originFormat: "dd-MM-yyyyHH:mma", reqFormat: "dd, MMMM, yyyy HH:mm a")
                         }
                         let paymentStatus = order["PaymentStatus"].stringValue
-                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus)
+                        let orderStatus = order["Status"].stringValue
+                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, status: orderStatus)
                         orders.append(orderModel)
                     }
                 }
