@@ -51,9 +51,9 @@ class ProfileVC: UIViewController {
         phoneLbl.layer.cornerRadius = 5.0
         phoneLbl.layer.masksToBounds = true
         
-        detailsView.layer.borderWidth = 1.0
-        detailsView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        detailsView.layer.cornerRadius = 5.0
+//        detailsView.layer.borderWidth = 1.0
+//        detailsView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//        detailsView.layer.cornerRadius = 5.0
     }
     
     func setInitialValues() {

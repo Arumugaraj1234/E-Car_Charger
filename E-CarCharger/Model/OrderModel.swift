@@ -20,8 +20,11 @@ class OrderModel {
     var bookedTime: String
     var paymentStatus: String
     var status: String
+    var vehicleId: Int
+    var chargerId: Int
+    var chargerMobileNo: String
     
-    init(orderId: Int, vehicleName: String, vehicleImageLink: String, chargerName: String, fare: Double, latitude: Double, longitude: Double, otp: Int, bookedTime: String, paymentStatus: String, status: String) {
+    init(orderId: Int, vehicleName: String, vehicleImageLink: String, chargerName: String, fare: Double, latitude: Double, longitude: Double, otp: Int, bookedTime: String, paymentStatus: String, status: String, vehicleId: Int, chargerId: Int, chargerMobileNo: String) {
         self.orderId = orderId
         self.vehicleName = vehicleName
         self.vehicleImageLink = vehicleImageLink
@@ -33,5 +36,8 @@ class OrderModel {
         self.bookedTime = bookedTime
         self.paymentStatus = paymentStatus
         self.status = status
+        self.vehicleId = vehicleId
+        self.chargerId = chargerId
+        self.chargerMobileNo = chargerMobileNo
     }
 }

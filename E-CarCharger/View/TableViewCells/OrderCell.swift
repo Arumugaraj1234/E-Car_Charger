@@ -22,6 +22,7 @@ class OrderCell: UITableViewCell {
     @IBOutlet weak var otpStackView: UIStackView!
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet weak var trackBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

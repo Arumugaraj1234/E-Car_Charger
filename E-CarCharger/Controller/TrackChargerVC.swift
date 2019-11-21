@@ -51,6 +51,8 @@ class TrackChargerVC: UIViewController {
     }
     
     @IBAction func onBackBtnPressed(sender: Any) {
+        self.timer?.invalidate()
+        self.timer = nil
         self.navigationController?.popToRootViewController(animated: true)
     }
     

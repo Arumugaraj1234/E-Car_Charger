@@ -71,7 +71,15 @@ class InstructionVC: UIViewController {
     }
     
     @IBAction func onResendOtpBtnTapped(sender: UIButton) {
-        
+        view.endEditing(true)
+        startAnimate(with: "")
+        if isMobileNoValid {
+            sendOtp()
+        }
+        else {
+            stopAnimating()
+            makeToast(message: "Oops! Invalid mobile number. Please check.", time: 3.0, position: .bottom)
+        }
     }
     
     @IBAction func onChangePhoneNoBtnTapped(sender: UIButton) {

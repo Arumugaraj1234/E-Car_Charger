@@ -107,6 +107,35 @@ class ProfileEditVC: UIViewController {
         }
     }
     
+    @IBAction func resendOtpBtnPressed(sender: UIButton) {
+        view.endEditing(true)
+        validateTextField()
+        startAnimate(with: "")
+        if isPhoneValid {
+            if checkInternetAvailablity() {
+                let userModel = UserDetailsModel(userId: webService.userId, firstName: firstNameTF.text!, lastName: lastNameTF.text!, email: emailTF.text!, phoneNo: phoneNoTF.text!)
+                webService.updateProfile(userDetails: userModel, password: "123456") { (status, message, data) in
+                    if status == 2 {
+                        self.stopAnimating()
+                        self.makeToast(message: "OTP Send to your registered mobile no", time: 3.0, position: .bottom)
+                    }
+                    else {
+                        self.stopAnimating()
+                        self.makeToast(message: message, time: 3.0, position: .bottom)
+                    }
+                }
+            }
+            else {
+                stopAnimating()
+                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            }
+        }
+        else {
+            stopAnimating()
+            makeToast(message: "Please provide the valid mobile number", time: 3.0, position: .bottom)
+        }
+    }
+    
     func setupInitialView() {
         
         let userDetails = webService.userDetails

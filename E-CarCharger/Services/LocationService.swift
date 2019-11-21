@@ -31,6 +31,7 @@ class LocationService: NSObject {
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 50
+        locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
     
@@ -82,17 +83,17 @@ class LocationService: NSObject {
     
 }
 
-//extension LocationService: CLLocationManagerDelegate {
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        print("Get Locations")
-//        let defaultLocation = CLLocation(latitude: 0.0, longitude: 0.0)
-//        let location: CLLocation = locations.last ?? defaultLocation
-//        myCurrentLatitude = location.coordinate.latitude
-//        myCurrentLongitude = location.coordinate.longitude
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print("Error in Getting Location: \(error)")
-//        //locationManager.stopUpdatingLocation()
-//    }
-//}
+extension LocationService: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Get Locations")
+        let defaultLocation = CLLocation(latitude: 0.0, longitude: 0.0)
+        let location: CLLocation = locations.last ?? defaultLocation
+        myCurrentLatitude = location.coordinate.latitude
+        myCurrentLongitude = location.coordinate.longitude
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error in Getting Location: \(error)")
+        //locationManager.stopUpdatingLocation()
+    }
+}

@@ -14,6 +14,7 @@ class HistoryVC: UIViewController {
     
     var orders = [OrderModel]()
     let webService = WebRequestService.shared
+    var chargerId: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,12 @@ class HistoryVC: UIViewController {
         let index = sender.tag
         let orderId = orders[index].orderId
         cancelOrder(orderId: orderId)
+    }
+    
+    @IBAction func onTrackBtnPressed(sender: UIButton) {
+        let index = sender.tag
+        self.chargerId = orders[index].chargerId
+        performSegue(withIdentifier: HISTORYVC_TO_TRACK_CHARGER, sender: self)
     }
 
     func getOrderHistory() {
@@ -82,6 +89,15 @@ class HistoryVC: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == HISTORYVC_TO_TRACK_CHARGER {
+            let trackVc = segue.destination as! TrackChargerVC
+            trackVc.chargerId = self.chargerId!
+            trackVc.myCurrentLatitude = LocationService.shared.myCurrentLatitude
+            trackVc.myCurrentLongitude = LocationService.shared.myCurrentLongitude
+        }
+    }
+    
 }
 
 extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
@@ -96,6 +112,7 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as? OrderCell else {return UITableViewCell()}
         cell.cancelBtn.tag = indexPath.row
+        cell.trackBtn.tag = indexPath.row
         cell.cancelBtnOne.tag = indexPath.row
         let order = orders[indexPath.row]
         cell.configureCell(order: order)

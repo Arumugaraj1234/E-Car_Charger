@@ -20,11 +20,15 @@ class NearByChargersVC: UIViewController {
     @IBOutlet weak var constraintMenuWidth: NSLayoutConstraint!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+
     //MARK: Other Outlets
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var centreMapBtn: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var existOrderView: UIView!
+    @IBOutlet weak var existOrderVehicleImg: UIImageView!
+    @IBOutlet weak var existOrderChargerNameLbl: UILabel!
+    @IBOutlet weak var existOrderRefNoLbl: UILabel!
     
     //MARK: Hamburger Menu Variables
     let maxBlackViewAlpha: CGFloat = 0.5
@@ -56,10 +60,13 @@ class NearByChargersVC: UIViewController {
         mapView.delegate = self
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
         startAnimate(with: "")
+        existOrderView.isHidden = true
         setInitialSideMenu() // Side Menu initial Settings
         getNearByChargers() // Gettting nearby chargers to show in map
         getVehicleTypes()
-        
+        checkForOrderInService()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.goToTrackChargerForExistOrder(_:)))
+        existOrderView.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -152,6 +159,20 @@ class NearByChargersVC: UIViewController {
         self.present(personalDetailsVc, animated: true)
     }
     
+    func checkForOrderInService() {
+        webService.checkForAnyOrderInService(userId: webService.userId) { (status, message, data) in
+            if status == 1 {
+                if let order = data {
+                    self.existOrderView.isHidden = false
+                    self.chargerId = order.chargerId
+                    self.existOrderVehicleImg.downloadedFrom(link: order.vehicleImageLink)
+                    self.existOrderChargerNameLbl.text = order.chargerName
+                    self.existOrderRefNoLbl.text = order.vehicleName + " - " + String(order.orderId)
+                }
+            }
+        }
+    }
+    
     func bookCharger() {
         startAnimate(with: "")
         if checkInternetAvailablity() {
@@ -203,7 +224,11 @@ class NearByChargersVC: UIViewController {
         }
     }
     
-
+    @objc
+    func goToTrackChargerForExistOrder(_ sender: UITapGestureRecognizer) {
+        
+        self.performSegue(withIdentifier: NEARBY_CHARGERS_TO_TRACK_CHARGER, sender: self)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == NEARBY_CHARGERS_TO_TRACK_CHARGER {

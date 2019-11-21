@@ -466,7 +466,11 @@ class WebRequestService: NSObject {
                         }
                         let paymentStatus = order["PaymentStatus"].stringValue
                         let orderStatus = order["Status"].stringValue
-                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, status: orderStatus)
+                        let vehicleId = order["VehileId"].intValue
+                        let chargerId = order["ChargerId"].intValue
+                        let chargerPhone = order["ChargerNumber"].stringValue
+                        
+                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, status: orderStatus, vehicleId: vehicleId, chargerId: chargerId, chargerMobileNo: chargerPhone)
                         orders.append(orderModel)
                     }
                 }
@@ -514,11 +518,62 @@ class WebRequestService: NSObject {
                         }
                         let paymentStatus = order["PaymentStatus"].stringValue
                         let orderStatus = order["Status"].stringValue
-                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, status: orderStatus)
+                        let vehicleId = order["VehileId"].intValue
+                        let chargerId = order["ChargerId"].intValue
+                        let chargerPhone = order["ChargerNumber"].stringValue
+                        let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, status: orderStatus, vehicleId: vehicleId, chargerId: chargerId, chargerMobileNo: chargerPhone)
                         orders.append(orderModel)
                     }
                 }
                 completion(responseCode, responseMsg, orders)
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error as! String, nil)
+            }
+        }
+    }
+    
+    func checkForAnyOrderInService(userId: Int, completion: @escaping (_ status: Int, _ message: String, _ data: OrderModel?) -> Void) {
+        let params = [
+            "CustomerId": userId
+        ]
+        
+        Alamofire.request(URL_TO_CHECK_ORDER_IN_SERVICE, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMsg = json["ResponseMessage"].stringValue
+                if responseCode == 1 {
+                    let responseData = json["ResponseData"]
+                    let orderId = responseData["BookingId"].intValue
+                    let vehicleName = responseData["VehileName"].stringValue
+                    let imageLink = responseData["VehileImage"].stringValue
+                    let chargerName = responseData["ChargerName"].stringValue
+                    let fare = responseData["Fare"].doubleValue
+                    let latitude = responseData["Latitude"].doubleValue
+                    let longitude = responseData["Longitude"].doubleValue
+                    let otp = responseData["OTP"].intValue
+                    var bookedDate = responseData["Booked"].stringValue
+                    var bookedTime = ""
+                    if bookedDate != "" {
+                        if let dotRange = bookedDate.range(of: ".") {
+                            bookedDate.removeSubrange(dotRange.lowerBound..<bookedDate.endIndex)
+                        }
+                        bookedTime = self.changeDateFormat(sourceDate: bookedDate, originFormat: "dd-MM-yyyyHH:mma", reqFormat: "dd, MMMM, yyyy HH:mm a")
+                    }
+                    let paymentStatus = responseData["PaymentStatus"].stringValue
+                    let orderStatus = responseData["Status"].stringValue
+                    let vehicleId = responseData["VehileId"].intValue
+                    let chargerId = responseData["ChargerId"].intValue
+                    let chargerPhone = responseData["ChargerNumber"].stringValue
+                    let orderModel = OrderModel(orderId: orderId, vehicleName: vehicleName, vehicleImageLink: imageLink, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedTime, paymentStatus: paymentStatus, status: orderStatus, vehicleId: vehicleId, chargerId: chargerId, chargerMobileNo: chargerPhone)
+                    completion(responseCode, responseMsg, orderModel)
+                }
+                else {
+                    completion(responseCode, responseMsg, nil)
+                }
             }
             else {
                 debugPrint(response.error as Any)

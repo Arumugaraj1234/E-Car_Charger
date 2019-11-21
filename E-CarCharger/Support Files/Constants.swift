@@ -17,6 +17,7 @@ let USER_DETAILS_KEY = "UserDetails"
 let NEARBY_CHARGERS_TO_TRACK_CHARGER = "nearByChargersToTrackCharger"
 let NEARBY_CHARGERS_TO_HISTORY = "nearByChargersToHistory"
 let PROFILEVC_TO_EDIT_PROFILEVC = "profileVcToEditProfileVc"
+let HISTORYVC_TO_TRACK_CHARGER = "historyVcToTrackChargerVc"
 
 //MARK: URL CONSTANTS
 let BASE_URL = "http://101.53.153.54/ElectricCharger/WebService/api/Customer/"
@@ -33,6 +34,7 @@ let URL_TO_CHECK_BOOKING = BASE_URL + "GetBookingStatus"
 let URL_TO_VERIFY_OTP_FOR_UPDATE_PHONENO = BASE_URL + "CheckOTPForUpdatePhoneNo"
 let URL_TO_AUTO_CANCEL_OF_ORDER = BASE_URL + "AutoCancelOfBooking"
 let URL_TO_CANCEL_ORDER_BY_USER = BASE_URL + "CancelBookingByCustomer"
+let URL_TO_CHECK_ORDER_IN_SERVICE = BASE_URL + "CheckBookingExist"
 
 //MARK: GOOGLE MAP URL CONSTANTS
 let GOOGLE_URL_FOR_GEOCODING =  "https://maps.googleapis.com/maps/api/geocode/json?"
@@ -48,9 +50,7 @@ let HEADER = [
  Pendings:
  1. Alert messages to set where ever required
  2. Toast message to be set in place with respect to backround color
- 3. Charger status need to updated down in track screen
  4. Call to number functionality
  5. Message to number functionality
- 6. Resend otp functionality
  */
 
