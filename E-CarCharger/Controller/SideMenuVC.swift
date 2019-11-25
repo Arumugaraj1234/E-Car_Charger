@@ -28,7 +28,7 @@ class SideMenuVC: UIViewController {
     }
     
     @IBAction func onSignOutBtnPressed(sender: UIButton) {
-        _ = SweetAlert().showAlert("Are You Sure", subTitle: "Are you sure you want to sign out?", style: .none, buttonTitle: "Yes", buttonColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1), otherButtonTitle: "No", action: { (status) in
+        _ = SweetAlert().showAlert("Sign Out", subTitle: "Are you sure you want to sign out?", style: .none, buttonTitle: "YES", buttonColor: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), otherButtonTitle: "NO", action: { (status) in
             if status {
                 self.webService.userId = 0
                 self.webService.isLoggedIn = false

@@ -51,18 +51,19 @@ class PersonalDetailsVC: UIViewController {
                     }
                     else {
                         self.stopAnimating()
-                        self.makeToast(message: message, time: 3.0, position: .bottom)
+                        _ = SweetAlert().showAlert("Failed!", subTitle: message, style: .none)
+                        //self.makeToast(message: message, time: 3.0, position: .bottom)
                     }
                 }
             }
             else {
                 stopAnimating()
-                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
             }
         }
         else {
             stopAnimating()
-            makeToast(message: "Please provide the valid details to update!", time: 3.0, position: .bottom)
+            makeToast(message: "Please provide the valid details to update!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     

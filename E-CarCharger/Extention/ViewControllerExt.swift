@@ -37,11 +37,11 @@ extension UIViewController: NVActivityIndicatorViewable {
         self.navigationItem.titleView = titleLabel
     }
     
-    func makeToast(message: String, time: TimeInterval, position: ToastPosition) {
+    func makeToast(message: String, time: TimeInterval, position: ToastPosition, textColor: UIColor) {
         var style = ToastStyle()
         style.backgroundColor = UIColor.clear
-        style.messageColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        if let font = UIFont(name: "AThonburi-Regular", size: 14.0) {
+        style.messageColor = textColor
+        if let font = UIFont(name: "Thonburi-Bold", size: 14.0) {
             style.messageFont = font
         }
         self.view.makeToast(message, duration: time, position: position, style: style)
@@ -54,14 +54,14 @@ extension UIViewController: NVActivityIndicatorViewable {
             fadedView = UIView(frame: CGRect(x: 0, y: 0,
                                              width: view.frame.width,
                                              height: view.frame.height))
-            fadedView?.backgroundColor = UIColor.white
+            fadedView?.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.7529411765, blue: 0.2470588235, alpha: 1)
             fadedView?.alpha = 1.0
             fadedView?.tag = 99
             
-            var bgImage = UIImageView()
-            bgImage = UIImageView(frame: (fadedView?.bounds)!)
-            bgImage.image = UIImage(named: "bgImage")
-            bgImage.removeFromSuperview()
+//            var bgImage = UIImageView()
+//            bgImage = UIImageView(frame: (fadedView?.bounds)!)
+//            bgImage.image = UIImage(named: "bgImage")
+//            bgImage.removeFromSuperview()
             
             var activityIndicator = UIActivityIndicatorView()
             activityIndicator.removeFromSuperview()
@@ -72,7 +72,7 @@ extension UIViewController: NVActivityIndicatorViewable {
             activityIndicator.startAnimating()
             
             view.addSubview(fadedView!)
-            fadedView?.addSubview(bgImage)
+            //fadedView?.addSubview(bgImage)
             fadedView?.addSubview(activityIndicator)
             fadedView?.fadeTo(alphaValue: 1.0, withDuration: 0.2)
         } else {

@@ -45,6 +45,7 @@ class NearByChargersVC: UIViewController {
     
     //MARK: General Variables
     let webService = WebRequestService.shared
+    let locationService = LocationService.shared
     var vehicles = [VehicleTypeModel]()
     var selectedVehicle: VehicleTypeModel?
     var bookOrder: OrderBookModel?
@@ -77,7 +78,7 @@ class NearByChargersVC: UIViewController {
     
     @IBAction func onCentreMapBtnPressed(sender: UIButton) {
         if self.pathToCentre == nil {
-            let currentCoordinates = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
+            let currentCoordinates = CLLocationCoordinate2DMake(locationService.myCurrentLatitude, locationService.myCurrentLongitude)
             mapView.camera = GMSCameraPosition.camera(withTarget: currentCoordinates, zoom: 15.0)
         } else {
             let bounds = GMSCoordinateBounds(path: pathToCentre!)
@@ -106,9 +107,10 @@ class NearByChargersVC: UIViewController {
     }
     
     func getNearByChargers() {
-        let myLocatiion = CLLocationCoordinate2DMake(13.074554, 80.259644)
+        //let myLocatiion = CLLocationCoordinate2DMake(13.074554, 80.259644)
+        let myLocation = CLLocationCoordinate2DMake(locationService.myCurrentLatitude, locationService.myCurrentLongitude)
         if checkInternetAvailablity() {
-            webService.getNearByChargers(with: myLocatiion.latitude, and: myLocatiion.longitude) { (status, message, data) in
+            webService.getNearByChargers(with: myLocation.latitude, and: myLocation.longitude) { (status, message, data) in
                 if status == 1 {
                     let nearestChargers = data!
                     self.setLocationMarkerForChargers(chargers: nearestChargers)
@@ -118,7 +120,7 @@ class NearByChargersVC: UIViewController {
         }
         else {
             stopAnimating()
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -130,12 +132,13 @@ class NearByChargersVC: UIViewController {
                     self.collectionView.reloadData()
                 }
                 else {
-                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                    print(message)
+                    //self.makeToast(message: message, time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                 }
             }
         }
         else {
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -176,7 +179,7 @@ class NearByChargersVC: UIViewController {
     func bookCharger() {
         startAnimate(with: "")
         if checkInternetAvailablity() {
-            let myLocation = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
+            let myLocation = CLLocationCoordinate2DMake(locationService.myCurrentLatitude, locationService.myCurrentLongitude)
             webService.bookCharger(userId: webService.userId, vehicleId: (selectedVehicle?.id)!, userLocation: myLocation) { (status, message, data) in
                 if status == 1 {
                     self.bookOrder = data!
@@ -188,13 +191,14 @@ class NearByChargersVC: UIViewController {
                 }
                 else {
                     self.stopAnimating()
-                    self.makeToast(message: "Oops! \(message)", time: 3.0, position: .bottom)
+                    _ = SweetAlert().showAlert("Failed!", subTitle: message, style: .none)
+                    //self.makeToast(message: "Oops! \(message)", time: 3.0, position: .bottom)
                 }
             }
         }
         else {
             stopAnimating()
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -202,7 +206,7 @@ class NearByChargersVC: UIViewController {
         chargerCountFlag = chargerCountFlag + 1
         print(chargerCountFlag)
         if chargerCountFlag < 7 {
-            let myLocation = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
+            let myLocation = CLLocationCoordinate2DMake(locationService.myCurrentLatitude, locationService.myCurrentLongitude)
             webService.checkBookingStatus(orderId: (bookOrder?.id)!, vehicleType: (bookOrder?.vehicleId)!, userLocation: myLocation) { (status, message, data) in
                 if status == 1 {
                     self.stopAnimating()
@@ -219,7 +223,8 @@ class NearByChargersVC: UIViewController {
             self.timer = nil
             self.webService.autoCancelOfOrder(orderId: (bookOrder?.id)!) { (status, message) in
                 self.stopAnimating()
-                self.makeToast(message: message, time: 3.0, position: .bottom)
+                _ = SweetAlert().showAlert("Failed!", subTitle: message, style: .none)
+               // self.makeToast(message: message, time: 3.0, position: .bottom)
             }
         }
     }
@@ -234,8 +239,8 @@ class NearByChargersVC: UIViewController {
         if segue.identifier == NEARBY_CHARGERS_TO_TRACK_CHARGER {
             let trackChargerVc = segue.destination as! TrackChargerVC
             trackChargerVc.chargerId = self.chargerId!
-            trackChargerVc.myCurrentLatitude = self.myCurrentLatitude!
-            trackChargerVc.myCurrentLongitude = self.myCurrentLongitude!
+            trackChargerVc.myCurrentLatitude = locationService.myCurrentLatitude
+            trackChargerVc.myCurrentLongitude = locationService.myCurrentLongitude
         }
     }
     

@@ -66,7 +66,7 @@ class InstructionVC: UIViewController {
         }
         else {
             stopAnimating()
-            makeToast(message: "Oops! Invalid mobile number. Please check.", time: 3.0, position: .bottom)
+            makeToast(message: "Oops! Invalid mobile number", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -78,7 +78,7 @@ class InstructionVC: UIViewController {
         }
         else {
             stopAnimating()
-            makeToast(message: "Oops! Invalid mobile number. Please check.", time: 3.0, position: .bottom)
+            makeToast(message: "Oops! Invalid mobile number", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -96,7 +96,7 @@ class InstructionVC: UIViewController {
         }
         else {
             stopAnimating()
-            makeToast(message: "Oops! Invalid otp entered.", time: 3.0, position: .bottom)
+            makeToast(message: "Oops! Invalid OTP", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -190,13 +190,14 @@ class InstructionVC: UIViewController {
                     })
                 }
                 else {
-                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                    _ = SweetAlert().showAlert("Failed!", subTitle: message, style: .none)
+                    //self.makeToast(message: message, time: 3.0, position: .bottom, textColor: <#UIColor#>)
                 }
             }
         }
         else {
             stopAnimating()
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -208,13 +209,14 @@ class InstructionVC: UIViewController {
                     self.appDelegate.skipToNearByChargersScreen()
                 }
                 else {
-                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                    _ = SweetAlert().showAlert("Failed!", subTitle: message, style: .none)
+                    //self.makeToast(message: message, time: 3.0, position: .bottom)
                 }
             }
         }
         else {
             stopAnimating()
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
 

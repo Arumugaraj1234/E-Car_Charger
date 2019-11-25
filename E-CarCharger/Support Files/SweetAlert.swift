@@ -34,8 +34,8 @@ open class SweetAlert: UIViewController {
     var imageView:UIImageView?
     var subTitleTextView = UITextView()
     var userAction:((_ isOtherButton: Bool) -> Void)? = nil
-    let kFontDB = "AvenirNextCondensed-Demibold"
-    let kFontMedium = "AvenirNextCondensed-Medium"
+    let kFontDB = "AppleSDGothicNeo-Bold"
+    let kFontMedium = "AppleSDGothicNeo-Regular"
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -69,14 +69,14 @@ open class SweetAlert: UIViewController {
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont(name: kFontDB, size:18)
-        titleLabel.textColor = UIColor.colorFromRGB(0x3E3E3E) //0x575757
+        titleLabel.textColor = UIColor.black //0x575757
     }
     
     fileprivate func setupSubtitleTextView() {
         subTitleTextView.text = ""
         subTitleTextView.textAlignment = .center
-        subTitleTextView.font = UIFont(name: kFontMedium, size:18)
-        subTitleTextView.textColor = UIColor.colorFromRGB(0x3E3E3E)  //0x797979
+        subTitleTextView.font = UIFont(name: kFontMedium, size:16)
+        subTitleTextView.textColor = UIColor.black  //0x797979
         subTitleTextView.backgroundColor = #colorLiteral(red: 0.8837149971, green: 1, blue: 0.7996501223, alpha: 1)
         subTitleTextView.isEditable = false
     }
@@ -240,7 +240,7 @@ open class SweetAlert: UIViewController {
     open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String,buttonColor: UIColor,otherButtonTitle:
         String?, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
         self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle,buttonColor: buttonColor,otherButtonTitle:
-            otherButtonTitle,otherButtonColor: #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1))
+            otherButtonTitle,otherButtonColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         userAction = action
         return self
     }

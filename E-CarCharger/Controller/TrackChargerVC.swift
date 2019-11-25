@@ -51,8 +51,8 @@ class TrackChargerVC: UIViewController {
     }
     
     @IBAction func onBackBtnPressed(sender: Any) {
-        self.timer?.invalidate()
-        self.timer = nil
+//        self.timer?.invalidate()
+//        self.timer = nil
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -77,7 +77,7 @@ class TrackChargerVC: UIViewController {
             }
         }
         else {
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -85,9 +85,10 @@ class TrackChargerVC: UIViewController {
         if checkInternetAvailablity() {
             webService.trackCharger(chargerId: chargerId) { (status, Message, data) in
                 if status == 1 {
-                    let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
+                    //let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
+                    let myLocation = CLLocationCoordinate2DMake(self.locationService.myCurrentLatitude, self.locationService.myCurrentLongitude)
                     let chargerLocation = CLLocationCoordinate2DMake((data?.currentLatitude)!, (data?.currentLongitude)!)
-                    LocationService.shared.getDirectionsFromgeoCode(originLat: myLocatiion.latitude, originLon: myLocatiion.longitude, destinalat: chargerLocation.latitude, destLon: chargerLocation.longitude, wayPoints: [], travelMode: "driving" as AnyObject) { (success) in
+                    LocationService.shared.getDirectionsFromgeoCode(originLat: myLocation.latitude, originLon: myLocation.longitude, destinalat: chargerLocation.latitude, destLon: chargerLocation.longitude, wayPoints: [], travelMode: "driving" as AnyObject) { (success) in
                         if success {
                             DispatchQueue.main.async {
                                 print("Poly Line Success")
@@ -103,13 +104,13 @@ class TrackChargerVC: UIViewController {
             }
         }
         else {
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
     func configureMapAndMarkersForRoute(chargerCoOrdinates: CLLocationCoordinate2D) {
-        let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
-        //let myLocatiion = CLLocationCoordinate2DMake(myCurrentLatitude!, myCurrentLongitude!)
+        //let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
+        let myLocatiion = CLLocationCoordinate2DMake(locationService.myCurrentLatitude, locationService.myCurrentLongitude)
         mapView.camera = GMSCameraPosition.camera(withTarget: myLocatiion, zoom: 15.0)
         
         originMaker = GMSMarker(position: myLocatiion)
@@ -172,7 +173,7 @@ extension TrackChargerVC: CLLocationManagerDelegate {
         let myLocation: CLLocation = change![NSKeyValueChangeKey.newKey] as! CLLocation
         myCurrentLatitude = myLocation.coordinate.latitude
         myCurrentLongitude = myLocation.coordinate.longitude
-        mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 15.0)
+        //mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 15.0)
         mapView.settings.compassButton = true
     }
     

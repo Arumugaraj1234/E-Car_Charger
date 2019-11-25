@@ -55,17 +55,18 @@ class HistoryVC: UIViewController {
                     self.tableView.reloadData()
                     self.stopAnimating()
                     if self.orders.count == 0 {
-                        self.makeToast(message: "No orders found in history", time: 3.0, position: .bottom)
+                        self.makeToast(message: "No orders found in history", time: 3.0, position: .center, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                     }
                 }
                 else {
                     self.stopAnimating()
-                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                    _ = SweetAlert().showAlert("Failed", subTitle: message, style: .none)
+                    //self.makeToast(message: message, time: 3.0, position: .bottom)
                 }
             }
         }
         else {
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -75,17 +76,21 @@ class HistoryVC: UIViewController {
             webService.cancelOrderByUser(orderId: orderId, userId: webService.userId) { (status, message, data) in
                 if status == 1 {
                     self.orders = data!
-                    self.tableView.reloadData()
+                    //self.tableView.reloadData()
                     self.stopAnimating()
+                    _ = SweetAlert().showAlert("Cancelled!", subTitle: message, style: .none, buttonTitle: "OK", action: { (status) in
+                        self.tableView.reloadData()
+                    })
                 }
                 else {
                     self.stopAnimating()
-                    self.makeToast(message: message, time: 3.0, position: .bottom)
+                    _ = SweetAlert().showAlert("Failed!", subTitle: message, style: .none)
+                    //self.makeToast(message: message, time: 3.0, position: .bottom)
                 }
             }
         }
         else {
-            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+            makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     

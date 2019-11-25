@@ -69,18 +69,19 @@ class ProfileEditVC: UIViewController {
                     }
                     else {
                         self.stopAnimating()
-                        self.makeToast(message: message, time: 3.0, position: .bottom)
+                        _ = SweetAlert().showAlert("Failed!", subTitle: message, style: .none)
+                        //self.makeToast(message: message, time: 3.0, position: .bottom)
                     }
                 }
             }
             else {
                 stopAnimating()
-                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
             }
         }
         else {
             stopAnimating()
-            makeToast(message: "Please provide the valid details to update!", time: 3.0, position: .bottom)
+            makeToast(message: "Please provide the valid details to update!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
@@ -96,13 +97,14 @@ class ProfileEditVC: UIViewController {
                          self.navigationController?.popToRootViewController(animated: true)
                     }
                     else {
-                        self.makeToast(message: message, time: 3.0, position: .bottom)
+                        _ = SweetAlert().showAlert("Failed", subTitle: message, style: .none)
+                        //self.makeToast(message: message, time: 3.0, position: .bottom, textColor: <#UIColor#>)
                     }
                 }
             }
             else {
                 stopAnimating()
-                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
             }
         }
     }
@@ -117,22 +119,24 @@ class ProfileEditVC: UIViewController {
                 webService.updateProfile(userDetails: userModel, password: "123456") { (status, message, data) in
                     if status == 2 {
                         self.stopAnimating()
-                        self.makeToast(message: "OTP Send to your registered mobile no", time: 3.0, position: .bottom)
+                        _ = SweetAlert().showAlert("OTP Sent", subTitle: "OTP Send to your registered mobile no", style: .none)
+                        //self.makeToast(message: "OTP Send to your registered mobile no", time: 3.0, position: .bottom)
                     }
                     else {
                         self.stopAnimating()
-                        self.makeToast(message: message, time: 3.0, position: .bottom)
+                        _ = SweetAlert().showAlert("Failed", subTitle: message, style: .none)
+                        //self.makeToast(message: message, time: 3.0, position: .bottom)
                     }
                 }
             }
             else {
                 stopAnimating()
-                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom)
+                makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
             }
         }
         else {
             stopAnimating()
-            makeToast(message: "Please provide the valid mobile number", time: 3.0, position: .bottom)
+            makeToast(message: "Please provide the valid mobile number", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
     
