@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class ProfileVC: UIViewController {
     
@@ -32,9 +33,13 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func onBackBtnPressed(_ sender: UIBarButtonItem) {
-        let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let upcomingOrdersVC = main.instantiateViewController(withIdentifier: "NearByChargersNavigation") as! UINavigationController
-        present(upcomingOrdersVC, animated: true, completion: nil)
+        let menu = storyboard!.instantiateViewController(withIdentifier: "SideMenu") as! UISideMenuNavigationController
+        menu.sideMenuManager.menuPresentMode = .menuDissolveIn
+        present(menu, animated: true, completion: nil)
+        
+//        let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let upcomingOrdersVC = main.instantiateViewController(withIdentifier: "NearByChargersNavigation") as! UINavigationController
+//        present(upcomingOrdersVC, animated: true, completion: nil)
     }
     
     @IBAction func onEditProfileBtnPressed(sender: UIButton) {
@@ -57,11 +62,17 @@ class ProfileVC: UIViewController {
     }
     
     func setInitialValues() {
-        let userDetails = webService.userDetails
-        let fName = userDetails["firstName"] ?? ""
-        let lName = userDetails["lastName"] ?? ""
-        let email = userDetails["email"] ?? ""
-        let phone = userDetails["mobileNo"] ?? ""
+        var fName = ""
+        var lName = ""
+        var email = ""
+        var phone = ""
+        if let userDetails = webService.userDetails {
+            fName = userDetails["firstName"] ?? ""
+            lName = userDetails["lastName"] ?? ""
+            email = userDetails["email"] ?? ""
+            phone = userDetails["mobileNo"] ?? ""
+        }
+
         firstNameLbl.text = " " + fName
         lastNameLbl.text = " " + lName
         emailLbl.text = " " + email

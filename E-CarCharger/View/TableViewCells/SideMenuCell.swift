@@ -19,28 +19,20 @@ class SideMenuCell: UITableViewCell {
         super.layoutSubviews()
         containerView.roundCorners(corners: [.bottomLeft, .topLeft], radius: 20.0)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        if selected {
-            containerView.backgroundColor = UIColor.white
-            menuNameLbl.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        }
-        else {
-            containerView.backgroundColor = UIColor.clear
-            menuNameLbl.textColor = UIColor.white
-        }
-    }
     
     func configureCell(menu: SideMenuModel, index: Int) {
         menuNameLbl.text = menu.menuName
-        if index == 0 {
-            menuIconImg.image = menu.blueMenuIcon
-        }
-        else {
+        if WebRequestService.shared.selectedIndexAtSideMenu == index {
+            containerView.backgroundColor = UIColor.white
+            menuNameLbl.textColor = #colorLiteral(red: 0.5803921569, green: 0.09019607843, blue: 0.3176470588, alpha: 1)
             menuIconImg.image = menu.whiteMenuIcon
         }
+        else {
+            containerView.backgroundColor = UIColor.clear
+            menuNameLbl.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            menuIconImg.image = menu.blueMenuIcon
+        }
     }
+    
     
 }

@@ -14,6 +14,7 @@ extension UIView {
     private static let lineDashWidth: CGFloat = 2.0
     
     func makeDashedBorderLine() {
+        self.backgroundColor = UIColor.clear
         let path = CGMutablePath()
         let shapeLayer = CAShapeLayer()
         shapeLayer.lineWidth = UIView.lineDashWidth

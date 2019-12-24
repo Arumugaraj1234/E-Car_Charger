@@ -18,5 +18,6 @@ target 'E-CarCharger' do
   pod 'Toast-Swift', '~> 5.0.0'
   pod 'NVActivityIndicatorView'
   pod 'KOControls'
+  pod 'SideMenu'
 
 end

@@ -49,7 +49,13 @@ class InstructionVC: UIViewController {
     @IBAction func onBtnTapped(sender: UIButton) {
         
         if sender.tag == 1 {
-            appDelegate.skipToNearByChargersScreen()
+            if self.webService.isLoggedIn {
+                self.appDelegate.skipToNearByChargersScreen()
+            }
+            else {
+                self.mobileView.isHidden = false
+                self.otpView.isHidden = true
+            }
         }
         else if sender.tag == 2 {
             //Redirect to AppStore, Once got the appstore link
@@ -129,7 +135,9 @@ class InstructionVC: UIViewController {
                     if appVersionInMyMachine! != "\(result!.recentVersion)" {
                         self.isOldVersion = true
                     }
+                    
                     self.shouldPresentLoadingViewWithText(false, "")
+                    
                     if result!.flag == 2 && self.isOldVersion == true {
                         self.mobileView.isHidden = true
                         self.otpView.isHidden = true
@@ -155,6 +163,7 @@ class InstructionVC: UIViewController {
                             self.appDelegate.skipToNearByChargersScreen()
                         }
                         else {
+                            self.mobileView.isHidden = false
                             self.otpView.isHidden = true
                         }
                     }

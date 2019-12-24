@@ -40,9 +40,11 @@ class PersonalDetailsVC: UIViewController {
         startAnimate(with: "")
         if isFirstNameValid && isLastNameValid && isEmailValid {
             if checkInternetAvailablity() {
-                let personal = webService.userDetails
-                let phone = personal["mobileNo"]
-                let userModel = UserDetailsModel(userId: webService.userId, firstName: firstNameTF.text!, lastName: lastNameTF.text!, email: emailTF.text!, phoneNo: phone!)
+                var phone = ""
+                if let personal = webService.userDetails {
+                    phone = personal["mobileNo"] ?? ""
+                }
+                let userModel = UserDetailsModel(userId: webService.userId, firstName: firstNameTF.text!, lastName: lastNameTF.text!, email: emailTF.text!, phoneNo: phone)
                 webService.updateProfile(userDetails: userModel, password: "123456") { (status, message, data) in
                     if status == 1 {
                         self.stopAnimating()

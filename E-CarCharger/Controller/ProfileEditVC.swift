@@ -142,11 +142,17 @@ class ProfileEditVC: UIViewController {
     
     func setupInitialView() {
         
-        let userDetails = webService.userDetails
-        let fName = userDetails["firstName"] ?? ""
-        let lName = userDetails["lastName"] ?? ""
-        let email = userDetails["email"] ?? ""
-        let phone = userDetails["mobileNo"] ?? ""
+        var fName = ""
+        var  lName = ""
+        var email = ""
+        var phone = ""
+        if let userDetails = webService.userDetails {
+            fName = userDetails["firstName"] ?? ""
+            lName = userDetails["lastName"] ?? ""
+            email = userDetails["email"] ?? ""
+            phone = userDetails["mobileNo"] ?? ""
+        }
+
         
         firstNameTF.text = fName
         lastNameTF.text = lName

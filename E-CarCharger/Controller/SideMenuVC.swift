@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class SideMenuVC: UIViewController {
     
@@ -77,19 +78,31 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
         cell.menuIconImg.image = menu.blueMenuIcon
         
         if indexPath.row == 0 {
-            let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeVC = main.instantiateViewController(withIdentifier: "NearByChargersNavigation") as! UINavigationController
-            present(homeVC, animated: true, completion: nil)
+            self.dismiss(animated: true) { () -> Void in
+                let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let homeVC = main.instantiateViewController(withIdentifier: "NearByChargersNavigation") as! UINavigationController
+                self.present(homeVC, animated: true, completion: nil)
+                UIApplication.shared.keyWindow?.rootViewController = homeVC
+            }
+            webService.selectedIndexAtSideMenu = 0
         }
         else if indexPath.row == 1 {
-            let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let profileVc = main.instantiateViewController(withIdentifier: "ProfileVcNavigation") as! UINavigationController
-            present(profileVc, animated: true, completion: nil)
+            self.dismiss(animated: true) { () -> Void in
+                let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let profileVc = main.instantiateViewController(withIdentifier: "ProfileVcNavigation") as! UINavigationController
+                self.present(profileVc, animated: true, completion: nil)
+                UIApplication.shared.keyWindow?.rootViewController = profileVc
+            }
+            webService.selectedIndexAtSideMenu = 1
         }
         else if indexPath.row == 2 {
-            let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let historyVC = main.instantiateViewController(withIdentifier: "HistoryNaviagtion") as! UINavigationController
-            present(historyVC, animated: true, completion: nil)
+            self.dismiss(animated: true) { () -> Void in
+                let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let historyVC = main.instantiateViewController(withIdentifier: "HistoryNaviagtion") as! UINavigationController
+                self.present(historyVC, animated: true, completion: nil)
+                UIApplication.shared.keyWindow?.rootViewController = historyVC
+            }
+            webService.selectedIndexAtSideMenu = 2
         }
     }
     

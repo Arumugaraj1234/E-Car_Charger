@@ -64,6 +64,11 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>SideMenu.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -72,7 +77,7 @@
 		<key>SwiftyJSON.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>8</integer>
 		</dict>
 		<key>Toast-Swift.xcscheme</key>
 		<dict>
@@ -82,7 +87,7 @@
 		<key>Toast-Swift.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>9</integer>
 		</dict>
 		<key>ValidationTextField.xcscheme</key>
 		<dict>
@@ -92,7 +97,7 @@
 		<key>ValidationTextField.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>10</integer>
 		</dict>
 	</dict>
 </dict>

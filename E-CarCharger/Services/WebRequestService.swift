@@ -38,15 +38,16 @@ class WebRequestService: NSObject {
         }
     }
     
-    var userDetails: [String: String] {
+    var userDetails: [String: String]? {
         get {
-            return defaults.value(forKey: USER_DETAILS_KEY) as! [String: String]
+            return defaults.value(forKey: USER_DETAILS_KEY) as? [String: String]
         }
         set {
             defaults.set(newValue, forKey: USER_DETAILS_KEY)
         }
     }
     
+    var selectedIndexAtSideMenu = 0
 
     func getAppInitDetails(completion: @escaping (_ status:Int, _ message:String, _ result:AppDetailsModel?)-> Void) {
         
@@ -410,12 +411,15 @@ class WebRequestService: NSObject {
                 let json = JSON(data)
                 let responseCode = json["ResponseCode"].intValue
                 let responseMsg = json["ResponseMessage"].stringValue
+                var fName = ""
+                var lName = ""
+                var email = ""
                 if responseCode == 1 {
-                    let userDetails = self.userDetails
-                    let fName = userDetails["firstName"] ?? ""
-                    let lName = userDetails["lastName"] ?? ""
-                    let email = userDetails["email"] ?? ""
-                    
+                    if let userDetails = self.userDetails {
+                        fName = userDetails["firstName"] ?? ""
+                        lName = userDetails["lastName"] ?? ""
+                        email = userDetails["email"] ?? ""
+                    }
                     var userData = [String:String]()
                     userData["firstName"] = fName
                     userData["lastName"] = lName
@@ -580,6 +584,44 @@ class WebRequestService: NSObject {
                 completion(-2, response.error as! String, nil)
             }
         }
+    }
+    
+    
+    func checkOrderForCompleteCharging(orderId: Int, completion: @escaping (_ status: Int, _ message: String, _ orderStatus: Int?, _ data: CompletedOrderModel?) -> Void ) {
+        
+        let params = [
+            "BookingId": orderId
+        ]
+        
+        Alamofire.request(URL_TO_CHECK_ORDER_COMPLETE, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMessage = json["ResponseMessage"].stringValue
+                if responseCode == 1 {
+                    let responseData = json["ResponseData"]
+                    let orderStatus = responseData["Status"].intValue
+                    if orderStatus == 3 {
+                        let timeTook = responseData["TimeTaken"].stringValue
+                        let totalFare = responseData["Fare"].stringValue
+                        let model = CompletedOrderModel(orderStatus: orderStatus, timeTookToCharge: timeTook, totalFare: totalFare)
+                        completion(responseCode, responseMessage, orderStatus, model)
+                    }
+                    else {
+                        completion(responseCode, responseMessage, orderStatus, nil)
+                    }
+                }
+                else {
+                    completion(responseCode, responseMessage, nil, nil)
+                }
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error?.localizedDescription ?? "", nil, nil)
+            }
+        }
+        
     }
     
 }

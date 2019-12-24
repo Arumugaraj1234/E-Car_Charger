@@ -31,6 +31,8 @@ class TrackChargerVC: UIViewController {
     var wayPointsArray = [String]()
     var chargerId = 0
     var timer: Timer?
+    var timerToUpdateOrderStatus: Timer?
+    var orderId = 0
     
     let locationService = LocationService.shared
     let webService = WebRequestService.shared
@@ -43,6 +45,9 @@ class TrackChargerVC: UIViewController {
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
         updateChargerDetails()
         trackChargerWithTimer()
+        if timerToUpdateOrderStatus == nil {
+            timerToUpdateOrderStatus = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.trackOrderStatus), userInfo: nil, repeats: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,8 +56,10 @@ class TrackChargerVC: UIViewController {
     }
     
     @IBAction func onBackBtnPressed(sender: Any) {
-//        self.timer?.invalidate()
-//        self.timer = nil
+        self.timer?.invalidate()
+        self.timer = nil
+        self.timerToUpdateOrderStatus?.invalidate()
+        self.timerToUpdateOrderStatus = nil
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -92,6 +99,7 @@ class TrackChargerVC: UIViewController {
                         if success {
                             DispatchQueue.main.async {
                                 print("Poly Line Success")
+                                self.mapView.clear()
                                 self.configureMapAndMarkersForRoute(chargerCoOrdinates: chargerLocation)
                                 self.drawRoute()
                             }
@@ -109,23 +117,19 @@ class TrackChargerVC: UIViewController {
     }
     
     func configureMapAndMarkersForRoute(chargerCoOrdinates: CLLocationCoordinate2D) {
-        //let myLocatiion = CLLocationCoordinate2DMake(13.073383, 80.260889)
         let myLocatiion = CLLocationCoordinate2DMake(locationService.myCurrentLatitude, locationService.myCurrentLongitude)
         mapView.camera = GMSCameraPosition.camera(withTarget: myLocatiion, zoom: 15.0)
         
         originMaker = GMSMarker(position: myLocatiion)
         originMaker?.map = self.mapView
         originMaker?.icon = UIImage(named: "trackIcon")
-        //originMaker?.title = AuthService.instance.originAddress
         originMaker?.snippet = "User"
         self.mapView.selectedMarker = originMaker
         
-        //let chargerLocation = CLLocationCoordinate2DMake(13.078519, 80.261002)
         let chargerLocation = chargerCoOrdinates
         destinationMarker = GMSMarker(position: chargerLocation)
         destinationMarker?.map = self.mapView
         destinationMarker?.icon = UIImage(named: "chargerIcon")
-        //destinationMarker?.title = AuthService.instance.destinationAddress
         destinationMarker?.snippet = "John"
         self.mapView.selectedMarker = destinationMarker
         
@@ -154,9 +158,28 @@ class TrackChargerVC: UIViewController {
         routePolyLine?.map = mapView
         self.pathToCentre = path
         let bounds = GMSCoordinateBounds(path: path)
-        //mapView.animate(with: GMSCameraUpdate.fit(bounds))
-        mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 60.0))
-        //self.animateFromToContainerView(shoulShow: false)
+        
+        let gmsCameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 60.0)
+        mapView.moveCamera(gmsCameraUpdate)
+    }
+    
+    @objc
+    func trackOrderStatus() {
+        webService.checkOrderForCompleteCharging(orderId: self.orderId) { (status, message, oStatus, data) in
+            if status == 1 {
+                guard let orderStatus = oStatus else {return}
+                let index = IndexPath(row: 0, section: 0)
+                if let cell = self.tableView.cellForRow(at: index) as? ChargerStatusCell {
+                    cell.configureCell(status: orderStatus)
+                }
+                self.tableView.reloadData()
+                if orderStatus == 3 {
+                    print("Open view for payment")
+                    self.timerToUpdateOrderStatus?.invalidate()
+                    self.timerToUpdateOrderStatus = nil
+                }
+            }
+        }
     }
 
 }

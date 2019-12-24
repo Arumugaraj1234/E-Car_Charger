@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class HistoryVC: UIViewController {
     
@@ -29,9 +30,9 @@ class HistoryVC: UIViewController {
     }
     
     @IBAction func onBackBtnPressed(sender: Any) {
-        let main:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let upcomingOrdersVC = main.instantiateViewController(withIdentifier: "NearByChargersNavigation") as! UINavigationController
-        present(upcomingOrdersVC, animated: true, completion: nil)
+        let menu = storyboard!.instantiateViewController(withIdentifier: "SideMenu") as! UISideMenuNavigationController
+        menu.sideMenuManager.menuPresentMode = .menuDissolveIn
+        present(menu, animated: true, completion: nil)
     }
     
     @IBAction func onCancelBtnPressed(sender: UIButton) {

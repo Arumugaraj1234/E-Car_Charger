@@ -16,6 +16,7 @@ PODS:
   - Realm/Headers (3.16.1)
   - RealmSwift (3.16.1):
     - Realm (= 3.16.1)
+  - SideMenu (5.0.3)
   - SwiftyJSON (5.0.0)
   - Toast-Swift (5.0.0)
   - ValidationTextField (1.0.2)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - KOControls
   - NVActivityIndicatorView
   - RealmSwift
+  - SideMenu
   - SwiftyJSON
   - Toast-Swift (~> 5.0.0)
   - ValidationTextField
@@ -40,6 +42,7 @@ SPEC REPOS:
     - NVActivityIndicatorView
     - Realm
     - RealmSwift
+    - SideMenu
     - SwiftyJSON
     - Toast-Swift
     - ValidationTextField
@@ -52,10 +55,11 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   Realm: 601cacc51d8be3b17a377ef787be0f6ee0e76cf1
   RealmSwift: 486f2e09d5a8ccff63ed66e48d0846b111deb5e5
+  SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
   ValidationTextField: 553b3c61a7cf5d3d2a63eb99a2b1f0ad3df32da1
 
-PODFILE CHECKSUM: 0dddf3d749b5f67c7f1db1adb106cdc60cf00782
+PODFILE CHECKSUM: 046d6285c428152a5a64b148986e5d9a58942e5d
 
 COCOAPODS: 1.5.2

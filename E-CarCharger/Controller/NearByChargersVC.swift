@@ -9,18 +9,10 @@
 import UIKit
 import GooglePlaces
 import GoogleMaps
+import SideMenu
 
 class NearByChargersVC: UIViewController {
     
-    //MARK: Side Screen Outlets
-    @IBOutlet var gestureScreenEdgePan: UIScreenEdgePanGestureRecognizer!
-    @IBOutlet weak var viewBlack: UIView!
-    @IBOutlet weak var viewMenu: UIView!
-    @IBOutlet weak var constraintMenuLeft: NSLayoutConstraint!
-    @IBOutlet weak var constraintMenuWidth: NSLayoutConstraint!
-    @IBOutlet weak var menuBtn: UIBarButtonItem!
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
-
     //MARK: Other Outlets
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var centreMapBtn: UIButton!
@@ -29,13 +21,11 @@ class NearByChargersVC: UIViewController {
     @IBOutlet weak var existOrderVehicleImg: UIImageView!
     @IBOutlet weak var existOrderChargerNameLbl: UILabel!
     @IBOutlet weak var existOrderRefNoLbl: UILabel!
-    
-    //MARK: Hamburger Menu Variables
-    let maxBlackViewAlpha: CGFloat = 0.5
-    let animationDuration: TimeInterval = 0.3
-    var isLeftToRight = true
-    var isMenuOpened = false
-    
+    @IBOutlet weak var existOrderOtpLbl: UILabel!
+    @IBOutlet weak var menuBtn: UIBarButtonItem!
+    @IBOutlet weak var collectionViewHeightContraint: NSLayoutConstraint!
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
+        
     //MARK: Google Map Related Variables
     let locationManager = CLLocationManager()
     var pathToCentre: GMSPath?
@@ -51,7 +41,9 @@ class NearByChargersVC: UIViewController {
     var bookOrder: OrderBookModel?
     var timer: Timer?
     var chargerId: Int?
+    var acceptedOrderId: Int?
     var chargerCountFlag = 0
+    var timerToFindNearByChargers: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +54,10 @@ class NearByChargersVC: UIViewController {
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
         startAnimate(with: "")
         existOrderView.isHidden = true
-        setInitialSideMenu() // Side Menu initial Settings
-        getNearByChargers() // Gettting nearby chargers to show in map
+        collectionViewHeightContraint.constant = 70.0
+        if timerToFindNearByChargers == nil {
+            timerToFindNearByChargers = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(self.getNearByChargers), userInfo: nil, repeats: true)
+        }
         getVehicleTypes()
         checkForOrderInService()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.goToTrackChargerForExistOrder(_:)))
@@ -89,25 +83,16 @@ class NearByChargersVC: UIViewController {
         self.isMapCentered = true
     }
     
-    //MARK: Functions
-    
-    func setInitialSideMenu() {
-        constraintMenuLeft.constant = -constraintMenuWidth.constant
-        viewBlack.alpha = 0
-        viewBlack.isHidden = true
-        let language = NSLocale.preferredLanguages.first!
-        let direction = NSLocale.characterDirection(forLanguage: language)
-        if direction == .leftToRight {
-            gestureScreenEdgePan.edges = .left
-            isLeftToRight = true
-        } else {
-            gestureScreenEdgePan.edges = .right
-            isLeftToRight = false
-        }
+    @IBAction func menuBtnPressed(_ sender: Any) {
+        let menu = storyboard!.instantiateViewController(withIdentifier: "SideMenu") as! UISideMenuNavigationController
+        menu.sideMenuManager.menuPresentMode = .menuDissolveIn
+        present(menu, animated: true, completion: nil)
     }
     
+    //MARK: Functions
+    
+    @objc
     func getNearByChargers() {
-        //let myLocatiion = CLLocationCoordinate2DMake(13.074554, 80.259644)
         let myLocation = CLLocationCoordinate2DMake(locationService.myCurrentLatitude, locationService.myCurrentLongitude)
         if checkInternetAvailablity() {
             webService.getNearByChargers(with: myLocation.latitude, and: myLocation.longitude) { (status, message, data) in
@@ -133,7 +118,6 @@ class NearByChargersVC: UIViewController {
                 }
                 else {
                     print(message)
-                    //self.makeToast(message: message, time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                 }
             }
         }
@@ -143,6 +127,7 @@ class NearByChargersVC: UIViewController {
     }
     
     func setLocationMarkerForChargers(chargers: [ChargerModel]) {
+        mapView.clear()
         for charger in chargers {
             let driverLocationMarker = GMSMarker()
             let position = CLLocationCoordinate2DMake(charger.currentLatitude, charger.currentLongitude)
@@ -167,10 +152,13 @@ class NearByChargersVC: UIViewController {
             if status == 1 {
                 if let order = data {
                     self.existOrderView.isHidden = false
+                    self.collectionViewHeightContraint.constant = 0
                     self.chargerId = order.chargerId
                     self.existOrderVehicleImg.downloadedFrom(link: order.vehicleImageLink)
                     self.existOrderChargerNameLbl.text = order.chargerName
-                    self.existOrderRefNoLbl.text = order.vehicleName + " - " + String(order.orderId)
+                    self.existOrderRefNoLbl.text = "Order Ref. No: \(order.orderId)"
+                    self.existOrderOtpLbl.text = "OTP: \(order.otp)"
+                    self.acceptedOrderId = order.orderId
                 }
             }
         }
@@ -213,6 +201,7 @@ class NearByChargersVC: UIViewController {
                     self.timer?.invalidate()
                     self.timer = nil
                     self.chargerId = data
+                    self.acceptedOrderId = self.bookOrder?.id
                     self.performSegue(withIdentifier: NEARBY_CHARGERS_TO_TRACK_CHARGER, sender: self)
                 }
             }
@@ -241,6 +230,7 @@ class NearByChargersVC: UIViewController {
             trackChargerVc.chargerId = self.chargerId!
             trackChargerVc.myCurrentLatitude = locationService.myCurrentLatitude
             trackChargerVc.myCurrentLongitude = locationService.myCurrentLongitude
+            trackChargerVc.orderId = self.acceptedOrderId!
         }
     }
     
@@ -282,163 +272,6 @@ extension NearByChargersVC: GMSMapViewDelegate {
     
 }
 
-extension NearByChargersVC {
-    //hamburger Menu functions
-    
-    func openMenu() {
-        
-        // when menu is opened, it's left constraint should be 0
-        constraintMenuLeft.constant = 0
-        
-        // view for dimming effect should also be shown
-        viewBlack.isHidden = false
-        
-        // animate opening of the menu - including opacity value
-        UIView.animate(withDuration: animationDuration, animations: {
-            
-            self.view.layoutIfNeeded()
-            self.viewBlack.alpha = self.maxBlackViewAlpha
-            
-        }, completion: { (complete) in
-            
-            // disable the screen edge pan gesture when menu is fully opened
-            self.gestureScreenEdgePan.isEnabled = false
-        })
-    }
-    
-    func hideMenu() {
-        
-        // when menu is closed, it's left constraint should be of value that allows it to be completely hidden to the left of the screen - which is negative value of it's width
-        constraintMenuLeft.constant = -constraintMenuWidth.constant
-        
-        // animate closing of the menu - including opacity value
-        UIView.animate(withDuration: animationDuration, animations: {
-            
-            self.view.layoutIfNeeded()
-            self.viewBlack.alpha = 0
-            
-        }, completion: { (complete) in
-            
-            // reenable the screen edge pan gesture so we can detect it next time
-            self.gestureScreenEdgePan.isEnabled = true
-            
-            // hide the view for dimming effect so it wont interrupt touches for views underneath it
-            self.viewBlack.isHidden = true
-        })
-    }
-    
-    @IBAction func gestureScreenEdgePan(_ sender: UIScreenEdgePanGestureRecognizer) {
-        
-        // retrieve the current state of the gesture
-        if sender.state == UIGestureRecognizer.State.began {
-            
-            // if the user has just started dragging, make sure view for dimming effect is hidden well
-            viewBlack.isHidden = false
-            viewBlack.alpha = 0
-            
-        } else if (sender.state == UIGestureRecognizer.State.changed) {
-            
-            // retrieve the amount viewMenu has been dragged
-            var translationX = sender.translation(in: sender.view).x
-            
-            if !isLeftToRight {
-                translationX = -translationX
-            }
-            
-            if -constraintMenuWidth.constant + translationX > 0 {
-                
-                // viewMenu fully dragged out
-                constraintMenuLeft.constant = 0
-                viewBlack.alpha = maxBlackViewAlpha
-                
-            } else if translationX < 0 {
-                
-                // viewMenu fully dragged in
-                constraintMenuLeft.constant = -constraintMenuWidth.constant
-                viewBlack.alpha = 0
-                
-            } else {
-                
-                // viewMenu is being dragged somewhere between min and max amount
-                constraintMenuLeft.constant = -constraintMenuWidth.constant + translationX
-                
-                let ratio = translationX / constraintMenuWidth.constant
-                let alphaValue = ratio * maxBlackViewAlpha
-                viewBlack.alpha = alphaValue
-            }
-        } else {
-            
-            // if the menu was dragged less than half of it's width, close it. Otherwise, open it.
-            if constraintMenuLeft.constant < -constraintMenuWidth.constant / 2 {
-                self.hideMenu()
-            } else {
-                self.openMenu()
-            }
-        }
-    }
-    
-    @IBAction func gesturePan(_ sender: UIPanGestureRecognizer) {
-        // retrieve the current state of the gesture
-        if sender.state == UIGestureRecognizer.State.began {
-            
-            // no need to do anything
-        } else if sender.state == UIGestureRecognizer.State.changed {
-            
-            // retrieve the amount viewMenu has been dragged
-            var translationX = sender.translation(in: sender.view).x
-            
-            if !isLeftToRight {
-                translationX = -translationX
-            }
-            
-            if translationX > 0 {
-                
-                // viewMenu fully dragged out
-                constraintMenuLeft.constant = 0
-                viewBlack.alpha = maxBlackViewAlpha
-                
-            } else if translationX < -constraintMenuWidth.constant {
-                
-                // viewMenu fully dragged in
-                constraintMenuLeft.constant = -constraintMenuWidth.constant
-                viewBlack.alpha = 0
-                
-            } else {
-                
-                // it's being dragged somewhere between min and max amount
-                constraintMenuLeft.constant = translationX
-                
-                let ratio = (constraintMenuWidth.constant + translationX) / constraintMenuWidth.constant
-                let alphaValue = ratio * maxBlackViewAlpha
-                viewBlack.alpha = alphaValue
-            }
-        } else {
-            
-            // if the drag was less than half of it's width, close it. Otherwise, open it.
-            if constraintMenuLeft.constant < -constraintMenuWidth.constant / 2 {
-                self.hideMenu()
-            } else {
-                self.openMenu()
-            }
-        }
-    }
-    
-    @IBAction func gestureTap(_ sender: UITapGestureRecognizer) {
-        self.hideMenu()
-    }
-    
-    @IBAction func menuBtnPressed(_ sender: Any) {
-        if isMenuOpened {
-            self.hideMenu()
-        } else {
-            self.openMenu()
-        }
-        isMenuOpened = !isMenuOpened
-    }
-    
-}
-
-
 extension NearByChargersVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -459,10 +292,14 @@ extension NearByChargersVC: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedVehicleType = vehicles[indexPath.row]
         self.selectedVehicle = selectedVehicleType
-        let personal = webService.userDetails
-        let fName = personal["firstName"]
-        let lName = personal["lastName"]
-        let email = personal["email"]
+        var fName = ""
+        var lName = ""
+        var email = ""
+        if let personal = webService.userDetails {
+            fName = personal["firstName"] ?? ""
+            lName = personal["lastName"] ?? ""
+            email = personal["email"] ?? ""
+        }
         if fName == "" || lName == "" || email == "" {
            updatePersonalDetails()
         }

@@ -33,7 +33,7 @@ extension UIViewController: NVActivityIndicatorViewable {
         titleLabel.text = title
         titleLabel.textAlignment = .center
         titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont(name: "Thonburi-Bold", size: 18.0)
+        titleLabel.font = UIFont(name: "Futura-Medium", size: 18.0)
         self.navigationItem.titleView = titleLabel
     }
     
