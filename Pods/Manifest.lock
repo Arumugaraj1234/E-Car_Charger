@@ -11,6 +11,7 @@ PODS:
   - NVActivityIndicatorView (4.7.0):
     - NVActivityIndicatorView/Presenter (= 4.7.0)
   - NVActivityIndicatorView/Presenter (4.7.0)
+  - razorpay-pod (1.0.28)
   - Realm (3.16.1):
     - Realm/Headers (= 3.16.1)
   - Realm/Headers (3.16.1)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - GooglePlaces
   - KOControls
   - NVActivityIndicatorView
+  - razorpay-pod (~> 1.0.26)
   - RealmSwift
   - SideMenu
   - SwiftyJSON
@@ -40,6 +42,7 @@ SPEC REPOS:
     - GooglePlaces
     - KOControls
     - NVActivityIndicatorView
+    - razorpay-pod
     - Realm
     - RealmSwift
     - SideMenu
@@ -53,6 +56,7 @@ SPEC CHECKSUMS:
   GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
   KOControls: c4d6a9de48df37ed6726b490457698d2ff5c08f5
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
+  razorpay-pod: 85ceeb8bbb2863a86beaee8988482c35b27e830e
   Realm: 601cacc51d8be3b17a377ef787be0f6ee0e76cf1
   RealmSwift: 486f2e09d5a8ccff63ed66e48d0846b111deb5e5
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
@@ -60,6 +64,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
   ValidationTextField: 553b3c61a7cf5d3d2a63eb99a2b1f0ad3df32da1
 
-PODFILE CHECKSUM: 046d6285c428152a5a64b148986e5d9a58942e5d
+PODFILE CHECKSUM: 78a9301a53ce5a5d688e2e4918fafd19643510fb
 
 COCOAPODS: 1.5.2

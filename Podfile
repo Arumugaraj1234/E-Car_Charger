@@ -19,5 +19,6 @@ target 'E-CarCharger' do
   pod 'NVActivityIndicatorView'
   pod 'KOControls'
   pod 'SideMenu'
+  pod 'razorpay-pod', '~> 1.0.26'
 
 end

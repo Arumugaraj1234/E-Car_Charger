@@ -22,7 +22,7 @@ class HistoryVC: UIViewController {
 
         getOrderHistory()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 153
+        tableView.estimatedRowHeight = 143
     }
     
     override func viewWillAppear(_ animated: Bool) {

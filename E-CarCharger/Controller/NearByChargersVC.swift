@@ -58,8 +58,8 @@ class NearByChargersVC: UIViewController {
         if timerToFindNearByChargers == nil {
             timerToFindNearByChargers = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(self.getNearByChargers), userInfo: nil, repeats: true)
         }
-        getVehicleTypes()
         checkForOrderInService()
+        getVehicleTypes()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.goToTrackChargerForExistOrder(_:)))
         existOrderView.addGestureRecognizer(tap)
     }
@@ -99,12 +99,10 @@ class NearByChargersVC: UIViewController {
                 if status == 1 {
                     let nearestChargers = data!
                     self.setLocationMarkerForChargers(chargers: nearestChargers)
-                    self.stopAnimating()
                 }
             }
         }
         else {
-            stopAnimating()
             makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
@@ -112,6 +110,7 @@ class NearByChargersVC: UIViewController {
     func getVehicleTypes() {
         if checkInternetAvailablity() {
             webService.getVehicleType { (status, message, data) in
+                self.stopAnimating()
                 if status == 1 {
                     self.vehicles = data!
                     self.collectionView.reloadData()
@@ -122,6 +121,7 @@ class NearByChargersVC: UIViewController {
             }
         }
         else {
+            stopAnimating()
             makeToast(message: "Your internet is weak or unavailable. Please check & try again!", time: 3.0, position: .bottom, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         }
     }
@@ -202,6 +202,7 @@ class NearByChargersVC: UIViewController {
                     self.timer = nil
                     self.chargerId = data
                     self.acceptedOrderId = self.bookOrder?.id
+                    self.webService.orderStatusForOrderInService = 1
                     self.performSegue(withIdentifier: NEARBY_CHARGERS_TO_TRACK_CHARGER, sender: self)
                 }
             }

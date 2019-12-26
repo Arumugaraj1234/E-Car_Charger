@@ -9,6 +9,7 @@
 import UIKit
 import GooglePlaces
 import GoogleMaps
+import Razorpay
 
 class TrackChargerVC: UIViewController {
     
@@ -16,6 +17,13 @@ class TrackChargerVC: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var chargerNameLbl: UILabel!
+    @IBOutlet weak var chargingView: UIView!
+    @IBOutlet weak var chargingLbl:UILabel!
+    @IBOutlet weak var fareShowingView: UIView!
+    @IBOutlet weak var totalTimeLbl: UILabel!
+    @IBOutlet weak var totalFareLbl: UILabel!
+    @IBOutlet weak var vehicleImage: UIImageView!
+    @IBOutlet weak var otpLbl: UILabel!
     
     //MARK: Google Map Related Variables
     let locationManager = CLLocationManager()
@@ -32,7 +40,11 @@ class TrackChargerVC: UIViewController {
     var chargerId = 0
     var timer: Timer?
     var timerToUpdateOrderStatus: Timer?
+    var timerForChargingLbl: Timer?
+    var flagForChargerLbl = 0
     var orderId = 0
+    var flagToShowChargingView = 0
+    var razorpay: Razorpay?
     
     let locationService = LocationService.shared
     let webService = WebRequestService.shared
@@ -43,11 +55,25 @@ class TrackChargerVC: UIViewController {
         locationManager.delegate = self
         mapView.delegate = self
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
-        updateChargerDetails()
-        trackChargerWithTimer()
-        if timerToUpdateOrderStatus == nil {
-            timerToUpdateOrderStatus = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.trackOrderStatus), userInfo: nil, repeats: true)
+        chargingView.isHidden = true
+        fareShowingView.isHidden = true
+        razorpay = Razorpay.initWithKey("rzp_test_DmW0jpqP1WI399", andDelegate: self)
+        if webService.orderStatusForOrderInService == 2 {
+            enableChargingView(with: true)
+            if timerToUpdateOrderStatus == nil {
+                timerToUpdateOrderStatus = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.trackOrderStatus), userInfo: nil, repeats: true)
+            }
         }
+        else if webService.orderStatusForOrderInService == 3 {
+            getFareForOrder()
+        }
+        else {
+            if timerToUpdateOrderStatus == nil {
+                timerToUpdateOrderStatus = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.trackOrderStatus), userInfo: nil, repeats: true)
+            }
+            trackChargerWithTimer()
+        }
+        updateChargerDetails()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,15 +82,45 @@ class TrackChargerVC: UIViewController {
     }
     
     @IBAction func onBackBtnPressed(sender: Any) {
-        self.timer?.invalidate()
-        self.timer = nil
-        self.timerToUpdateOrderStatus?.invalidate()
-        self.timerToUpdateOrderStatus = nil
+        if let _ = timer {
+            timer?.invalidate()
+            timer = nil
+        }
+        if let _ = timerToUpdateOrderStatus {
+            timerToUpdateOrderStatus?.invalidate()
+            timerToUpdateOrderStatus = nil
+        }
+        if let _ = timerForChargingLbl {
+            timerForChargingLbl?.invalidate()
+            timerForChargingLbl = nil
+            
+        }
         self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func onCenterBtnPressed(sender: UIButton) {
         drawRoute()
+    }
+    
+    @IBAction func onPayByCashBtnPressed(_ sender: RoundedBtn) {
+        performSegue(withIdentifier: TRACKVC_TO_HISTORYVC, sender: self)
+    }
+    
+    @IBAction func onEPaymentBtnPressed(_ sender: RoundedBtn) {
+        let options: [String:Any] = [
+            "amount" : "1000", //mandatory in paise like:- 1000 paise ==  10 rs
+            "description": "Charged Amount",
+            "image": "https://url-to-image.png",
+            "name": "Mi-Charger",
+            "prefill": [
+            "contact": "9797979797",
+            "email": "foo@bar.com"
+            ],
+            "theme": [
+                "color": "#F37254"
+            ]
+        ]
+        razorpay?.open(options)
     }
     
     func trackChargerWithTimer() {
@@ -77,9 +133,12 @@ class TrackChargerVC: UIViewController {
     
     func updateChargerDetails() {
         if checkInternetAvailablity() {
-            webService.trackCharger(chargerId: chargerId) { (status, message, data) in
+            webService.getOrderInfo(orderId: orderId) { (status, message, data) in
                 if status == 1 {
-                    self.chargerNameLbl.text = (data?.firstName)! + " " + (data?.lastName)!
+                    guard let orderModel = data else {return}
+                    self.chargerNameLbl.text = orderModel.chargerName
+                    self.vehicleImage.downloadedFrom(link: orderModel.vehicleImageLink)
+                    self.otpLbl.text = "OTP: \(orderModel.otp)"
                 }
             }
         }
@@ -168,15 +227,106 @@ class TrackChargerVC: UIViewController {
         webService.checkOrderForCompleteCharging(orderId: self.orderId) { (status, message, oStatus, data) in
             if status == 1 {
                 guard let orderStatus = oStatus else {return}
+                self.webService.orderStatusForOrderInService = orderStatus
                 let index = IndexPath(row: 0, section: 0)
                 if let cell = self.tableView.cellForRow(at: index) as? ChargerStatusCell {
                     cell.configureCell(status: orderStatus)
                 }
                 self.tableView.reloadData()
+                if orderStatus == 2 {
+                    if let _ = self.timer {
+                        self.timer?.invalidate()
+                        self.timer = nil
+                    }
+                    if self.flagToShowChargingView == 0 {
+                        self.enableChargingView(with: true)
+                    }
+                    self.flagToShowChargingView = 1
+                }
+                else if orderStatus == 3 {
+                    if let _ = self.timer {
+                        self.timer?.invalidate()
+                        self.timer = nil
+                    }
+                    if let _ = self.timerToUpdateOrderStatus {
+                        self.timerToUpdateOrderStatus?.invalidate()
+                        self.timerToUpdateOrderStatus = nil
+                    }
+                    if let _ = self.timerForChargingLbl {
+                        self.timerForChargingLbl?.invalidate()
+                        self.timerForChargingLbl = nil
+                        
+                    }
+                    guard let fareModel = data else {return}
+                    self.totalTimeLbl.text = fareModel.timeTookToCharge
+                    let rupee = "\u{20B9}"
+                    self.totalFareLbl.text = rupee + fareModel.totalFare
+                    self.enableFareShowingView(with: true)
+                }
+            }
+        }
+    }
+    
+    func enableChargingView(with status: Bool) {
+        if status {
+            UIView.animate(withDuration: 3.0) {
+                self.chargingView.isHidden = false
+            }
+            timerForChargingLbl = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerToUpdateChargingLbl), userInfo: nil, repeats: true)
+        }
+        else {
+            chargingView.isHidden = true
+            if let _ = timerForChargingLbl {
+                self.timerForChargingLbl?.invalidate()
+                self.timerForChargingLbl = nil
+                
+            }
+        }
+    }
+    
+    @objc
+    func timerToUpdateChargingLbl() {
+        if flagForChargerLbl == 0 {
+            chargingLbl.text = "Charging."
+            flagForChargerLbl = 1
+        }
+        else if flagForChargerLbl == 1 {
+            chargingLbl.text = "Charging.."
+            flagForChargerLbl = 2
+        }
+        else {
+            chargingLbl.text = "Charging..."
+            flagForChargerLbl = 0
+        }
+    }
+    
+    func enableFareShowingView(with status: Bool) {
+        if status {
+            UIView.animate(withDuration: 3.0) {
+                self.fareShowingView.isHidden = false
+            }
+        }
+        else {
+            fareShowingView.isHidden = true
+        }
+    }
+    
+    func getFareForOrder() {
+        webService.checkOrderForCompleteCharging(orderId: self.orderId) { (status, message, oStatus, data) in
+            if status == 1 {
+                guard let orderStatus = oStatus else {return}
+                let index = IndexPath(row: 0, section: 0)
+                if let cell = self.tableView.cellForRow(at: index) as? ChargerStatusCell {
+                    cell.configureCell(status: orderStatus)
+                }
+                self.tableView.reloadData()
+
                 if orderStatus == 3 {
-                    print("Open view for payment")
-                    self.timerToUpdateOrderStatus?.invalidate()
-                    self.timerToUpdateOrderStatus = nil
+                    guard let fareModel = data else {return}
+                    let rupee = "\u{20B9}"
+                    self.totalTimeLbl.text = fareModel.timeTookToCharge
+                    self.totalFareLbl.text = rupee + fareModel.totalFare
+                    self.enableFareShowingView(with: true)
                 }
             }
         }
@@ -241,4 +391,16 @@ extension TrackChargerVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChargerStatusCell", for: indexPath) as? ChargerStatusCell else {return UITableViewCell()}
         return cell
     }
+}
+
+extension TrackChargerVC: RazorpayPaymentCompletionProtocol {
+    func onPaymentError(_ code: Int32, description str: String) {
+        _ = SweetAlert().showAlert("Error", subTitle: "Code: \(code)\n\(str)", style: .none)
+    }
+    
+    func onPaymentSuccess(_ payment_id: String) {
+        _ = SweetAlert().showAlert("Paid", subTitle: "Payment success", style: .none)
+    }
+    
+    
 }

@@ -48,6 +48,7 @@ class WebRequestService: NSObject {
     }
     
     var selectedIndexAtSideMenu = 0
+    var orderStatusForOrderInService = 0
 
     func getAppInitDetails(completion: @escaping (_ status:Int, _ message:String, _ result:AppDetailsModel?)-> Void) {
         
@@ -622,6 +623,47 @@ class WebRequestService: NSObject {
             }
         }
         
+    }
+    
+    func getOrderInfo(orderId: Int, completion: @escaping (_ status: Int, _ message: String, _ data: OrderModel?) -> Void) {
+        let params = [
+            "BookingId": orderId
+        ]
+        
+        Alamofire.request(URL_TO_GET_BOOKING_INFO, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                let responseCode = json["ResponseCode"].intValue
+                let responseMessage = json["ResponseMessage"].stringValue
+                if responseCode == 1 {
+                    let responseData = json["ResponseData"]
+                    let bookId = responseData["BookingId"].intValue
+                    let vehicleId = responseData["VehileId"].intValue
+                    let vehicleName = responseData["VehileName"].stringValue
+                    let vehicleImage = responseData["VehileImage"].stringValue
+                    let chargerId = responseData["ChargerId"].intValue
+                    let chargerName = responseData["ChargerName"].stringValue
+                    let chargerNo = responseData["ChargerNumber"].stringValue
+                    let fare = responseData["Fare"].doubleValue
+                    let latitude = responseData["Latitude"].doubleValue
+                    let longitude = responseData["Longitude"].doubleValue
+                    let status = responseData["Status"].stringValue
+                    let otp = responseData["OTP"].intValue
+                    let bookedDate = responseData["Booked"].stringValue
+                    let paymentStatus = responseData["PaymentStatus"].stringValue
+                    let orderModel = OrderModel(orderId: bookId, vehicleName: vehicleName, vehicleImageLink: vehicleImage, chargerName: chargerName, fare: fare, latitude: latitude, longitude: longitude, otp: otp, bookedTime: bookedDate, paymentStatus: paymentStatus, status: status, vehicleId: vehicleId, chargerId: chargerId, chargerMobileNo: chargerNo)
+                    completion(responseCode, responseMessage, orderModel)
+                }
+                else {
+                    completion(responseCode, responseMessage, nil)
+                }
+            }
+            else {
+                debugPrint(response.error as Any)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
+            }
+        }
     }
     
 }

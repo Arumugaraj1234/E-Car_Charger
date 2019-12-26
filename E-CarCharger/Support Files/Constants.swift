@@ -18,6 +18,7 @@ let NEARBY_CHARGERS_TO_TRACK_CHARGER = "nearByChargersToTrackCharger"
 let NEARBY_CHARGERS_TO_HISTORY = "nearByChargersToHistory"
 let PROFILEVC_TO_EDIT_PROFILEVC = "profileVcToEditProfileVc"
 let HISTORYVC_TO_TRACK_CHARGER = "historyVcToTrackChargerVc"
+let TRACKVC_TO_HISTORYVC = "trackVcToHistoryVc"
 
 //MARK: URL CONSTANTS
 let BASE_URL = "http://101.53.153.54/ElectricCharger/WebService/api/Customer/"
@@ -35,8 +36,8 @@ let URL_TO_VERIFY_OTP_FOR_UPDATE_PHONENO = BASE_URL + "CheckOTPForUpdatePhoneNo"
 let URL_TO_AUTO_CANCEL_OF_ORDER = BASE_URL + "AutoCancelOfBooking"
 let URL_TO_CANCEL_ORDER_BY_USER = BASE_URL + "CancelBookingByCustomer"
 let URL_TO_CHECK_ORDER_IN_SERVICE = BASE_URL + "CheckBookingExist"
-let URL_TO_GET_BOOKING_INFO = BASE_URL + "GetBookingInfo" //Not Done
-let URL_TO_CHECK_ORDER_COMPLETE = BASE_URL + "CheckOrderComplete" //Not Done
+let URL_TO_GET_BOOKING_INFO = BASE_URL + "GetBookingInfo"
+let URL_TO_CHECK_ORDER_COMPLETE = BASE_URL + "CheckOrderComplete"
 
 //MARK: GOOGLE MAP URL CONSTANTS
 let GOOGLE_URL_FOR_GEOCODING =  "https://maps.googleapis.com/maps/api/geocode/json?"

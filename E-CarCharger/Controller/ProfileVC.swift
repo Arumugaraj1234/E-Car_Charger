@@ -24,6 +24,7 @@ class ProfileVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        startAnimate(with: "")
         setupView()
         setInitialValues()
     }
@@ -73,10 +74,11 @@ class ProfileVC: UIViewController {
             phone = userDetails["mobileNo"] ?? ""
         }
 
-        firstNameLbl.text = " " + fName
-        lastNameLbl.text = " " + lName
-        emailLbl.text = " " + email
-        phoneLbl.text = " " + phone
+        firstNameLbl.text = fName
+        lastNameLbl.text = lName
+        emailLbl.text = email
+        phoneLbl.text = phone
+        stopAnimating()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
