@@ -26,15 +26,27 @@ class OrderCell: UITableViewCell {
     @IBOutlet weak var totalTimeStackView: UIStackView!
     @IBOutlet weak var totalTimeLbl: UILabel!
     @IBOutlet weak var paymentStatusImg: UIImageView!
+    @IBOutlet weak var callBtn: UIButton!
+    @IBOutlet weak var messageBtn: UIButton!
     
-    let cancelledIcon = UIImage(named: "unpaidIcon")!
-    let inServiceIcon = UIImage(named: "unpaidIcon")!
+    let cancelledIcon = UIImage(named: "cancelledIcon")!
+    let inServiceIcon = UIImage(named: "inServiceIcon")!
+    let unpaidIcon = UIImage(named: "unpaidIcon")!
+    let bookedIcon = UIImage(named: "bookedIcon")!
     
     override func awakeFromNib() {
         super.awakeFromNib()
 //        totalView.layer.cornerRadius = 10.0
 //        totalView.layer.borderWidth = 1.0
 //        totalView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    }
+    
+    func setTagForButtons(tag: Int) {
+        cancelBtn.tag = tag
+        trackBtn.tag = tag
+        cancelBtnOne.tag = tag
+        callBtn.tag = tag
+        messageBtn.tag = tag
     }
 
     func configureCell(order: OrderModel) {
@@ -53,13 +65,13 @@ class OrderCell: UITableViewCell {
             lineView.isHidden = true
             buttonStackView.isHidden = true
         }
-        else if order.status == "Booked " {
+        else if order.status == "Booked    " {
             chargerNameLbl.text = order.chargerName
             otpStackView.isHidden = false
             otpLbl.text = "\(order.otp)"
             totalTimeStackView.isHidden = true
             fareLbl.text = rupee + "\(order.fare)"
-            paymentStatusImg.image = inServiceIcon
+            paymentStatusImg.image = bookedIcon
             lineView.isHidden = false
             buttonStackView.isHidden = false
         }
@@ -79,7 +91,7 @@ class OrderCell: UITableViewCell {
             totalTimeStackView.isHidden = false
             totalTimeLbl.text = "01:28:35"
             fareLbl.text = rupee + "\(order.fare)"
-            paymentStatusImg.image = inServiceIcon
+            paymentStatusImg.image = unpaidIcon
             lineView.isHidden = true
             buttonStackView.isHidden = true
         }

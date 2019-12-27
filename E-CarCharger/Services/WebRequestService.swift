@@ -76,7 +76,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }
@@ -97,7 +97,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String)
+                completion(-2, response.error?.localizedDescription ?? "")
             }
         }
     }
@@ -135,7 +135,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String)
+                completion(-2, response.error?.localizedDescription ?? "")
             }
         }
     }
@@ -175,7 +175,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
         
@@ -206,7 +206,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }
@@ -248,7 +248,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }
@@ -280,7 +280,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }
@@ -336,7 +336,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }
@@ -373,7 +373,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completiion(-2, response.error as! String, nil)
+                completiion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }
@@ -393,7 +393,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String)
+                completion(-2, response.error?.localizedDescription ?? "")
             }
         }
     }
@@ -432,7 +432,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completiion(-2, response.error as! String)
+                completiion(-2, response.error?.localizedDescription ?? "")
             }
         }
     }
@@ -483,7 +483,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }
@@ -534,7 +534,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }
@@ -582,7 +582,7 @@ class WebRequestService: NSObject {
             }
             else {
                 debugPrint(response.error as Any)
-                completion(-2, response.error as! String, nil)
+                completion(-2, response.error?.localizedDescription ?? "", nil)
             }
         }
     }

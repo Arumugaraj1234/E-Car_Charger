@@ -429,16 +429,17 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello! Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVo-Bj-fha">
                                 <rect key="frame" x="15" y="170" width="345" height="18.5"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9912600000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8R-LC-30E">
-                                <rect key="frame" x="15" y="198.5" width="345" height="23.5"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <rect key="frame" x="15" y="198.5" width="345" height="26.5"/>
+                                <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Zc-X2-zfe">
-                                <rect key="frame" x="0.0" y="242" width="375" height="321"/>
+                                <rect key="frame" x="0.0" y="245" width="375" height="318"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SideMenuCell" rowHeight="40" id="RpA-XE-9ae" customClass="SideMenuCell" customModule="E_CarCharger" customModuleProvider="target">
@@ -462,8 +463,7 @@
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3k-8w-IWd">
                                                                     <rect key="frame" x="35" y="0.0" width="300" height="25"/>
-                                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="22"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -539,6 +539,7 @@
                     <navigationItem key="navigationItem" id="iBt-8L-acx"/>
                     <connections>
                         <outlet property="tableView" destination="1Zc-X2-zfe" id="n0F-fS-fm6"/>
+                        <outlet property="userLbl" destination="X8R-LC-30E" id="kl3-x5-ahf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQk-qX-8Vm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -584,6 +585,9 @@
                                                             <constraint firstAttribute="width" constant="25" id="Mvz-Rp-77o"/>
                                                         </constraints>
                                                         <state key="normal" image="phone"/>
+                                                        <connections>
+                                                            <action selector="onCallButtonPressed:" destination="lAT-yV-y1Z" eventType="touchUpInside" id="rI7-D5-Trq"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cH-IR-T21">
                                                         <rect key="frame" x="200" y="0.0" width="25" height="25"/>
@@ -591,6 +595,9 @@
                                                             <constraint firstAttribute="width" constant="25" id="uh8-Br-0Eg"/>
                                                         </constraints>
                                                         <state key="normal" image="message"/>
+                                                        <connections>
+                                                            <action selector="onComposeMessageBtnPressed:" destination="lAT-yV-y1Z" eventType="touchUpInside" id="KQa-22-cTV"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -779,15 +786,15 @@
             <objects>
                 <viewController id="KOh-Kc-0SM" customClass="TrackChargerVC" customModule="E_CarCharger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zKq-wW-ghi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ete-Gk-hPJ" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="337"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="381"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFt-3O-47P">
-                                <rect key="frame" x="325" y="287" width="40" height="40"/>
+                                <rect key="frame" x="325" y="351" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="24j-D4-CSW"/>
                                     <constraint firstAttribute="height" constant="40" id="MvW-v9-8f6"/>
@@ -798,7 +805,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ao-y7-TFM">
-                                <rect key="frame" x="0.0" y="338" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="402" width="375" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="HDG-v5-pRa"/>
@@ -943,7 +950,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdZ-lL-gqx" userLabel="CustomerView">
-                                <rect key="frame" x="0.0" y="538" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="602" width="375" height="65"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JOp-eh-PYm">
                                         <rect key="frame" x="10" y="5" width="355" height="25"/>
@@ -965,6 +972,9 @@
                                                     <constraint firstAttribute="width" constant="25" id="uPg-hH-fs2"/>
                                                 </constraints>
                                                 <state key="normal" image="phone"/>
+                                                <connections>
+                                                    <action selector="onCallBtnPressed:" destination="KOh-Kc-0SM" eventType="touchUpInside" id="psr-NU-moy"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qme-nO-rkB">
                                                 <rect key="frame" x="330" y="0.0" width="25" height="25"/>
@@ -972,6 +982,9 @@
                                                     <constraint firstAttribute="width" constant="25" id="vc3-zM-vLi"/>
                                                 </constraints>
                                                 <state key="normal" image="message"/>
+                                                <connections>
+                                                    <action selector="onComposeMessageBtnPressed:" destination="KOh-Kc-0SM" eventType="touchUpInside" id="dIM-ab-czR"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -1011,10 +1024,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uGO-iF-RCM" userLabel="ChargingView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="337"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="381"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eIe-r0-1me">
-                                        <rect key="frame" x="87.5" y="103.5" width="200" height="130"/>
+                                        <rect key="frame" x="87.5" y="125.5" width="200" height="130"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batteryIcon" translatesAutoresizingMaskIntoConstraints="NO" id="H0P-2H-rB7">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
@@ -1042,7 +1055,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PlZ-nd-DHi" userLabel="FareView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="337"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="381"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="acceptIcon" translatesAutoresizingMaskIntoConstraints="NO" id="BlS-zo-mBf">
                                         <rect key="frame" x="162.5" y="20" width="50" height="50"/>
@@ -1210,11 +1223,11 @@
             <objects>
                 <viewController id="Gqe-fn-UdX" customClass="HistoryVC" customModule="E_CarCharger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rdr-cn-Yi0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ETS-fr-Vrm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderCell" rowHeight="143" id="f1L-rF-uZh" customClass="OrderCell" customModule="E_CarCharger" customModuleProvider="target">
@@ -1388,6 +1401,9 @@
                                                                                             <state key="normal" image="phoneSmall">
                                                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             </state>
+                                                                                            <connections>
+                                                                                                <action selector="onCallBtnPressed:" destination="Gqe-fn-UdX" eventType="touchUpInside" id="NuB-Mo-SuV"/>
+                                                                                            </connections>
                                                                                         </button>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GO-R8-oeW">
                                                                                             <rect key="frame" x="0.0" y="25" width="35" height="10"/>
@@ -1414,6 +1430,9 @@
                                                                                             <state key="normal" image="messageSmall">
                                                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             </state>
+                                                                                            <connections>
+                                                                                                <action selector="onComposeMessageBtnPressed:" destination="Gqe-fn-UdX" eventType="touchUpInside" id="C7x-Ob-fOt"/>
+                                                                                            </connections>
                                                                                         </button>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T58-ft-Pni">
                                                                                             <rect key="frame" x="0.0" y="25" width="35" height="10"/>
@@ -1526,11 +1545,13 @@
                                         <connections>
                                             <outlet property="bookedDateLbl" destination="5fz-6V-8Lc" id="GZZ-SC-dlM"/>
                                             <outlet property="buttonStackView" destination="jPz-v3-QRk" id="Uek-N3-pYQ"/>
+                                            <outlet property="callBtn" destination="s1i-DJ-oUB" id="SwA-Mg-IFi"/>
                                             <outlet property="cancelBtn" destination="n2u-jL-g5T" id="snS-FJ-i7s"/>
                                             <outlet property="cancelBtnOne" destination="ehJ-tB-1eB" id="yx3-Ni-Jgu"/>
                                             <outlet property="chargerNameLbl" destination="gmm-sp-U5S" id="El0-Lc-zvx"/>
                                             <outlet property="fareLbl" destination="DUV-I4-g1r" id="TYY-ac-TXQ"/>
                                             <outlet property="lineView" destination="FeJ-Wi-99X" id="icW-Rr-Lma"/>
+                                            <outlet property="messageBtn" destination="fHf-sW-00D" id="9P5-Da-sJn"/>
                                             <outlet property="orderRefNoLbl" destination="6o4-0y-cN7" id="YWV-hK-el3"/>
                                             <outlet property="otpLbl" destination="f9s-sc-rRc" id="Tdo-JN-zDL"/>
                                             <outlet property="otpStackView" destination="REh-Af-0qX" id="r4d-Lu-xn3"/>
@@ -2105,7 +2126,7 @@
         <image name="unpaidIcon" width="90" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ajE-O0-bny"/>
+        <segue reference="men-eq-Mwy"/>
         <segue reference="iFf-Pk-T6o"/>
     </inferredMetricsTieBreakers>
 </document>

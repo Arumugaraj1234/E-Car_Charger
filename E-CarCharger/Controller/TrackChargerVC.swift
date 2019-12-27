@@ -11,6 +11,10 @@ import GooglePlaces
 import GoogleMaps
 import Razorpay
 
+protocol BackFromTrackChargerDelegate {
+    func updateIfAnyOrderInService()
+}
+
 class TrackChargerVC: UIViewController {
     
     //MARK: Outlets
@@ -45,6 +49,8 @@ class TrackChargerVC: UIViewController {
     var orderId = 0
     var flagToShowChargingView = 0
     var razorpay: Razorpay?
+    var currentOrder: OrderModel?
+    var delegate: BackFromTrackChargerDelegate?
     
     let locationService = LocationService.shared
     let webService = WebRequestService.shared
@@ -54,7 +60,7 @@ class TrackChargerVC: UIViewController {
 
         locationManager.delegate = self
         mapView.delegate = self
-        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
+        //mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
         chargingView.isHidden = true
         fareShowingView.isHidden = true
         razorpay = Razorpay.initWithKey("rzp_test_DmW0jpqP1WI399", andDelegate: self)
@@ -95,6 +101,7 @@ class TrackChargerVC: UIViewController {
             timerForChargingLbl = nil
             
         }
+        delegate?.updateIfAnyOrderInService()
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -123,6 +130,17 @@ class TrackChargerVC: UIViewController {
         razorpay?.open(options)
     }
     
+    @IBAction func onCallBtnPressed(_ sender: UIButton) {
+        guard let order = self.currentOrder else {return}
+        guard let number = URL(string: "tel://" + order.chargerMobileNo) else { return }
+        UIApplication.shared.open(number)
+    }
+    
+    @IBAction func onComposeMessageBtnPressed(_ sender: UIButton) {
+        guard let order = self.currentOrder else {return}
+        MessageService.shared.displayMessageInterface(vc: self, mobileNo: order.chargerMobileNo)
+    }
+    
     func trackChargerWithTimer() {
         guard self.timer == nil else {return}
         self.timer = Timer.scheduledTimer(timeInterval: 5,
@@ -136,6 +154,7 @@ class TrackChargerVC: UIViewController {
             webService.getOrderInfo(orderId: orderId) { (status, message, data) in
                 if status == 1 {
                     guard let orderModel = data else {return}
+                    self.currentOrder = orderModel
                     self.chargerNameLbl.text = orderModel.chargerName
                     self.vehicleImage.downloadedFrom(link: orderModel.vehicleImageLink)
                     self.otpLbl.text = "OTP: \(orderModel.otp)"

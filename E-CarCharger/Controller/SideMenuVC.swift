@@ -13,6 +13,7 @@ class SideMenuVC: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var userLbl: UILabel!
     
     //Variables
     let menuDetails: [SideMenuModel] = [
@@ -24,8 +25,20 @@ class SideMenuVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        var fName = ""
+        var lName = ""
+        var phone = ""
+        if let personal = webService.userDetails {
+            fName = personal["firstName"] ?? ""
+            lName = personal["lastName"] ?? ""
+            phone = personal["mobileNo"] ?? ""
+        }
+        if fName == "" && lName == "" {
+            userLbl.text = phone
+        }
+        else {
+            userLbl.text = fName + " " + lName
+        }
     }
     
     @IBAction func onSignOutBtnPressed(sender: UIButton) {

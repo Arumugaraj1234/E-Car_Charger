@@ -44,6 +44,7 @@ class NearByChargersVC: UIViewController {
     var acceptedOrderId: Int?
     var chargerCountFlag = 0
     var timerToFindNearByChargers: Timer?
+    var existOrderDetails: OrderModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +88,17 @@ class NearByChargersVC: UIViewController {
         let menu = storyboard!.instantiateViewController(withIdentifier: "SideMenu") as! UISideMenuNavigationController
         menu.sideMenuManager.menuPresentMode = .menuDissolveIn
         present(menu, animated: true, completion: nil)
+    }
+    
+    @IBAction func onCallButtonPressed(_ sender: UIButton) {
+        guard let order = self.existOrderDetails else {return}
+        guard let number = URL(string: "tel://" + order.chargerMobileNo) else { return }
+        UIApplication.shared.open(number)
+    }
+    
+    @IBAction func onComposeMessageBtnPressed(_ sender: UIButton) {
+        guard let order = self.existOrderDetails else {return}
+        MessageService.shared.displayMessageInterface(vc: self, mobileNo: order.chargerMobileNo)
     }
     
     //MARK: Functions
@@ -151,6 +163,7 @@ class NearByChargersVC: UIViewController {
         webService.checkForAnyOrderInService(userId: webService.userId) { (status, message, data) in
             if status == 1 {
                 if let order = data {
+                    self.existOrderDetails = order
                     self.existOrderView.isHidden = false
                     self.collectionViewHeightContraint.constant = 0
                     self.chargerId = order.chargerId
@@ -228,6 +241,7 @@ class NearByChargersVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == NEARBY_CHARGERS_TO_TRACK_CHARGER {
             let trackChargerVc = segue.destination as! TrackChargerVC
+            trackChargerVc.delegate = self
             trackChargerVc.chargerId = self.chargerId!
             trackChargerVc.myCurrentLatitude = locationService.myCurrentLatitude
             trackChargerVc.myCurrentLongitude = locationService.myCurrentLongitude
@@ -315,6 +329,11 @@ extension NearByChargersVC: PersonalDetailsDelegate {
     func personalDetailsUpdated() {
         bookCharger()
     }
-    
-    
 }
+
+extension NearByChargersVC: BackFromTrackChargerDelegate {
+    func updateIfAnyOrderInService() {
+        checkForOrderInService()
+    }
+}
+

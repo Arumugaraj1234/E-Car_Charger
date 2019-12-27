@@ -46,6 +46,19 @@ class HistoryVC: UIViewController {
         self.chargerId = orders[index].chargerId
         performSegue(withIdentifier: HISTORYVC_TO_TRACK_CHARGER, sender: self)
     }
+    
+    @IBAction func onCallBtnPressed(_ sender: UIButton) {
+        let index = sender.tag
+        let mobileNo = orders[index].chargerMobileNo
+        guard let number = URL(string: "tel://" + mobileNo) else { return }
+        UIApplication.shared.open(number)
+    }
+    
+    @IBAction func onComposeMessageBtnPressed(_ sender: UIButton) {
+        let index = sender.tag
+        let mobileNo = orders[index].chargerMobileNo
+        MessageService.shared.displayMessageInterface(vc: self, mobileNo: mobileNo)
+    }
 
     func getOrderHistory() {
         if checkInternetAvailablity() {
@@ -117,9 +130,10 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as? OrderCell else {return UITableViewCell()}
-        cell.cancelBtn.tag = indexPath.row
-        cell.trackBtn.tag = indexPath.row
-        cell.cancelBtnOne.tag = indexPath.row
+//        cell.cancelBtn.tag = indexPath.row
+//        cell.trackBtn.tag = indexPath.row
+//        cell.cancelBtnOne.tag = indexPath.row
+        cell.setTagForButtons(tag: indexPath.row)
         let order = orders[indexPath.row]
         cell.configureCell(order: order)
         return cell
